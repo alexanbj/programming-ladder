@@ -1,0 +1,84 @@
+<template name="problems">
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked">
+			{{#each problems}}
+				<li class="{{selected}}">
+					<a href="{{pathFor 'showProblem'}}">
+						{{#if currentUser}}
+							{{#with answers.[0]}}
+								<span class="badge {{#if answered}}badge-success{{/if}} pull-right">{{score}}</span>
+							{{else}}
+								<span class="badge pull-right">{{maxScore}}</span>
+							{{/with}}
+						{{/if}}
+						{{title}}
+					</a>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</template>
+
+<template name="showProblem">
+	{{>problems}}
+	<div class="col-md-9">
+		{{#with problem}}
+			<div class="page-header">
+				<h1>{{title}}</h1>
+			</div>
+			<div class="well">
+				<p>{{description}}</p>
+			</div>
+			{{#if currentUser}}
+			Debug - Answer: {{solution}}
+				{{#if answers.[0].answered}}
+					<div id="success-message" class="alert alert-dismissable alert-success">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
+					</div>
+					<a href="#" class="btn btn-default" data-content="{{solution}}">Reveal answer</a>
+				{{else}}
+					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+					</div>
+					<form class="form-inline" role="form">
+						<div class="form-group">
+							<label class="sr-only" for="answer">Answer</label>
+							<input type="text" class="form-control" id="answer" placeholder="Answer" required>
+						</div>
+						<button type="submit" class="btn btn-default">Check</button>
+					</form>
+				{{/if}}
+			{{/if}}
+		{{/with}}
+	</div>
+</template>
+
+<template name="newProblem">
+	<form role="form">
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" class="form-control" id="title" placeholder="Title" required>
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" id="description" placeholder="Description" required></textarea>
+		</div>
+		<div class="form-group">
+			<label for="max-score">Max score</label>
+			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value=10 required>
+			<span class="help-block">Remember the rules! This should be 10, but you are allowed to change this as you see fit.</span>
+		</div>
+		<div class="form-group">
+			<label for="min-score">Minimum score</label>
+			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value=2 required>
+			<span class="help-block">Remember the rules! This should be 2, but you are allowed to customize this as you see fit.</span>
+		</div>
+		<div class="form-group">
+			<label for="solution">Solution</label>
+			<input type="text" class="form-control" id="solution" placeholder="Solution" required>
+		</div>
+		<button type="submit" class="btn btn-default">Save</button>
+	</form>
+</template>

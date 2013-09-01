@@ -1,0 +1,22 @@
+/* CSS declarations go here */
+.footer {
+	padding-top: 40px;
+	padding-bottom: 30px;
+	margin-top: 100px;
+	color: #777;
+	text-align: center;
+	border-top: 1px solid #e5e5e5;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    text-align: left;
+  }
+  .footer p {
+    margin-bottom: 0;
+  }
+}
+
+.badge-success {
+	background-color: #5cb85c;
+}
