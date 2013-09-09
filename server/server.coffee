@@ -1,10 +1,3 @@
-###
-Meteor.startup ->
-  @Spawn = Npm.require('child_process').spawn
-  @Future = Npm.require('fibers/future')
-  @FS = Npm.require('fs')
-###
-  
 Meteor.methods
   checkAnswer: (answer, problemId) ->
     if not Meteor.userId()
@@ -37,43 +30,3 @@ Meteor.methods
       else if score > problem.minScore # Decrement possible score for this problem
         Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$inc: {'answers.$.score': -1}})
       return false
-
-### In the future: We want to upload code to run on the server
-  run: ->
-    files = FS.readdirSync '/Users/alexanbj/Documents/Hacking/programming-ladder/solutions'
-    Meteor._debug files
-
-    # this needs to be optimized. If one fails we want to cancel them all!
-    futures = files.map (file) ->
-      future = new Future  
-
-      prc = Spawn('python', ['/Users/alexanbj/Documents/Hacking/programming-ladder/test.py'])
-      prc.stdout.setEncoding('utf8')
-      test = null
-      prc.stdout.on('data', (data) ->
-        # FIXME: Get the last element written to stdout
-        test = data
-      )
-
-
-      prc.on('close', (code) ->
-        if code isnt 0
-          return future['return'] false
-          # cancel all futures here?
-        solution = FS.readFileSync '/Users/alexanbj/Documents/Hacking/programming-ladder/solutions/' + file, 'utf-8'
-        solution.trim
-        Meteor._debug "test: " + test
-        Meteor._debug "sol: " + solution
-        if solution == test
-          future['return'] true
-        else future['return'] false
-      )
-
-      return future
-
-    Future.wait futures
-
-    #future.wait)
-
-    _.invoke(futures, 'get')
-###
