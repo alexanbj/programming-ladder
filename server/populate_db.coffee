@@ -21,5 +21,6 @@ Find the sum of all the multiples of 3 or 5 below 1000."
 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 
 By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms."
+  # If we only have one user. Make him admin!
   if Meteor.users.find().count() is 1
     Meteor.users.update {}, {$set: {isAdmin: true}}

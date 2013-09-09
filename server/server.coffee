@@ -6,9 +6,13 @@ Meteor.startup ->
 ###
   
 Meteor.methods
-  checkAnswer: (answer, problemId, userId) ->
-    #TODO: Make sure rouge clients aren't calling this with other people's userIds to decrement their possible score
-    problem = Problems.findOne problemId 
+  checkAnswer: (answer, problemId) ->
+    if not Meteor.userId()
+      throw new Meteor.Error 601, "You need to be logged in to do that"
+
+    userId = Meteor.userId()
+
+    problem = Problems.findOne problemId # TODO: Do some error handling if no problem is found? 
 
     # If the user has tried and failed to solve this before. Get the current score value for this problem for this user
     previousAnswer = problem.answers?.filter (x) -> x.userId is userId

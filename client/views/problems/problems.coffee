@@ -9,7 +9,7 @@ Template.showProblem.events
     event.preventDefault() # don't reload the page on submit
     answer = template.find("#answer").value.trim()
     if answer
-      Meteor.call 'checkAnswer', answer, Session.get('selectedProblemId'), Meteor.userId(), #use template.data._id??
+      Meteor.call 'checkAnswer', answer, Session.get('selectedProblemId'), #use template.data._id instead of session object her
       (err, res) ->  
         # Is it the 'meteor way' to use jquery here or should session variables be used?
         #if res is true
