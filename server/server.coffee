@@ -34,6 +34,10 @@ Meteor.methods
         Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$inc: {'answers.$.score': -1}})
       return false
 
+  revealAnswer: (problemId, userId) ->
+    problem = Problems.findOne problemId
+    return problem.solution
+
 ### In the future: We want to upload code to run on the server
   run: ->
     files = FS.readdirSync '/Users/alexanbj/Documents/Hacking/programming-ladder/solutions'

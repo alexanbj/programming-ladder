@@ -1,8 +1,15 @@
 Template.problems.problems = ->
-  Problems.find({})
+  Problems.find({})    
 
 Template.problems.selected = ->
   if Session.equals "selectedProblemId", this._id then "active" else ""
+
+Template.showProblem.solution = ->
+  Meteor.call 'revealAnswer', Session.get('selectedProblemId'), Meteor.userId(),
+    (err, res) ->  
+      console.log(err)
+      console.log(res)
+      $('a#correctAnswer').popover({placement:'right', content: res})
 
 Template.showProblem.events
   'submit form': (event, template) ->

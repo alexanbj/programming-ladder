@@ -30,13 +30,12 @@
 				<p>{{description}}</p>
 			</div>
 			{{#if currentUser}}
-			Debug - Answer: {{solution}}
 				{{#if answers.[0].answered}}
 					<div id="success-message" class="alert alert-dismissable alert-success">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
 					</div>
-					<a href="#" class="btn btn-default" data-content="{{solution}}">Reveal answer</a>
+					<a href="#" id="correctAnswer" class="btn btn-default" rel="popover" {{solution}}>Reveal answer</a>
 				{{else}}
 					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
