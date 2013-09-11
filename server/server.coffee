@@ -6,7 +6,8 @@ Meteor.startup ->
 ###
   
 Meteor.methods
-  checkAnswer: (answer, problemId, userId) ->
+  checkAnswer: (answer, problemId) ->
+    userId = Meteor.userId()
     #TODO: Make sure rouge clients aren't calling this with other people's userIds to decrement their possible score
     problem = Problems.findOne problemId 
 
@@ -34,7 +35,8 @@ Meteor.methods
         Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$inc: {'answers.$.score': -1}})
       return false
 
-  revealAnswer: (problemId, userId) ->
+  revealAnswer: (problemId) ->
+    userId = Meteor.userId()
     problem = Problems.findOne problemId
     return problem.solution
 
