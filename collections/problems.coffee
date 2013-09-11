@@ -16,8 +16,6 @@ Meteor.methods
     if not isAdminById @userId
       throw new Meteor.Error 602, "You need to be an admin to do that"
 
-    #TODO: Check if the user is authorized (admin)
-
     problem = _.extend problem,
       title: problem.title.trim()
       description: problem.description.trim()

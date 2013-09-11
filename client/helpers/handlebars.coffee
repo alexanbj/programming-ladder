@@ -1,2 +1,2 @@
 Handlebars.registerHelper 'isAdmin', ->
-  isAdmin Meteor.user() 
+  isAdmin Meteor.user()
