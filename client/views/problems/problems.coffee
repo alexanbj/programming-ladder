@@ -1,5 +1,5 @@
 Template.problems.problems = ->
-  Problems.find({})
+  Problems.find({})    
 
 Template.problems.selected = ->
   if Session.equals "selectedProblemId", this._id then "active" else ""
@@ -17,6 +17,14 @@ Template.showProblem.events
         $('#fail-message').show()
         console.log(err)
         console.log(res)
+  'click a#correctAnswer': ->
+     Meteor.call 'revealAnswer', Session.get('selectedProblemId'),
+      (err, res) ->  
+        console.log(err)
+        console.log(res)
+        $('a#correctAnswer').popover({placement:'right', content: res, trigger: "manual"})
+        $('a#correctAnswer').popover('toggle')
+        $('a#correctAnswer').addClass('disabled')
 
 Template.newProblem.events
   'submit form': (event, template) ->

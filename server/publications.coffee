@@ -16,7 +16,6 @@ Meteor.publish 'problems', ->
       maxScore: true
       title: true
       description: true
-      solution: true
   else 
     Problems.find {}, fields:
       title: true
