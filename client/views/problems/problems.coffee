@@ -17,14 +17,15 @@ Template.showProblem.events
         $('#fail-message').show()
         console.log(err)
         console.log(res)
-  'click a#correctAnswer': ->
-     Meteor.call 'revealAnswer', Session.get('selectedProblemId'),
+
+  'click a#revealAnswer': (event) ->
+    event.preventDefault()
+    Meteor.call 'revealAnswer', Session.get('selectedProblemId'),
       (err, res) ->  
-        console.log(err)
-        console.log(res)
-        $('a#correctAnswer').popover({placement:'right', content: res, trigger: "manual"})
-        $('a#correctAnswer').popover('toggle')
-        $('a#correctAnswer').addClass('disabled')
+        if res
+          $('a#revealAnswer').popover({placement:'right', content: res, trigger: "manual"})
+          $('a#revealAnswer').popover('toggle')
+          $('a#revealAnswer').addClass('disabled')
 
 Template.newProblem.events
   'submit form': (event, template) ->
