@@ -4,6 +4,7 @@ Template.problems.problems = ->
 Template.problems.selected = ->
   if Session.equals "selectedProblemId", this._id then "active" else ""
 
+
 Template.showProblem.events
   'submit form': (event, template) ->
     event.preventDefault() # don't reload the page on submit
@@ -30,6 +31,7 @@ Template.showProblem.events
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
+    $('#description').val($('#description-editor').cleanHtml()) # Set text from wysiwyg editor to description textarea
 
     properties =
       title: template.find("#title").value
@@ -41,3 +43,9 @@ Template.newProblem.events
     Meteor.call 'addProblem', properties,
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
+
+Template.newProblem.rendered = ->
+  $('.editor').wysiwyg({
+    hotKeys: { # Disable hotkeys
+    }
+  })
