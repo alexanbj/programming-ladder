@@ -22,7 +22,7 @@ Template.showProblem.events
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
-    $('#description').val($('#editor').cleanHtml()) # Set text from wysiwyg editor to description textarea
+    $('#description').val($('#description-editor').cleanHtml()) # Set text from wysiwyg editor to description textarea
 
     properties =
       title: template.find("#title").value
@@ -36,7 +36,7 @@ Template.newProblem.events
         if problemId then Router.go "showProblem", _id: problemId
 
 Template.newProblem.rendered = ->
-  $('#editor').wysiwyg({
+  $('.editor').wysiwyg({
     hotKeys: { # Disable hotkeys
     }
   })
