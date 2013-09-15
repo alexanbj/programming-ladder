@@ -20,3 +20,7 @@
 .badge-success {
 	background-color: #5cb85c;
 }
+
+.badge-error {
+	background-color: #9d261d;
+}
