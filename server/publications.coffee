@@ -14,6 +14,7 @@ Meteor.publish 'problems', ->
       title: true
       description: true
       solution: true
+      created: true
   else 
     Problems.find {}, fields:
       title: true

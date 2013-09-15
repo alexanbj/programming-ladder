@@ -1,12 +1,15 @@
 <template name="problems">
-	<div class="col-md-3">
+		<div class="col-md-3">
+			<form class="form-inline" role="form">		
+			<button type="submit" class="btn">Random Problem</button>
+		</form>
 		<ul class="nav nav-pills nav-stacked">
 			{{#each problems}}
 				<li class="{{selected}}">
 					<a href="{{pathFor 'showProblem'}}">
 						{{#if currentUser}}
 							{{#with answers.[0]}}
-								<span class="badge {{#if answered}}badge-success{{/if}} pull-right">{{score}}</span>
+								<span class="badge {{#if answered}}badge-success{{else}}badge-error{{/if}} pull-right">{{score}}</span>
 							{{else}}
 								<span class="badge pull-right">{{maxScore}}</span>
 							{{/with}}
@@ -19,7 +22,7 @@
 	</div>
 </template>
 
-<template name="showProblem">
+<template name="showProblem">	
 	{{>problems}}
 	<div class="col-md-9">
 		{{#with problem}}
@@ -38,10 +41,12 @@
 					</div>
 					<a href="#" class="btn btn-default" data-content="{{solution}}">Reveal answer</a>
 				{{else}}
-					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-					</div>
+					{{#with wrongAnswer}}	
+						<div id="fail-message" class="alert alert-dismissable alert-danger">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+						</div>
+					{{/with}}
 					<form class="form-inline" role="form">
 						<div class="form-group">
 							<label class="sr-only" for="answer">Answer</label>

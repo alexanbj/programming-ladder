@@ -13,6 +13,7 @@ Meteor.methods
       title: problem.title.trim()
       description: problem.description.trim()
       solution: problem.solution.trim()
+      created: problem.created
 
     #TODO: Sanitize data. Make sure there are no nulls and that maxscore isnt lower than minscore
 
