@@ -1,8 +1,11 @@
 # Users
 Meteor.publish 'allUsers', ->
-  Meteor.users.find {}, fields:
-    username: true
-    score: true
+    if isAdminById @userId
+      Meteor.users.find() # Change this to have admins only see the fields they need...
+    else
+      Meteor.users.find {}, fields:
+        username: true
+        score: true
 
 
 # Problems
@@ -13,7 +16,6 @@ Meteor.publish 'problems', ->
       maxScore: true
       title: true
       description: true
-      solution: true
   else 
     Problems.find {}, fields:
       title: true

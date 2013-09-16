@@ -21,22 +21,21 @@
 
 <template name="showProblem">
 	{{>problems}}
-	<div class="col-md-9">
+	<section class="col-md-9 problem">
 		{{#with problem}}
 			<div class="page-header">
 				<h1>{{title}}</h1>
 			</div>
 			<div class="well">
-				<p>{{description}}</p>
+				{{{description}}}
 			</div>
 			{{#if currentUser}}
-			Debug - Answer: {{solution}}
 				{{#if answers.[0].answered}}
 					<div id="success-message" class="alert alert-dismissable alert-success">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
 					</div>
-					<a href="#" class="btn btn-default" data-content="{{solution}}">Reveal answer</a>
+					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
 				{{else}}
 					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -52,7 +51,7 @@
 				{{/if}}
 			{{/if}}
 		{{/with}}
-	</div>
+	</section>
 </template>
 
 <template name="newProblem">
@@ -61,9 +60,22 @@
 			<label for="title">Title</label>
 			<input type="text" class="form-control" id="title" placeholder="Title" required>
 		</div>
+
 		<div class="form-group">
-			<label for="description">Description</label>
-			<textarea class="form-control" id="description" placeholder="Description" required></textarea>
+			<label for="editor">Description</label>
+			<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+				</div>
+			</div>
+			<div class="form-control editor" id="description-editor" required></div>
+			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden"></textarea>
 		</div>
 		<div class="form-group">
 			<label for="max-score">Max score</label>
