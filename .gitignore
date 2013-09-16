@@ -2,3 +2,6 @@
 packages/
 *.sublime-project
 *.sublime-workspace
+
+*.iml
+.idea/
