@@ -13,9 +13,9 @@
 			</div>
 			<nav class="collapse navbar-collapse" role="navigation">
 				<ul class="nav navbar-nav">
-					<li class=""><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
-					<li class=""><a href="{{pathFor 'problems'}}">Problems</a></li> 
-					<li class=""><a href="{{pathFor 'rules'}}">Rules</a></li>
+					<li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
+					<li class="{{activeClassByRoute 'problems'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+					<li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
 				</ul>
 				{{#with currentUser}}
 					<p class="navbar-text">Score: {{score}}</p>
