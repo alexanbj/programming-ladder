@@ -4,7 +4,8 @@
     "basePackages": {
       "iron-router": {},
       "bootstrap-3": {},
-      "accounts-ui-bootstrap-3": {}
+      "accounts-ui-bootstrap-3": {},
+      "font-awesome": {}
     },
     "packages": {
       "iron-router": {
@@ -14,13 +15,18 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.3.3",
-        "commit": "bbb5b5eb3e36aff6a740889a965c8bdb8586ef14"
+        "tag": "v0.3.4",
+        "commit": "680c056e849d079a1b669247f347da2b443aad91"
       },
       "accounts-ui-bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
-        "tag": "v0.2.1",
-        "commit": "123a193f7a20dbf4587dda3f4109035c54581f11"
+        "tag": "v0.2.2",
+        "commit": "570ffe3ba084bae10c53915e5b0074dae26cae4a"
+      },
+      "font-awesome": {
+        "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
+        "tag": "v3.2.1",
+        "commit": "38bdfff72dfb8857b272f9a9b056045d6a015489"
       }
     }
   }
