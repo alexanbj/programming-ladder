@@ -13,9 +13,8 @@ Meteor.methods
       if previousAnswer[0]?.answered then return # Don't trust the client
       score = previousAnswer[0]?.score
 
-    #problem.answer should be a string, or the comparison will always fail.
-    # TODO: strip all whitespace and lowercase before compare
-    if answer is problem.solution
+    # Check if user submitted the correct answer and take appropriate action
+    if sanitize(answer) is sanitize(problem.solution)
       if score # Hooray, we answered correctly. Set boolean to true
         Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$set: {'answers.$.answered': true}})
       else # Insert new answer array, with max points!
@@ -35,3 +34,7 @@ Meteor.methods
     userId = Meteor.userId()
     problem = Problems.findOne problemId
     return problem.solution
+
+# Perhaps we should trim away all whitespace, specials chars etc?
+@sanitize = (string) ->
+  string.trim().toLowerCase()
