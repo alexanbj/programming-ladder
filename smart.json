@@ -3,6 +3,7 @@
     "iron-router": {},
     "bootstrap-3": {},
     "accounts-ui-bootstrap-3": {},
-    "font-awesome": {}
+    "font-awesome": {},
+    "collection-hooks": {}
   }
 }

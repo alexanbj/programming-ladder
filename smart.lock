@@ -5,7 +5,8 @@
       "iron-router": {},
       "bootstrap-3": {},
       "accounts-ui-bootstrap-3": {},
-      "font-awesome": {}
+      "font-awesome": {},
+      "collection-hooks": {}
     },
     "packages": {
       "iron-router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/nate-strauser/meteor-font-awesome.git",
         "tag": "v3.2.1",
         "commit": "38bdfff72dfb8857b272f9a9b056045d6a015489"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.5.2",
+        "commit": "2c986b3aeae7ad3ce3e146669675fd515db346b9"
       }
     }
   }

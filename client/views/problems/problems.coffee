@@ -44,6 +44,11 @@ Template.newProblem.events
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
 
+
+Template.layout.events
+  'click .delete-link': ->
+    Meteor.call 'deleteProblem', Session.get('selectedProblemId')
+
 Template.newProblem.rendered = ->
   $('.editor').wysiwyg({
     hotKeys: { # Disable hotkeys
