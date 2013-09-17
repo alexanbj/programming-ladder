@@ -80,16 +80,17 @@
 		<div class="form-group">
 			<label for="max-score">Max score</label>
 			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value=10 required>
-			<span class="help-block">Remember the rules! This should be 10, but you are allowed to change this as you see fit.</span>
+			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
 		</div>
 		<div class="form-group">
 			<label for="min-score">Minimum score</label>
 			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value=2 required>
-			<span class="help-block">Remember the rules! This should be 2, but you are allowed to customize this as you see fit.</span>
+			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
 		</div>
 		<div class="form-group">
 			<label for="solution">Solution</label>
 			<input type="text" class="form-control" id="solution" placeholder="Solution" required>
+			<span class="help-block">If the solution is in a specific format, please describe it in the description. The system uses string comparisons when checking submitted answers for correctness.</span>
 		</div>
 		<button type="submit" class="btn btn-default">Save</button>
 	</form>
