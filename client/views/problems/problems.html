@@ -24,6 +24,12 @@
 	<section class="col-md-9 problem">
 		{{#with problem}}
 			<div class="page-header">
+				{{#if isAdmin}}
+				<div class="edit-problem-buttons pull-right">
+					<button class="btn btn-primary"><i class="icon-edit"></i> Edit</button>
+					<button class="btn btn-danger"><i class="icon-trash"></i> Delete</button>
+				</div>
+				{{/if}}
 				<h1>{{title}}</h1>
 			</div>
 			<div class="well">
