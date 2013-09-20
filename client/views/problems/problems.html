@@ -1,9 +1,12 @@
 <template name="problems">
-		<div class="col-md-3">
-			<form class="form-inline" role="form">		
-			<button type="submit" class="btn">Random Problem</button>
-		</form>
-		<ul class="nav nav-pills nav-stacked">
+		<div class="col-md-4">
+			<div class="problems-toolbar">
+				{{#if isAdmin}}
+						<a class="btn btn-default" href="{{pathFor 'newProblem'}}"><i class="icon-plus"></i> New problem</a>
+				{{/if}}
+				<a href="#" id="randomProblem" title="Go to random problem" class="btn btn-default"><i class="icon-random"></i> Random problem</a>
+			</div>
+			<ul class="nav nav-pills nav-stacked">
 			{{#each problems}}
 				<li class="{{selected}}">
 					<a href="{{pathFor 'showProblem'}}">
@@ -24,7 +27,7 @@
 
 <template name="showProblem">	
 	{{>problems}}
-	<section class="col-md-9 problem">
+	<section class="col-md-8 problem">
 		{{#with problem}}
 			<div class="page-header">
 				{{#if isAdmin}}

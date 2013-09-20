@@ -18,14 +18,6 @@
 					<li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					{{#if isAdmin}}
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="{{pathFor 'newProblem'}}">New problem</a></li>
-							</ul>
-						</li>
-					{{/if}}
 					{{loginButtons}}
 					{{#with currentUser}}
 						<p class="navbar-text score">Score: {{score}}</p>

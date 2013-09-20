@@ -2,7 +2,7 @@ Template.problems.problems = ->
   Problems.find({}, {sort: {created : -1}})
 
 Template.problems.events 
-  'submit form': (event, template) ->
+  'click a#randomProblem': (event) ->
     event.preventDefault() # don't reload the page on submit
     unsolvedProblems = Problems.find({$or : [{answers : null}, {"answers.answered" : false}]}).fetch()
     randomIndex = Math.floor(Math.random() * unsolvedProblems.length)   
