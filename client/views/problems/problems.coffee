@@ -14,7 +14,7 @@ Template.problems.selected = ->
 Template.showProblem.wrongAnswer = ->  
   Session.get(Session.get('selectedProblemId'))  
 
-Template.showProblem.events
+Template.showProblem.events 
   'submit form': (event, template) ->
     event.preventDefault() # don't reload the page on submit
     answer = template.find("#answer").value.trim()
@@ -55,3 +55,28 @@ Template.newProblem.events
     Meteor.call 'addProblem', properties,
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
+
+
+Template.editProblem.problemAnswered = -> 
+  Meteor.call 'isAnswered', Session.get('selectedProblemId'),
+    (err, answered) -> Session.set("answered", answered)
+  Session.get("answered")
+
+Template.editProblem.events 
+  'submit form': (event, template) ->
+    event.preventDefault()
+
+    properties =
+      _id: Session.get("selectedProblemId")
+      title: template.find("#title").value
+      description: template.find("#description").value
+      maxScore: parseInt template.find("#max-score").value
+      minScore: parseInt template.find("#min-score").value
+      solution: template.find("#solution").value
+      created: new Date
+      
+    Meteor.call 'editProblem', properties,
+      (err, problemId) ->
+        if problemId then Router.go "showProblem", _id: problemId
+
+

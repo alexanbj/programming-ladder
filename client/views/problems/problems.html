@@ -86,3 +86,31 @@
 		<button type="submit" class="btn btn-default">Save</button>
 	</form>
 </template>
+
+<template name="editProblem">
+	<form role="form">		
+		<div class="form-group">
+			<label for="title">Title</label>
+			<input type="text" class="form-control" id="title" value="{{problem.title}}">
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" id="description">{{problem.description}}</textarea>
+		</div>
+		<div class="form-group">
+			<label for="max-score">Max score</label>
+			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value={{problem.maxScore}} {{#if problemAnswered}}disabled{{/if}}>
+			<span class="help-block">Remember the rules! This should be 10, but you are allowed to change this as you see fit.</span>
+		</div>
+		<div class="form-group">
+			<label for="min-score">Minimum score</label>
+			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value={{problem.minScore}} {{#if problemAnswered}}disabled{{/if}}>
+			<span class="help-block">Remember the rules! This should be 2, but you are allowed to customize this as you see fit.</span>
+		</div>
+		<div class="form-group">
+			<label for="solution">Solution</label>
+			<input type="text" class="form-control" id="solution" value="{{problem.solution}}">
+		</div>
+		<button type="submit" class="btn btn-default">Save</button>		
+	</form>
+</template>
