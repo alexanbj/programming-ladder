@@ -5,5 +5,6 @@ Handlebars.registerHelper 'activeClassByRoute', (route) ->
   currentRoute = Router.current()
   if (!currentRoute)
     return ''
-  if currentRoute.route.name == route
+  regex = new RegExp(route, "i")
+  if regex.test(currentRoute.route.name)
     return 'active'
