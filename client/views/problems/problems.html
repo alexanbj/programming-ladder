@@ -1,15 +1,16 @@
 <template name="problems">
-	<div class="col-md-3">
+		<div class="col-md-3">
+			<form class="form-inline" role="form">		
+			<button type="submit" class="btn">Random Problem</button>
+		</form>
 		<ul class="nav nav-pills nav-stacked">
 			{{#each problems}}
 				<li class="{{selected}}">
 					<a href="{{pathFor 'showProblem'}}">
 						{{#if currentUser}}
-							{{#with answers.[0]}}
-								<span class="badge {{#if solved}}badge-success{{/if}} pull-right">{{score}}</span>
-							{{else}}
-								<span class="badge pull-right">{{maxScore}}</span>
-							{{/with}}
+							{{#if answers.[0].answered}}
+								<span class="glyphicon glyphicon-ok-sign pull-right"></span>
+							{{/if}}
 						{{/if}}
 						{{title}}
 					</a>
@@ -19,12 +20,20 @@
 	</div>
 </template>
 
-<template name="showProblem">
+<template name="showProblem">	
 	{{>problems}}
 	<section class="col-md-9 problem">
 		{{#with problem}}
 			<div class="page-header">
-				<h1>{{title}}</h1>
+				{{#if answers.[0]}}
+					{{#if answers.[0].answered}}
+						<h1>{{title}} <button type="button" class="btn disabled btn-success pull-right">{{answers.[0].score}}/{{maxScore}}</button></h1>
+					{{else}}
+						<h1>{{title}} <button type="button" class="btn disabled pull-right">{{answers.[0].score}}/{{maxScore}}</button></h1>
+					{{/if}}
+				{{else}}
+					<h1>{{title}} <button type="button" class="btn disabled pull-right">{{maxScore}}/{{maxScore}}</button></h1>
+				{{/if}}
 			</div>
 			<div class="well">
 				{{{description}}}
@@ -37,10 +46,12 @@
 					</div>
 					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
 				{{else}}
-					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-					</div>
+					{{#with wrongAnswer}}	
+						<div id="fail-message" class="alert alert-dismissable alert-danger">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+						</div>
+					{{/with}}
 					<form class="form-inline" role="form">
 						<div class="form-group">
 							<label class="sr-only" for="answer">Answer</label>
