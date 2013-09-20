@@ -17,9 +17,6 @@
 					<li class="{{activeClassByRoute 'problems'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
 					<li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
 				</ul>
-				{{#with currentUser}}
-					<p class="navbar-text">Score: {{score}}</p>
-				{{/with}}
 				<ul class="nav navbar-nav navbar-right">
 					{{#if isAdmin}}
 						<li class="dropdown">
@@ -30,6 +27,9 @@
 						</li>
 					{{/if}}
 					{{loginButtons}}
+					{{#with currentUser}}
+						<p class="navbar-text score">Score: {{score}}</p>
+					{{/with}}
 				</ul>
 			</nav>
 		</div>
