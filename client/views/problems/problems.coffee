@@ -1,5 +1,5 @@
 Template.problems.problems = ->
-  Problems.find({}, {sort: {created : -1}})
+  Problems.find({}, {sort: {created : 1}})
 
 Template.problems.events 
   'submit form': (event, template) ->
