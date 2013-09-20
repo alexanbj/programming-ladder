@@ -1,5 +1,8 @@
 <template name="problems">
-	<div class="col-md-3">
+		<div class="col-md-3">
+			<form class="form-inline" role="form">		
+			<button type="submit" class="btn">Random Problem</button>
+		</form>
 		<ul class="nav nav-pills nav-stacked">
 			{{#each problems}}
 				<li class="{{selected}}">
@@ -19,7 +22,7 @@
 	</div>
 </template>
 
-<template name="showProblem">
+<template name="showProblem">	
 	{{>problems}}
 	<section class="col-md-9 problem">
 		{{#with problem}}
@@ -37,10 +40,12 @@
 					</div>
 					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
 				{{else}}
-					<div id="fail-message" class="alert alert-dismissable alert-danger" style="display:none">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-					</div>
+					{{#with wrongAnswer}}	
+						<div id="fail-message" class="alert alert-dismissable alert-danger">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+						</div>
+					{{/with}}
 					<form class="form-inline" role="form">
 						<div class="form-group">
 							<label class="sr-only" for="answer">Answer</label>
