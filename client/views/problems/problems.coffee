@@ -4,7 +4,7 @@ Template.problems.problems = ->
 Template.problems.events 
   'submit form': (event, template) ->
     event.preventDefault() # don't reload the page on submit
-    unsolvedProblems = Problems.find({$or : [{answers : null}, {"answers.answered" : false}]}).fetch()
+    unsolvedProblems = Problems.find({$or : [{answers : null}, {"answers.solved" : false}]}).fetch()
     randomIndex = Math.floor(Math.random() * unsolvedProblems.length)   
     Router.go "showProblem", _id: unsolvedProblems[randomIndex]._id
 

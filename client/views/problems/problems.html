@@ -8,7 +8,7 @@
 				<li class="{{selected}}">
 					<a href="{{pathFor 'showProblem'}}">
 						{{#if currentUser}}
-							{{#if answers.[0].answered}}
+							{{#if answers.[0].solved}}
 								<span class="glyphicon glyphicon-ok-sign pull-right"></span>
 							{{/if}}
 						{{/if}}
@@ -26,7 +26,7 @@
 		{{#with problem}}
 			<div class="page-header">
 				{{#if answers.[0]}}
-					{{#if answers.[0].answered}}
+					{{#if answers.[0].solved}}
 						<h1>{{title}} <button type="button" class="btn disabled btn-success pull-right">{{answers.[0].score}}/{{maxScore}}</button></h1>
 					{{else}}
 						<h1>{{title}} <button type="button" class="btn disabled pull-right">{{answers.[0].score}}/{{maxScore}}</button></h1>
