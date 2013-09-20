@@ -29,4 +29,4 @@ Meteor.methods
 # When a problem is deleted, decrement the users' scores accordingly
 if Meteor.isServer
   Problems.after.remove (userId, problem) ->
-    Meteor.users.update answer.userId, { $inc: { score: -answer.score}} for answer in problem.answers when answer.answered is true
+    Meteor.users.update answer.userId, { $inc: { score: -answer.score}} for answer in problem.answers when answer.solved is true
