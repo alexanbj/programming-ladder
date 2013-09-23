@@ -26,6 +26,12 @@ Template.showProblem.events
           $('a#revealAnswer').popover('toggle')
           $('a#revealAnswer').addClass('disabled')
 
+  'click .delete-link': (event, template) ->
+    if confirm("Are you sure?")
+      Problems.remove template.data.problem._id
+      Session.set('selectedProblemId', null)
+      Router.go "problems"
+
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
@@ -42,11 +48,6 @@ Template.newProblem.events
     Meteor.call 'addProblem', properties,
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
-
-
-Template.layout.events
-  'click .delete-link': ->
-    Meteor.call 'deleteProblem', Session.get('selectedProblemId')
 
 Template.newProblem.rendered = ->
   $('.editor').wysiwyg({

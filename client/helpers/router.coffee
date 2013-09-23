@@ -1,7 +1,8 @@
 Router.map ->
   @route "home", path: "/"
   @route "leaderboard"
-  @route "problems"
+  @route "problems",
+    template: "sidebar"
   @route "showProblem",
     path: "/problems/:_id"
     data: -> problem: Problems.findOne @params._id #make this work with notFoundTemplate

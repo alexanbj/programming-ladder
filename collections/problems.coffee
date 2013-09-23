@@ -6,10 +6,6 @@ Problems.allow
   remove: -> isAdminById @userId
 
 Meteor.methods
-  deleteProblem: (problemId) ->
-    if not isAdminById @userId
-      throw new Meteor.Error 602, "You need to be an admin to do that"
-    Problems.remove problemId
 
   addProblem: (problem) ->
     if not isAdminById @userId
