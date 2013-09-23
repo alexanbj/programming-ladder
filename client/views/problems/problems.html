@@ -6,20 +6,24 @@
 	<section class="col-md-8 problem">
 		{{#with problem}}
 			<div class="page-header">
-				{{#if isAdmin}}
-				<div class="edit-problem-buttons pull-right">
-					<button class="btn btn-primary"><i class="icon-edit"></i> Edit</button>
-					<button class="delete-link btn btn-danger"><i class="icon-trash"></i> Delete</button>
-				</div>
-				{{/if}}
-				{{#if answers.[0]}}
-					{{#if answers.[0].solved}}
-						<h1>{{title}} <span class="label label-success">{{answers.[0].score}}/{{maxScore}}</span></h1>
+				{{#if currentUser}}
+					{{#if isAdmin}}
+					<div class="edit-problem-buttons pull-right">
+						<button class="btn btn-primary"><i class="icon-edit"></i> Edit</button>
+						<button class="delete-link btn btn-danger"><i class="icon-trash"></i> Delete</button>
+					</div>
+					{{/if}}
+					{{#if answers.[0]}}
+						{{#if answers.[0].solved}}
+							<h1>{{title}} <span class="label label-success">{{answers.[0].score}}/{{maxScore}}</span></h1>
+						{{else}}
+							<h1>{{title}} <span class="label label-warning">{{answers.[0].score}}/{{maxScore}}</span></h1>
+						{{/if}}
 					{{else}}
-						<h1>{{title}} <span class="label label-warning">{{answers.[0].score}}/{{maxScore}}</span></h1>
+						<h1>{{title}} <span class="label label-warning">{{maxScore}}/{{maxScore}}</span></h1>
 					{{/if}}
 				{{else}}
-					<h1>{{title}} <span class="label label-warning">{{maxScore}}/{{maxScore}}</span></h1>
+					<h1>{{title}}</h1>
 				{{/if}}
 			</div>
 			<div class="well">
