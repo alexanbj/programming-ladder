@@ -1,0 +1,22 @@
+<template name="nav">
+    <header class="navbar navbar-default navbar-static-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{pathFor 'home'}}">Knowit</a>
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
+                    <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+                    <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {{loginButtons}}
+                    {{#with currentUser}}
+                        <p class="navbar-text score">Score: {{score}}</p>
+                    {{/with}}
+                </ul>
+            </nav>
+        </div>
+    </header>
+</template>
