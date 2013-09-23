@@ -1,30 +1,8 @@
-<template name="problems">
-		<div class="col-md-4">
-			<div class="problems-toolbar">
-				{{#if isAdmin}}
-						<a class="btn btn-default" href="{{pathFor 'newProblem'}}"><i class="icon-plus"></i> New problem</a>
-				{{/if}}
-				<a href="#" id="randomProblem" title="Go to random problem" class="btn btn-default"><i class="icon-random"></i> Random problem</a>
-			</div>
-			<ul class="nav nav-pills nav-stacked">
-			{{#each problems}}
-				<li class="{{selected}}">
-					<a href="{{pathFor 'showProblem'}}">
-						{{#if currentUser}}
-							{{#if answers.[0].solved}}
-								<span class="glyphicon glyphicon-ok-sign pull-right"></span>
-							{{/if}}
-						{{/if}}
-						{{title}}
-					</a>
-				</li>
-			{{/each}}
-		</ul>
+<template name="showProblem">
+	<div class="col-md-4">
+		{{>sidebar}}
 	</div>
-</template>
 
-<template name="showProblem">	
-	{{>problems}}
 	<section class="col-md-8 problem">
 		{{#with problem}}
 			<div class="page-header">
