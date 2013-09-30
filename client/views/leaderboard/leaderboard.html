@@ -4,12 +4,26 @@
             <th>#</th>
             <th>User</th>
             <th>Score</th>
+            {{#if currentIsAdmin}}
+                <th>Actions</th>
+            {{/if}}
         </tr>
         {{#each users}}
         <tr>
             <td>1</td>
             <td>{{username}}</td>
             <td>{{score}}</td>
+            {{#if currentIsAdmin}}
+                <td>
+                    <form class="form-inline" role="form">
+                        {{#if isAdmin}}
+                            <button type="submit" class="btn btn-danger">Remove admin</button>
+                        {{else}}
+                            <button type="submit" class="btn btn-warning">Make admin</button>
+                    {{/if}}
+                    </form>
+                </td>
+            {{/if}}
         </tr>
         {{/each}}
     </table>
