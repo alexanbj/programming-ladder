@@ -1,39 +1,36 @@
-<template name="problems">
-		<div class="col-md-3">
-			<form class="form-inline" role="form">		
-			<button type="submit" class="btn">Random Problem</button>
-		</form>
-		<ul class="nav nav-pills nav-stacked">
-			{{#each problems}}
-				<li class="{{selected}}">
-					<a href="{{pathFor 'showProblem'}}">
-						{{#if currentUser}}
-							{{#with answers.[0]}}
-								<span class="badge {{#if answered}}badge-success{{/if}} pull-right">{{score}}</span>
-							{{else}}
-								<span class="badge pull-right">{{maxScore}}</span>
-							{{/with}}
-						{{/if}}
-						{{title}}
-					</a>
-				</li>
-			{{/each}}
-		</ul>
+<template name="showProblem">
+	<div class="col-md-4">
+		{{>sidebar}}
 	</div>
-</template>
 
-<template name="showProblem">	
-	{{>problems}}
-	<section class="col-md-9 problem">
+	<section class="col-md-8 problem">
 		{{#with problem}}
 			<div class="page-header">
-				<h1>{{title}}</h1>
+				{{#if currentUser}}
+					{{#if isAdmin}}
+					<div class="edit-problem-buttons pull-right">
+						<button class="btn btn-primary"><i class="icon-edit"></i> Edit</button>
+						<button class="delete-link btn btn-danger"><i class="icon-trash"></i> Delete</button>
+					</div>
+					{{/if}}
+					{{#if answers.[0]}}
+						{{#if answers.[0].solved}}
+							<h1>{{title}} <span class="label label-success">{{answers.[0].score}}/{{maxScore}}</span></h1>
+						{{else}}
+							<h1>{{title}} <span class="label label-warning">{{answers.[0].score}}/{{maxScore}}</span></h1>
+						{{/if}}
+					{{else}}
+						<h1>{{title}} <span class="label label-warning">{{maxScore}}/{{maxScore}}</span></h1>
+					{{/if}}
+				{{else}}
+					<h1>{{title}}</h1>
+				{{/if}}
 			</div>
 			<div class="well">
 				{{{description}}}
 			</div>
 			{{#if currentUser}}
-				{{#if answers.[0].answered}}
+				{{#if answers.[0].solved}}
 					<div id="success-message" class="alert alert-dismissable alert-success">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!

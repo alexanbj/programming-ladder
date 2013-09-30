@@ -1,16 +1,3 @@
-Template.problems.problems = ->
-  Problems.find({}, {sort: {created : -1}})
-
-Template.problems.events 
-  'submit form': (event, template) ->
-    event.preventDefault() # don't reload the page on submit
-    unsolvedProblems = Problems.find({$or : [{answers : null}, {"answers.answered" : false}]}).fetch()
-    randomIndex = Math.floor(Math.random() * unsolvedProblems.length)   
-    Router.go "showProblem", _id: unsolvedProblems[randomIndex]._id
-
-Template.problems.selected = ->
-  if Session.equals "selectedProblemId", this._id then "active" else ""
-
 Template.showProblem.wrongAnswer = ->  
   Session.get(Session.get('selectedProblemId'))  
 
@@ -39,6 +26,12 @@ Template.showProblem.events
           $('a#revealAnswer').popover('toggle')
           $('a#revealAnswer').addClass('disabled')
 
+  'click .delete-link': (event, template) ->
+    if confirm("Are you sure?")
+      Problems.remove template.data.problem._id
+      Session.set('selectedProblemId', null)
+      Router.go "problems"
+
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
@@ -55,11 +48,6 @@ Template.newProblem.events
     Meteor.call 'addProblem', properties,
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
-
-
-Template.layout.events
-  'click .delete-link': ->
-    Meteor.call 'deleteProblem', Session.get('selectedProblemId')
 
 Template.newProblem.rendered = ->
   $('.editor').wysiwyg({

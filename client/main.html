@@ -6,36 +6,7 @@
 </body>
 
 <template name="layout">
-	<header class="navbar navbar-default navbar-static-top" role="banner">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="{{pathFor 'home'}}">Knowit</a>
-			</div>
-			<nav class="collapse navbar-collapse" role="navigation">
-				<ul class="nav navbar-nav">
-					<li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
-					<li class="{{activeClassByRoute 'problems'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
-					<li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
-				</ul>
-				{{#with currentUser}}
-					<p class="navbar-text">Score: {{score}}</p>
-				{{/with}}
-				<ul class="nav navbar-nav navbar-right">
-					{{#if currentIsAdmin}}
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="{{pathFor 'newProblem'}}">New problem</a></li>
-								<li><a href="#">Edit current</a></li>
-								<li><a class="delete-link" href="#">Delete current</a></li>
-							</ul>
-						</li>
-					{{/if}}
-					{{loginButtons}}
-				</ul>
-			</nav>
-		</div>
-	</header>
+	{{>nav}}
 
 	<div class="container">
 		<div class="row">
@@ -43,20 +14,7 @@
 		</div>
 	</div>
 
-	<footer class="footer">
-		<div class="container">
-  		<p>
-  			Designed and built by <a href="http://twitter.com/alexanbj" target="_blank">@alexanbj</a>
-  		</p>
-  		<p>
-  			Runs on <a href="http://www.meteor.com/">Meteor</a> and <a href="http://getbootstrap.com/">Bootstrap</a>
-  		</p> 
-		</div>
-	</footer>
-</template>
-
-<template name="home">
-	<p>
-		Welcome to the programming ladder!
-	</p>
+    {{#constant}}
+    	{{>footer}}
+    {{/constant}}
 </template>
