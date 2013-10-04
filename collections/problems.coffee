@@ -15,11 +15,8 @@ Meteor.methods
       title: problem.title.trim()
       description: problem.description.trim()
       solution: problem.solution.trim()
-      created: problem.created
-      maxScore: problem.maxscore
-      minScore: problem.minScore
 
-    #TODO: Sanitize data. Make sure there are no nulls and that maxscore isnt lower than minscore
+    #TODO: Sanitize data: Make sure there are no nulls and that maxscore isnt lower than minscore
 
     Problems.insert problem,
       (err, id) ->
