@@ -1,6 +1,3 @@
-Template.showProblem.wrongAnswer = ->  
-  Session.get(Session.get('selectedProblemId'))  
-
 Template.showProblem.events
   'submit form': (event, template) ->
     event.preventDefault() # don't reload the page on submit
@@ -8,14 +5,11 @@ Template.showProblem.events
     if answer
       Meteor.call 'checkAnswer', answer, Session.get('selectedProblemId'), #use template.data._id instead of session object her
       (err, res) ->  
-        #if res is true
-        if not res
-          Session.set(Session.get('selectedProblemId'), true)
+        Deps.flush() #Force dom update before we jquery it!
+        if res
+          $('#success-message').show()
         else
-          Session.set(Session.get('selectedProblemId'), null)       
-        
-        console.log(err)
-        console.log(res)
+          $('#fail-message').show()
 
   'click a#revealAnswer': (event) ->
     event.preventDefault()

@@ -31,18 +31,16 @@
 			</div>
 			{{#if currentUser}}
 				{{#if answers.[0].solved}}
-					<div id="success-message" class="alert alert-dismissable alert-success fade in">
+					<div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
 					</div>
 					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
 				{{else}}
-					{{#with wrongAnswer}}	
-						<div id="fail-message" class="alert alert-dismissable alert-danger fade in">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-						</div>
-					{{/with}}
+					<div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+					</div>
 					<form class="form-inline" role="form">
 						<div class="form-group">
 							<label class="sr-only" for="answer">Answer</label>
