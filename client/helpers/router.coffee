@@ -7,6 +7,9 @@ Router.map ->
     path: "/problems/:_id"
     data: -> problem: Problems.findOne @params._id #make this work with notFoundTemplate
   @route "newProblem"
+  @route "editProblem",
+    path: "/problems/edit/:_id"
+    data: -> problem: Problems.findOne @params._id
   @route "rules"
   @route "notFound", path: "*"
 

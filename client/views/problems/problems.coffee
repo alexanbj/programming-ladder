@@ -32,6 +32,9 @@ Template.showProblem.events
       Session.set('selectedProblemId', null)
       Router.go "problems"
 
+  'click .edit-problem': (event, template) ->
+     Router.go "editProblem", _id: Session.get('selectedProblemId')
+
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
@@ -54,3 +57,38 @@ Template.newProblem.rendered = ->
     hotKeys: { # Disable hotkeys
     }
   })
+
+
+Template.editProblem.rendered = ->
+  
+  $('.editor').wysiwyg({
+    hotKeys: { # Disable hotkeys
+    }
+  })
+  #<textarea id="description" class="form-control hidden" name="description" placeholder="Description">&lt;span style="color: rgb(51, 51, 51);"&gt;Description&lt;/span&gt;</textarea>
+
+  content = $('#description').html().replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+  $('#description-editor').html(content);
+
+Template.editProblem.problemAnswered = -> 
+  Meteor.call 'isAnswered', Session.get('selectedProblemId'),
+    (err, answered) -> Session.set("answered", answered)
+  Session.get("answered")
+
+Template.editProblem.events 
+  'submit form': (event, template) ->
+    event.preventDefault()
+    $('#description').val($('#description-editor').cleanHtml()) # Set text from wysiwyg editor to description textarea
+
+    properties =
+      _id: Session.get("selectedProblemId")
+      title: template.find("#title").value
+      description: template.find("#description").value
+      maxScore: parseInt template.find("#max-score").value
+      minScore: parseInt template.find("#min-score").value
+      solution: template.find("#solution").value
+      created: new Date
+    
+    Meteor.call 'editProblem', properties,
+      (err, problemId) ->
+        if problemId then Router.go "showProblem", _id: problemId
