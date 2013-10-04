@@ -1,6 +1,6 @@
 @isAdmin = (user) ->
-  if user and user.isAdmin then true else false
+  user and user.isAdmin
 
 @isAdminById = (userId) ->
   user = Meteor.users.findOne(userId)
-  user and isAdmin(user)
+  isAdmin(user)

@@ -1,6 +1,6 @@
 <template name="sidebar">
     <div class="problems-toolbar">
-        {{#if isAdmin}}
+        {{#if currentIsAdmin}}
                 <a class="btn btn-default" href="{{pathFor 'newProblem'}}"><i class="icon-plus"></i> New problem</a>
         {{/if}}
         <a href="#" id="randomProblem" title="Go to random problem" class="btn btn-default"><i class="icon-random"></i> Random problem</a>

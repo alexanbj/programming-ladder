@@ -1,4 +1,4 @@
-Handlebars.registerHelper 'isAdmin', ->
+Handlebars.registerHelper 'currentIsAdmin', ->
   isAdmin Meteor.user()
 
 Handlebars.registerHelper 'activeClassByRoute', (route) ->
