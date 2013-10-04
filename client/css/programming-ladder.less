@@ -38,6 +38,20 @@ form .editor {
 		margin-right: 5px
 	}	
 }
+
+/* Hack for leaderboard ranking until this is fixed
+https://github.com/meteor/meteor/issues/489
+*/
+.leaderboard {
+	counter-reset: rank;
+}
+.rank::before {
+	counter-increment: rank;
+	content: counter(rank)".";
+}
+
+
+
 .edit-problem-buttons {
 	button:not(:last-child) {
 		margin-right: 15px;

@@ -1,5 +1,5 @@
 <template name="leaderboard">
-  <table class="table table-striped table-hover">
+  <table class="leaderboard table table-striped table-hover">
     <tr>
       <th>#</th>
       <th>User</th>
@@ -10,7 +10,7 @@
     </tr>
     {{#each users}}
       <tr>
-        <td>1</td>
+        <td class="rank"><!--Empty on purpose. Handled through CSS --></td>
         <td>{{username}}</td>
         <td>{{score}}</td>
         {{#if currentIsAdmin}}
