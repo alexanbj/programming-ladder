@@ -45,12 +45,32 @@ https://github.com/meteor/meteor/issues/489
 .leaderboard {
 	counter-reset: rank;
 }
+
 .rank::before {
 	counter-increment: rank;
-	content: counter(rank)".";
+	content: counter(rank);
 }
 
+.leaderboard tr:nth-child(2) .rank:before {
+	content: url('/medal-gold-2-icon.png');
+	position: relative;
+	top: 3px;
+	left: -4px;
+}
 
+.leaderboard tr:nth-child(3) .rank:before {
+	content: url('/medal-silver-2-icon.png');
+	position: relative;
+	top: 3px;
+	left: -4px;
+}
+
+.leaderboard tr:nth-child(4) .rank:before {
+	content: url('/medal-bronze-2-icon.png');
+	position: relative;
+	top: 3px;
+	left: -4px;
+}
 
 .edit-problem-buttons {
 	button:not(:last-child) {
