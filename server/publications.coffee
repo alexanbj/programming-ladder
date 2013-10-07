@@ -1,7 +1,10 @@
 # Users
 Meteor.publish 'allUsers', ->
     if isAdminById @userId
-      Meteor.users.find() # Change this to have admins only see the fields they need...
+      Meteor.users.find {}, fields:
+        username: true
+        score: true
+        isAdmin: true
     else
       Meteor.users.find {}, fields:
         username: true

@@ -52,14 +52,11 @@ Template.newProblem.rendered = ->
     }
   })
 
-
 Template.editProblem.rendered = ->
-  
   $('.editor').wysiwyg({
     hotKeys: { # Disable hotkeys
     }
   })
-  #<textarea id="description" class="form-control hidden" name="description" placeholder="Description">&lt;span style="color: rgb(51, 51, 51);"&gt;Description&lt;/span&gt;</textarea>
 
   content = $('#description').html().replace(/&lt;/g, "<").replace(/&gt;/g, ">");
   $('#description-editor').html(content);

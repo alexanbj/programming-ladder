@@ -15,13 +15,12 @@
         <td>{{score}}</td>
         {{#if currentIsAdmin}}
           <td>
-            <form class="form-inline" role="form">
               {{#if isAdmin}}
-                <button type="submit" class="btn btn-danger btn-xs">Remove admin</button>
+                <button class="admin-toggle btn btn-success btn-xs">Admin</button>
               {{else}}
-                <button type="submit" class="btn btn-warning btn-xs">Make admin</button>
+                <button class="admin-toggle btn btn-default btn-xs">Admin</button>
               {{/if}}
-            </form>
+              <button class="delete-user btn btn-danger btn-xs">Delete</button>
           </td>
         {{/if}}
       </tr>
