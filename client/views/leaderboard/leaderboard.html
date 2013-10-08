@@ -3,6 +3,7 @@
     <tr>
       <th>#</th>
       <th>User</th>
+      <th>Solved</th>
       <th>Score</th>
       {{#if currentIsAdmin}}
         <th>Actions</th>
@@ -12,6 +13,7 @@
       <tr>
         <td class="rank"><!--Empty on purpose. Handled through CSS --></td>
         <td>{{username}}</td>
+        <td>{{solved}} / {{../problems}}</td>
         <td>{{score}}</td>
         {{#if currentIsAdmin}}
           <td>

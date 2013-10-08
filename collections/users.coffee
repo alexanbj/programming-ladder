@@ -11,6 +11,7 @@ Users.allow
 if Meteor.isServer
   Accounts.onCreateUser (options, user) ->
     user.score = 0
+    user.solved = 0
     user.isAdmin = false
     user
 

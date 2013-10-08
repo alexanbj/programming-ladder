@@ -1,7 +1,9 @@
 Router.map ->
   @route "home", path: "/"
   @route "leaderboard",
-    data: -> users: Users.find({}, {sort: {score: -1}})
+    data: ->
+      problems: Problems.find().count()
+      users: Users.find({}, {sort: {score: -1}})
   @route "problems",
     template: "sidebar"
   @route "showProblem",

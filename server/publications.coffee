@@ -4,11 +4,13 @@ Meteor.publish 'allUsers', ->
       Meteor.users.find {}, fields:
         username: true
         score: true
+        solved: true
         isAdmin: true
     else
       Meteor.users.find {}, fields:
         username: true
         score: true
+        solved: true
 
 
 # Problems
