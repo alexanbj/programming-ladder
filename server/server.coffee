@@ -35,6 +35,6 @@ Meteor.methods
     problem = Problems.findOne problemId
     return problem.solution
 
-# Perhaps we should trim away all whitespace, specials chars etc?
+# Removes all whitespace and lowercases it. Perhaps we should remove special chars as well?
 @sanitize = (string) ->
-  string.trim().toLowerCase()
+  string.replace(/\s+|\s+$/g, "").toLowerCase()
