@@ -17,4 +17,4 @@ if Meteor.isServer
 
   # When a user is deleted, clean up the problems where user has answered
   Users.after.remove (userId, user) ->
-    #TODO
+    Problems.update({}, {$pull: {answers: {userId: user._id}}}, {multi: true})
