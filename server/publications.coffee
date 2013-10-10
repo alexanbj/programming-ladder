@@ -15,7 +15,7 @@ Meteor.publish 'allUsers', ->
 
 # Problems
 Meteor.publish 'problems', ->
-  if @userId
+  if isAdminById @userId
     Problems.find {}, fields:
       answers: {$elemMatch: {userId: @userId}} #Only get the answer object for the logged in user
       maxScore: true
@@ -24,7 +24,16 @@ Meteor.publish 'problems', ->
       description: true
       created: true
       solution: true
-  else 
+  else if @userId
+    Problems.find {}, fields:
+      answers: {$elemMatch: {userId: @userId}} #Only get the answer object for the logged in user
+      maxScore: true
+      minScore: true
+      title: true
+      description: true
+      created: true
+  else
     Problems.find {}, fields:
       title: true
       description: true
+      created: true
