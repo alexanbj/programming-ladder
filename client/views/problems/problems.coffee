@@ -20,9 +20,9 @@ Template.showProblem.events
           $('a#revealAnswer').popover('toggle')
           $('a#revealAnswer').addClass('disabled')
 
-  'click .delete-link': (event, template) ->
+  'click .delete-link': ->
     if confirm("Are you sure?")
-      Problems.remove template.data.problem._id
+      Problems.remove this._id
       Session.set('selectedProblemId', null)
       Router.go "problems"
 
