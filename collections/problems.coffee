@@ -1,9 +1,9 @@
 @Problems = new Meteor.Collection("problems")
 
 Problems.allow
-  insert: -> isAdminById @userId
-  update: -> isAdminById @userId
-  remove: -> isAdminById @userId
+  insert: -> isAdminById Meteor.userId()
+  update: -> isAdminById Meteor.userId()
+  remove: -> isAdminById Meteor.userId()
 
 Meteor.methods
 
