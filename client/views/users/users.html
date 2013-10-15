@@ -1,0 +1,14 @@
+<template name="user">
+  <div class="page-header">
+    <h1>{{user.username}}</h1>
+  </div>
+
+  Solved {{user.solved}} out of {{problemCount}} problems
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{user.solved}}" aria-valuemin="0" aria-valuemax="{{problemCount}}" style="width: {{percentage user.solved problemCount}}%">
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-danger btn-xs"><i class="icon-minus"></i></button>
+  <button type="button" class="btn btn-success btn-xs"><i class="icon-plus"></i></button>
+</template>

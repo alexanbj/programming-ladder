@@ -8,6 +8,9 @@
                 <ul class="nav navbar-nav">
                     <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
                     <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+                    {{#with currentUser}}
+                        <li class="{{activeClassByRoute 'user'}}"><a href="{{pathFor 'user'}}">Progress</a></li>
+                    {{/with}}
                     <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

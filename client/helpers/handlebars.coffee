@@ -8,3 +8,6 @@ Handlebars.registerHelper 'activeClassByRoute', (route) ->
   regex = new RegExp(route, "i")
   if regex.test(currentRoute.route.name)
     return 'active'
+
+Handlebars.registerHelper 'percentage', (x, y) ->
+  (x/y) * 100

@@ -13,6 +13,11 @@ Router.map ->
   @route "editProblem",
     path: "/problems/edit/:_id"
     data: -> problem: Problems.findOne @params._id
+  @route "user",
+    path: "/users/:_id"
+    data: ->
+      user: Meteor.users.findOne(@params._id)
+      problemCount: Problems.find().count()
   @route "rules"
   @route "notFound", path: "*"
 
