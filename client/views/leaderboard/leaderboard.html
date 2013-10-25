@@ -12,7 +12,7 @@
     {{#each users}}
       <tr>
         <td class="rank"><!--Empty on purpose. Handled through CSS --></td>
-        <td>{{username}}</td>
+        <td><a href="{{pathFor 'user'}}">{{username}}</a></td>
         <td>{{solved}} / {{../problems}}</td>
         <td>{{score}}</td>
         {{#if currentIsAdmin}}

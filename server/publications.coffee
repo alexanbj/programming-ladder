@@ -12,7 +12,6 @@ Meteor.publish 'allUsers', ->
         score: true
         solved: true
 
-
 # Problems
 Meteor.publish 'problems', ->
   if isAdminById @userId
