@@ -29,6 +29,30 @@ Template.showProblem.events
   'click .edit-problem': (event, template) ->
      Router.go "editProblem", _id: Session.get('selectedProblemId')
 
+  'change .fileUploader': (event, template) ->     
+    event.preventDefault()
+    fileId = CodeFiles.storeFile event.target.files[0], {problemId: Session.get('selectedProblemId')} 
+    Session.set 'uploadedFile', event.target.files[0].name
+    Session.set 'uploadStarted', true
+    Session.set 'fileId', fileId
+
+  'click .compile': (event, template) ->
+    event.preventDefault()
+    Meteor.call 'compileFile', Session.get('fileId')
+
+
+Template.showProblem.uploadStarted = ->
+  if Session.get('uploadStarted')?
+    Session.get('uploadStarted')
+  else
+    false
+
+Template.showProblem.fileName = ->
+  if Session.get('uploadedFile')?
+    Session.get('uploadedFile')
+  else
+    "No file uploaded"
+    
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
