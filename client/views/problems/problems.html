@@ -30,53 +30,48 @@
 				{{{description}}}
 			</div>
 
+			<form class="form-inline" role="form">	
+				{{#if answers.[0].solved}}
+					<div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
+					</div>
+					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>					
+				{{else}}
+					<div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+					</div>
 
-			<ul class="nav nav-tabs">
-			  <li ><a href="#input" data-toggle="tab">Input Answer</a></li>
-			  <li class="active"><a href="#upload" data-toggle="tab">Upload Code</a></li>					  
-			</ul>
+					<ul class="nav nav-tabs">
+					  <li ><a href="#input" data-toggle="tab">Input Answer</a></li>
+					  <li class="active"><a href="#upload" data-toggle="tab">Upload Code</a></li>					  
+					</ul>
 
-			<div class="tab-content">
-			  <div class="tab-pane " id="input">
-	  			{{#if currentUser}}
-					{{#if answers.[0].solved}}
-						<div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
-						</div>
-						<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
-					{{else}}
-						<div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-						</div>
-						<form class="form-inline" role="form">
-							<div class="form-group">
-								<label class="sr-only" for="answer">Answer</label>
-								<input type="text" class="form-control" id="answer" placeholder="Answer" required>
-							</div>		
-
-							<button type="submit" class="btn btn-default">Check</button>						
-						</form>					
-					{{/if}}
+					<div class="tab-content">
+					  <div class="tab-pane " id="input">
+			  			{{#if currentUser}}					
+							<form class="form-inline" role="form">
+								<div class="form-group">
+									<label class="sr-only" for="answer">Answer</label>
+									<input type="text" class="form-control" id="answer" placeholder="Answer" required>
+								</div>		
+								<button type="submit" class="btn btn-default">Check</button>						
+							</form>										
+						{{/if}}
+					  </div>
+					  <div class="tab-pane active" id="upload">
+			  			<form class="form-inline" role="form">		
+							<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>		
+							<span class="label label-default" id="upload-label">{{fileName}}</span>	
+							{{#if uploadStarted and cfsIsUploaded "CodeFiles" fileId=fileId}}
+								<button type="submit" class="compile btn btn-default">Check</button>
+							{{/if}}						
+						</form>		
+					  </div>			 
+					</div>	
 				{{/if}}
-			  </div>
-			  <div class="tab-pane active" id="upload">
-	  			<form class="form-inline" role="form">		
-
-					<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>		
-					<span class="label label-default" id="upload-label">{{fileName}}</span>	
-					{{#if uploadStarted and cfsIsUploaded "CodeFiles" fileId=fileId}}
-						<button type="submit" class="compile btn btn-default">Check</button>
-					{{/if}}	
-					
-				</form>		
-			  </div>
-			 
-			</div>
-
-
-			
+			</form>	
 		{{/with}}
 	</section>
 </template>

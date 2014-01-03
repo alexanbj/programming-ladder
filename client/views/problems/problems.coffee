@@ -9,7 +9,7 @@ Template.showProblem.events
         if res
           $('#success-message').show()
         else
-          $('#fail-message').show()
+          $('#fail-message').show()   
 
   'click a#revealAnswer': (event) ->
     event.preventDefault()
@@ -38,7 +38,13 @@ Template.showProblem.events
 
   'click .compile': (event, template) ->
     event.preventDefault()
-    Meteor.call 'compileFile', Session.get('fileId')
+    Meteor.call 'compileFile', Session.get('fileId'), 
+      (err, res) ->  
+        Deps.flush() #Force dom update before we jquery it!
+        if res
+          $('#success-message').show()
+        else
+          $('#fail-message').show()   
 
 
 Template.showProblem.uploadStarted = ->
