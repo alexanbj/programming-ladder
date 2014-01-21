@@ -23,20 +23,20 @@ Router.map ->
 
 
 Router.configure
-  layout: "layout"
+  layoutTemplate: "layout"
   notFoundTemplate: "notFound"
 
 
 # Custom controller. Enables us to hightlight current problem in sidebar
 class @ShowProblemController extends RouteController
-  onBeforeRun: ->
+  before: ->
     Session.set("selectedProblemId", @params._id)
     Session.set("uploadedFile", null)
     Session.set("uploadStarted", null)
 
 # Go to the last shown problem or last added problem
 class @ProblemsController extends RouteController
-  onBeforeRun: ->
+  before: ->
     if Session.get "selectedProblemId"
       id = Session.get "selectedProblemId"
     else
