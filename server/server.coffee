@@ -28,7 +28,6 @@ Meteor.methods
     if Meteor.userId() != fileRecord.owner
       throw new Meteor.Error 500, "Somethingh weird happend .. "
 
-    console.log fileRecord.contentType          
     path = "/tmp/" + fileRecord.owner
 
     if not FS.existsSync(path)
@@ -46,15 +45,15 @@ Meteor.methods
     output = ""
  
     if fileRecord.contentType == "application/x-shellscript"
-      output = runBash(problemId, path, fileRecord.filename)
+      output = runBash path, fileRecord.filename
     else if fileRecord.contentType == "text/x-java"  
-      output = runJava(problemId, path, fileRecord.filename)  
+      output = runJava path, fileRecord.filename 
     else if fileRecord.contentType == "text/x-scala"  
-      output = runScala(problemId, path, fileRecord.filename)  
+      output = runScala path, fileRecord.filename 
     else if fileRecord.contentType == "text/x-python"  
-      output = runPython(problemId, path, fileRecord.filename)  
+      output = runPython path, fileRecord.filename
     else if fileRecord.contentType == "application/x-ruby"  
-      output = runRuby(problemId, path, fileRecord.filename)
+      output = runRuby path, fileRecord.filename
     else 
       throw new Meteor.Error(415, "Unsupported file");
 
@@ -91,13 +90,19 @@ Meteor.methods
     return false 
 
 @runCommand = (command, parameter) ->
+
+  
+
   prc = Spawn(command, parameter.split(' '), {stdio:'pipe'})
 
   commandFuture = new Future
 
   prc.stdout.on 'data', (data) ->    
-    console.log "output: \n" + data    
-    commandFuture.return "" + data     
+    if commandFuture #if there are more lines in the output, this function will be called more often     
+      if not data        
+        commandFuture.return "" 
+      else
+        commandFuture.return "" + data   
   
   prc.stderr.on 'data', (data) ->    
     console.log "error: \n" + data    
@@ -105,35 +110,33 @@ Meteor.methods
   prc.stdin.end()
   commandFuture.wait()
   returnValue = commandFuture.get() 
+
+  console.log "Command " + command + " " + parameter + " has output: '" + returnValue + "'"
+
   commandFuture = null
   return returnValue
 
-@runJava = (problemId, path, file) ->
+@runJava = (path, file) ->
   command = 'docker'
   parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_java.sh /tmp/code ' + file.replace(/.java/, "")
-  console.log command + ' ' + parameter
   return runCommand command, parameter
 
-@runScala = (problemId, path, file) ->
+@runScala = (path, file) ->
   command = 'docker'
   parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_scala.sh /tmp/code ' + file  
-  console.log command + ' ' + parameter
   return runCommand command, parameter
 
-@runRuby = (problemId, path, file) ->
+@runRuby = (path, file) ->
   command = 'docker'
   parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_ruby.sh /tmp/code ' + file 
-  console.log command + ' ' + parameter
   return runCommand command, parameter
 
-@runPython = (problemId, path, file) ->
+@runPython = (path, file) ->
   command = 'docker'
   parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_python.sh /tmp/code ' + file
-  console.log command + ' ' + parameter
   return runCommand command, parameter
 
-@runBash = (problemId, path, file) ->
+@runBash = (path, file) ->
   command = 'docker'
   parameter = 'run -t -v ' + path + ':/tmp/code:ro '+ ImageName + ' /bin/bash /tmp/code/'  + file  
-  console.log command + ' ' + parameter
   return runCommand command, parameter

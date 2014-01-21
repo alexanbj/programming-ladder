@@ -30,13 +30,13 @@ Template.showProblem.events
      Router.go "editProblem", _id: Session.get('selectedProblemId')
 
   'change .fileUploader': (event, template) ->     
-    event.preventDefault()
-    $('.compile').removeClass('disabled')
+    event.preventDefault()   
+    name = event.target.files[0].name
     fileId = CodeFiles.storeFile event.target.files[0], {problemId: Session.get('selectedProblemId')} 
-    Session.set 'uploadedFile', event.target.files[0].name
+    Session.set 'uploadedFile', name
     Session.set 'uploadStarted', true
     Session.set 'fileId', fileId
-    Session.set 'checkAllowed', true
+    Session.set 'checkAllowed', true   
 
   'click .compile': (event, template) ->
     event.preventDefault() 

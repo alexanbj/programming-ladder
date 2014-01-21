@@ -41,47 +41,49 @@
 					<div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-					</div>
+					</div>				
+					{{#if currentUser}}	
+						<div class="panel panel-default">						
+						  	<div class="panel-heading"><h4>Input answer</h4></div>				    
+							<div id="input" class="panel-body">		
+								<div class = "alert alert-warning">
+									The answer will be used <b>as it is</b> (no trim, no sanitizing of input or cleaning of newlines). 
+								</div>								
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label class="sr-only" for="answer">Answer</label>
+										<input type="text" class="form-control" id="answer" placeholder="Answer" required>
+									</div>		
+									<button type="submit" class="btn btn-default">Check</button>						
+								</form>				
+						  	</div>					  
+						</div>
 
-					<ul class="nav nav-tabs">
-					  <li ><a href="#input" data-toggle="tab">Input Answer</a></li>
-					  <li class="active"><a href="#upload" data-toggle="tab">Upload Code</a></li>					  
-					</ul>
+						<div class="panel panel-default">
+						  	<div class="panel-heading"><h4>Upload code</h4></div>				    
+							<div id="upload"  class="panel-body">
+								<div class = "alert alert-warning">
+									The <b>first line</b> from <b>stdout</b> will be used as the answer <b>as it is</b> (no trim, no sanitizing of input or cleaning of newlines). 
+								</div>
 
-					<div class="tab-content">
-					  <div class="tab-pane " id="input">
-			  			{{#if currentUser}}					
-							<form class="form-inline" role="form">
-								<div class="form-group">
-									<label class="sr-only" for="answer">Answer</label>
-									<input type="text" class="form-control" id="answer" placeholder="Answer" required>
-								</div>		
-								<button type="submit" class="btn btn-default">Check</button>						
-							</form>										
-						{{/if}}
-					  </div>
-					  <div class="tab-pane active" id="upload">
-						<div class = "alert alert-warning">The output from <b>stdout</b> will be used as the answer <b>as it is</b> (no trim, no sanitizing of input or cleaning of newlines). </div>
-					  	<div class="well">
-					  		We support java (1.7.0_4), ruby (1.8.7), python (2.7.3), bash (4.2.24) and scala (2.10.3). Your code is run at a ubuntu 12.04 LTS server as user root. 
-					  		<br /><i>If you upload the code in a unrecognized programming language, the answer is ignored (no points are decreased).</i>
-					  	</div>
-			  			
-			  			<form class="form-inline" role="form">		
-							<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>	
-
-							<span class="label label-default" id="upload-label">{{fileName}}</span>	
-							{{#if uploadStarted and cfsIsUploaded "CodeFiles" fileId=fileId}}
-								{{#if allowCheck}}
-									<button type="submit" class="compile btn btn-default">Check</button>
-								{{else}}
-									<button type="submit" class="compile btn btn-default disabled">Check</button>
-								{{/if}}
-								
-							{{/if}}						
-						</form>		
-					  </div>			 
-					</div>	
+							  	<div class="well">
+							  		We support java (1.7.0_4), ruby (1.8.7), python (2.7.3), bash (4.2.24) and scala (2.10.3). Your code is run at a ubuntu 12.04 LTS server as user root. 
+							  		<br /><i>If you upload the code in a unrecognized programming language, the answer is ignored (no points are decreased).</i>
+							  	</div>				  			
+					  			<form class="form-inline" role="form">		
+									<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>	
+									<span class="label label-default" id="upload-label">{{fileName}}</span>	
+									{{#if uploadStarted and cfsIsUploaded "CodeFiles" fileId=fileId}}
+										{{#if allowCheck}}
+											<button type="submit" class="compile btn btn-default">Check</button>
+										{{else}}
+											<button type="submit" class="compile btn btn-default disabled">Check</button>
+										{{/if}}									
+									{{/if}}						
+								</form>		
+						  	</div>
+						</div>							 
+					{{/if}}
 				{{/if}}
 			</form>	
 		{{/with}}
