@@ -5,4 +5,4 @@ Meteor.subscribe 'problems'
 Meteor.subscribe 'allUsers'
 
 # Uploaded files 
-Meteor.subscribe 'uploaded-files'
+Meteor.subscribe 'uploadedFiles'

@@ -45,10 +45,9 @@ Template.showProblem.events
       (err, res) -> 
         Deps.flush() #Force dom update before we jquery it! 
 
-        if (err)
-          alert (err)
+        if err
+          alert err
           return
-
         if res
           $('#success-message').show()
         else

@@ -111,7 +111,7 @@ Meteor.methods
   commandFuture.wait()
   returnValue = commandFuture.get() 
 
-  console.log "Command " + command + " " + parameter + " has output: '" + returnValue + "'"
+  console.log "Command " + command + " " + parameter + " has output: '" + returnValue.replace(/(\r\n|\n|\r)/gm,"") + "'"
 
   commandFuture = null
   return returnValue
