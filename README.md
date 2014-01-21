@@ -10,5 +10,5 @@ An unfinished project Euler clone written in Meteor and Coffeescript
 
 # Install docker
 - Install [Docker](http://docker.io)
-- Download docker image `wget http://ubuntuone.com/1oPMNNeJjlqo02tb2E9IGI image.tar`
-- Install docker image `cat image.tar | sudo docker import - code-container`
+- Download docker image `wget http://ubuntuone.com/1oPMNNeJjlqo02tb2E9IGI`
+- Install docker image `cat 1oPMNNeJjlqo02tb2E9IGI | sudo docker import - code-container`
