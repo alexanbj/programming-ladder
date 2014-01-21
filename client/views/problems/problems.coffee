@@ -31,21 +31,32 @@ Template.showProblem.events
 
   'change .fileUploader': (event, template) ->     
     event.preventDefault()
+    $('.compile').removeClass('disabled')
     fileId = CodeFiles.storeFile event.target.files[0], {problemId: Session.get('selectedProblemId')} 
     Session.set 'uploadedFile', event.target.files[0].name
     Session.set 'uploadStarted', true
     Session.set 'fileId', fileId
+    Session.set 'checkAllowed', true
 
   'click .compile': (event, template) ->
-    event.preventDefault()
+    event.preventDefault() 
+    Session.set 'checkAllowed', false
     Meteor.call 'compileFile', Session.get('fileId'), 
-      (err, res) ->  
-        Deps.flush() #Force dom update before we jquery it!
+      (err, res) -> 
+        Deps.flush() #Force dom update before we jquery it! 
+
+        if (err)
+          alert (err)
+          return
+
         if res
           $('#success-message').show()
         else
-          $('#fail-message').show()   
+          $('#fail-message').show()  
 
+
+Template.showProblem.allowCheck = ->
+  return Session.get 'checkAllowed'
 
 Template.showProblem.uploadStarted = ->
   if Session.get('uploadStarted')?

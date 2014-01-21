@@ -2,6 +2,8 @@ Meteor.startup ->
   @Spawn = Npm.require('child_process').spawn
   @Future = Npm.require('fibers/future')
   @FS = Npm.require('fs')  
+  @MeteorDir = '/home/mkr/Desktop/pro-ladder/'
+  @ImageName = 'code-container'
 
 Meteor.methods
   checkAnswer: (answer, problemId) ->
@@ -26,27 +28,37 @@ Meteor.methods
     if Meteor.userId() != fileRecord.owner
       throw new Meteor.Error 500, "Somethingh weird happend .. "
 
-    if fileRecord.contentType == "text/x-java"             
-      path = "/tmp/" + fileRecord.owner
+    console.log fileRecord.contentType          
+    path = "/tmp/" + fileRecord.owner
 
-      if not FS.existsSync(path)
-        FS.mkdir path
-      output = ""
+    if not FS.existsSync(path)
+      FS.mkdir path
+    output = ""
 
-      fsFuture = new Future
+    fsFuture = new Future
 
-      FS.writeFile path + "/" + fileRecord.filename, blob , (err) ->
-        if err? console.log err
-        else 
-          fsFuture.return("")
+    FS.writeFile path + "/" + fileRecord.filename, blob , (err) ->
+      if err? console.log err
+      else 
+        fsFuture.return("")
+    fsFuture.wait()
+    fsFuture = null
+    output = ""
+ 
+    if fileRecord.contentType == "application/x-shellscript"
+      output = runBash(problemId, path, fileRecord.filename)
+    else if fileRecord.contentType == "text/x-java"  
+      output = runJava(problemId, path, fileRecord.filename)  
+    else if fileRecord.contentType == "text/x-scala"  
+      output = runScala(problemId, path, fileRecord.filename)  
+    else if fileRecord.contentType == "text/x-python"  
+      output = runPython(problemId, path, fileRecord.filename)  
+    else if fileRecord.contentType == "application/x-ruby"  
+      output = runRuby(problemId, path, fileRecord.filename)
+    else 
+      throw new Meteor.Error(415, "Unsupported file");
 
-      fsFuture.wait()
-      if compileJava(problemId, path, fileRecord.filename) == 0
-        output = runJava problemId, path, fileRecord.filename
-        console.log output           
-        return serverCheckAnswer output, problemId, fileRecord.owner
-
-    return false 
+    return serverCheckAnswer output, problemId, fileRecord.owner
 
 # Removes all whitespace and lowercases it. Perhaps we should remove special chars as well?
 @sanitize = (string) ->
@@ -78,42 +90,50 @@ Meteor.methods
       Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$inc: {'answers.$.score': -1}})
     return false 
 
-@compileJava = (problemId, path, file) -> 
-  prc = Spawn('javac', [path + "/" + file], {stdio:'pipe'})
-  prc.stdout.setEncoding('utf8') 
+@runCommand = (command, parameter) ->
+  prc = Spawn(command, parameter.split(' '), {stdio:'pipe'})
 
-  console.log ("Running: javac " + path + "/" + file)
-  prc.stdout.on 'data', (data) ->        
-    console.log("Compilelog:\n" + data)    
+  commandFuture = new Future
+
+  prc.stdout.on 'data', (data) ->    
+    console.log "output: \n" + data    
+    commandFuture.return "" + data     
   
-  future = new Future
+  prc.stderr.on 'data', (data) ->    
+    console.log "error: \n" + data    
 
-  prc.on 'close', (code) -> 
-    console.log("Compile exitcode: " + code)
-    future.return(code)
-   
   prc.stdin.end()
-  future.wait()
-  return future.get() 
+  commandFuture.wait()
+  returnValue = commandFuture.get() 
+  commandFuture = null
+  return returnValue
 
-@runJava = (problemId, path, name) ->
-  prc = Spawn('java', ["-cp", path, name.replace(/.java/, "")], {stdio:'pipe'})
-  prc.stdout.setEncoding('utf8')    
+@runJava = (problemId, path, file) ->
+  command = 'docker'
+  parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_java.sh /tmp/code ' + file.replace(/.java/, "")
+  console.log command + ' ' + parameter
+  return runCommand command, parameter
 
-  console.log ("Running: java -cp " +  path + " " + name.replace(/.java/, ""))
+@runScala = (problemId, path, file) ->
+  command = 'docker'
+  parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_scala.sh /tmp/code ' + file  
+  console.log command + ' ' + parameter
+  return runCommand command, parameter
 
-  future = new Future
+@runRuby = (problemId, path, file) ->
+  command = 'docker'
+  parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_ruby.sh /tmp/code ' + file 
+  console.log command + ' ' + parameter
+  return runCommand command, parameter
 
-  prc.stdout.on 'data', (data) -> 
-    future.return data      
+@runPython = (problemId, path, file) ->
+  command = 'docker'
+  parameter = 'run -t -v ' + path + '/:/tmp/code:rw -v ' + MeteorDir + 'execute_scripts/:/scripts:ro ' + ImageName + ' /bin/bash ./scripts/execute_python.sh /tmp/code ' + file
+  console.log command + ' ' + parameter
+  return runCommand command, parameter
 
-  prc.stderr.on 'data', (data) ->        
-    console.log("Error:\n" + data)
-
-  prc.on 'close', (code) -> 
-    console.log("Run exitcode: " + code)
-
-  prc.stdin.end() 
-  
-  future.wait()
-  return future.get()
+@runBash = (problemId, path, file) ->
+  command = 'docker'
+  parameter = 'run -t -v ' + path + ':/tmp/code:ro '+ ImageName + ' /bin/bash /tmp/code/'  + file  
+  console.log command + ' ' + parameter
+  return runCommand command, parameter

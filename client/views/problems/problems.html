@@ -61,11 +61,23 @@
 						{{/if}}
 					  </div>
 					  <div class="tab-pane active" id="upload">
+						<div class = "alert alert-warning">The output from <b>stdout</b> will be used as the answer <b>as it is</b> (no trim, no sanitizing of input or cleaning of newlines). </div>
+					  	<div class="well">
+					  		We support java (1.7.0_4), ruby (1.8.7), python (2.7.3), bash (4.2.24) and scala (2.10.3). Your code is run at a ubuntu 12.04 LTS server as user root. 
+					  		<br /><i>If you upload the code in a unrecognized programming language, the answer is ignored (no points are decreased).</i>
+					  	</div>
+			  			
 			  			<form class="form-inline" role="form">		
-							<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>		
+							<span class="fileUploader btn btn-file btn-default">Choose File<input type="file" id="upload-chooser"/></span>	
+
 							<span class="label label-default" id="upload-label">{{fileName}}</span>	
 							{{#if uploadStarted and cfsIsUploaded "CodeFiles" fileId=fileId}}
-								<button type="submit" class="compile btn btn-default">Check</button>
+								{{#if allowCheck}}
+									<button type="submit" class="compile btn btn-default">Check</button>
+								{{else}}
+									<button type="submit" class="compile btn btn-default disabled">Check</button>
+								{{/if}}
+								
 							{{/if}}						
 						</form>		
 					  </div>			 
