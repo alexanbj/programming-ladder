@@ -36,3 +36,7 @@ Meteor.publish 'problems', ->
       title: true
       description: true
       created: true
+
+Meteor.publish 'uploadedFiles', -> 
+  if @userId 
+    CodeFiles.find {owner: @userId}

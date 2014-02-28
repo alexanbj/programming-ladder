@@ -1,4 +1,20 @@
+
 @Problems = new Meteor.Collection("problems")
+@CodeFiles = new CollectionFS("problems", { autopublish: false });
+
+CodeFiles.allow
+  insert: -> true
+  update: -> true
+  remove: -> true
+
+CodeFiles.filter
+  allow: -> true
+
+CodeFiles.fileHandlers
+  default: (options) -> 
+    fileRecord = options.fileRecord
+    blob = options.blob     
+    {blob: options.blob, fileRecord: options.fileRecord}
 
 Problems.allow
   insert: -> isAdminById Meteor.userId()
@@ -6,7 +22,6 @@ Problems.allow
   remove: -> isAdminById Meteor.userId()
 
 Meteor.methods
-
   addProblem: (problem) ->
     if not isAdminById @userId
       throw new Meteor.Error 602, "You need to be an admin to do that"
@@ -28,7 +43,6 @@ Meteor.methods
     return (problem?.answers? and problem?.answers?.length > 0) 
     
   editProblem: (problem) ->
-
     if not isAdminById @userId
       throw new Meteor.Error 602, "You need to be an admin to do that"
 
@@ -54,3 +68,4 @@ Meteor.methods
 if Meteor.isServer
   Problems.after.remove (userId, problem) ->
     Meteor.users.update answer.userId, { $inc: { score: -answer.score, solved: -1}} for answer in problem.answers? when answer.solved is true
+

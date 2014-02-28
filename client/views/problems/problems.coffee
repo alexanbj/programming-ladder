@@ -9,7 +9,7 @@ Template.showProblem.events
         if res
           $('#success-message').show()
         else
-          $('#fail-message').show()
+          $('#fail-message').show()   
 
   'click a#revealAnswer': (event) ->
     event.preventDefault()
@@ -29,6 +29,46 @@ Template.showProblem.events
   'click .edit-problem': (event, template) ->
      Router.go "editProblem", _id: Session.get('selectedProblemId')
 
+  'change .fileUploader': (event, template) ->     
+    event.preventDefault()   
+    name = event.target.files[0].name
+    fileId = CodeFiles.storeFile event.target.files[0], {problemId: Session.get('selectedProblemId')} 
+    Session.set 'uploadedFile', name
+    Session.set 'uploadStarted', true
+    Session.set 'fileId', fileId
+    Session.set 'checkAllowed', true   
+
+  'click .compile': (event, template) ->
+    event.preventDefault() 
+    Session.set 'checkAllowed', false
+    Meteor.call 'compileFile', Session.get('fileId'), 
+      (err, res) -> 
+        Deps.flush() #Force dom update before we jquery it! 
+
+        if err
+          alert err
+          return
+        if res
+          $('#success-message').show()
+        else
+          $('#fail-message').show()  
+
+
+Template.showProblem.allowCheck = ->
+  return Session.get 'checkAllowed'
+
+Template.showProblem.uploadStarted = ->
+  if Session.get('uploadStarted')?
+    Session.get('uploadStarted')
+  else
+    false
+
+Template.showProblem.fileName = ->
+  if Session.get('uploadedFile')?
+    Session.get('uploadedFile')
+  else
+    "No file uploaded"
+    
 Template.newProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
