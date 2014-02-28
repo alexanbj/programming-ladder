@@ -6,7 +6,8 @@
       "bootstrap-3": {},
       "accounts-ui-bootstrap-3": {},
       "font-awesome": {},
-      "collection-hooks": {}
+      "collection-hooks": {},
+      "collectionFS": {}
     },
     "packages": {
       "iron-router": {
@@ -16,8 +17,8 @@
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
-        "tag": "v0.3.7",
-        "commit": "5dd0d142c870647b910be80bc777b96f0dd45e5e"
+        "tag": "v3.1.0-1",
+        "commit": "329dccb08bfc18c635676dea600ac9953162cda9"
       },
       "accounts-ui-bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-accounts-ui-bootstrap-3.git",
@@ -33,6 +34,16 @@
         "git": "https://github.com/matb33/meteor-collection-hooks.git",
         "tag": "v0.6.2",
         "commit": "29484b2110206be93b01c6d11ce06ec9208de7bd"
+      },
+      "collectionFS": {
+        "git": "https://github.com/raix/Meteor-CollectionFS.git",
+        "tag": "v0.3.7",
+        "commit": "34d9fb363472e44c6dba4a1473a9e106e107f5a9"
+      },
+      "cfs-public-folder": {
+        "git": "https://github.com/nooitaf/meteor-cfs-public-folder.git",
+        "tag": "v0.0.3",
+        "commit": "581c716424b374efb6f611110002621f9cc9212b"
       }
     }
   }
