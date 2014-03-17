@@ -6,15 +6,17 @@
 </body>
 
 <template name="layout">
-	{{>nav}}
+  {{>nav}}
 
-	<div class="container">
-		<div class="row">
-			{{yield}}
-		</div>
-	</div>
+  {{yield 'jumbotron'}}
+
+  <div class="container">
+    <div class="row">
+      {{yield}}
+    </div>
+  </div>
 
     {{#constant}}
-    	{{>footer}}
+      {{>footer}}
     {{/constant}}
 </template>

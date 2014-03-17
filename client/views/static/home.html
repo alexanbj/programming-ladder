@@ -1,3 +1,55 @@
+<template name="jumbotron">
+  <div class="jumbotron">
+    <div class="container">
+
+      <img src="/knowit_logo_green_rgb.png" alt="Knowit">
+
+      <div class="medals">
+          <div class="medal silver">
+
+            <h1 class="score">{{users.[1].score}}</h1>
+            <small>POINTS</small>
+            <p>{{users.[1].username}}</p>
+            <div>
+              <small>{{users.[1].solved}} SOLVED</small>
+            </div>
+          </div>
+
+
+          <div class="medal gold">
+
+            <h1 class="score">{{users.[0].score}}</h1>
+            <small>POINTS</small>
+            <p>{{users.[0].username}}</p>
+            <div>
+              <small>{{users.[0].solved}} SOLVED</small>
+            </div>
+          </div>
+
+
+          <div class="medal bronze">
+
+            <h1 class="score">{{users.[2].score}}</h1>
+            <small>POINTS</small>
+            <p>{{users.[2].username}}</p>
+            <div>
+              <small>{{users.[2].solved}} SOLVED</small>
+            </div>
+          </div>
+
+      </div>
+    </div>
+</div>
+</template>
+
 <template name="home">
-    <p>Welcome to the programming ladder!</p>
+  <div class="home">
+    <p class="lead text-center">"Totally sweet medals, dude. I want one."</p>
+    <p class="lead text-center">Yes. The programming ladder, our idea of just a hooting, tooting good time!</p>
+
+    <h4 class="lead text-center quote"><em>"D bli itj nå likar einn herre"</em> <small>&mdash; Ukjent Knowiter</small></h4>
+
+    <p class="lead text-center">We think you'll agree. But can your code beat both the game <em>and</em> your opponents?</p>
+    <p class="lead text-center">Register now and start climbing to the top to find out...</p>
+  </div>
 </template>
