@@ -1,5 +1,10 @@
 Router.map ->
-  @route "home", path: "/"
+  @route "home",
+    path: "/"
+    yieldTemplates:
+      "jumbotron": to: "jumbotron"
+    data: ->
+      users: Users.find({}, {sort: {score: -1}, limit: 3}).fetch() #Fetch? Why doesn't waitOn work
   @route "leaderboard",
     data: ->
       problems: Problems.find().count()

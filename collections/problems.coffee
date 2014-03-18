@@ -25,8 +25,8 @@ Meteor.methods
   isAnswered: (problemId) ->
     problem = Problems.findOne _id: problemId
 
-    return (problem?.answers? and problem?.answers?.length > 0) 
-    
+    return (problem?.answers? and problem?.answers?.length > 0)
+
   editProblem: (problem) ->
 
     if not isAdminById @userId
@@ -34,15 +34,15 @@ Meteor.methods
 
     problemToUpdate = Problems.findOne _id: problem._id
 
-    if problem?.answers? and problem?.answers?.length > 0  
-      Problems.update _id: problem._id, 
-        {$set: 
+    if problem?.answers? and problem?.answers?.length > 0
+      Problems.update _id: problem._id,
+        {$set:
           title: problem.title.trim()
           description: problem.description.trim()
           solution: problem.solution.trim()}
     else
-      Problems.update _id: problem._id, 
-        {$set: 
+      Problems.update _id: problem._id,
+        {$set:
           title: problem.title.trim()
           description: problem.description.trim()
           solution: problem.solution.trim()
@@ -53,4 +53,5 @@ Meteor.methods
 # When a problem is deleted, decrement the users' scores accordingly
 if Meteor.isServer
   Problems.after.remove (userId, problem) ->
-    Meteor.users.update answer.userId, { $inc: { score: -answer.score, solved: -1}} for answer in problem.answers? when answer.solved is true
+    if problem.answers
+      Meteor.users.update answer.userId, { $inc: { score: -answer.score, solved: -1}} for answer in problem.answers when answer.solved is true
