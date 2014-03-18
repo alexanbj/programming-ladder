@@ -73,6 +73,14 @@
 					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="glyphicon glyphicon-list-ul"></i></a>
 					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="glyphicon glyphicon-list-ol"></i></a>
 				</div>
+        <div class="btn-group">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+          <div class="dropdown-menu input-append">
+            <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+            <button class="btn" type="button">Add</button>
+          </div>
+          <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+        </div>
 			</div>
 			<div class="form-control editor" id="description-editor" required></div>
 			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden"></textarea>
@@ -107,14 +115,22 @@
 			<label for="editor">Description</label>
 			<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
 				<div class="btn-group">
-					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
-					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
-					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="glyphicon glyphicon-underline"></i></a>
+					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="glyphicon glyphicon-list-ul"></i></a>
-					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="glyphicon glyphicon-list-ol"></i></a>
+					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
 				</div>
+        <div class="btn-group">
+          <a class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+          <div class="dropdown-menu input-append">
+            <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
+            <button class="btn btn-default" type="button">Add</button>
+          </div>
+          <a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-chain-broken"></i></a>
+        </div>
 			</div>
 			<div class="form-control editor" id="description-editor" required></div>
 			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden">{{problem.description}}</textarea>			
