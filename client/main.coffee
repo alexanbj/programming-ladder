@@ -1,5 +1,1 @@
-# Problems
-Meteor.subscribe 'problems'
-
-# Users (Leaderboard)
-Meteor.subscribe 'allUsers'
+Meteor.subscribe 'userIsAdmin'

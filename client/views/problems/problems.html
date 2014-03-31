@@ -1,10 +1,9 @@
 <template name="showProblem">
 	<div class="col-md-4">
-		{{>sidebar}}
+		{{> sidebar}}
 	</div>
 
 	<section class="col-md-8 problem">
-		{{#with problem}}
 			<div class="page-header">
 				{{#if currentUser}}
 					{{#if currentIsAdmin}}
@@ -50,7 +49,6 @@
 					</form>
 				{{/if}}
 			{{/if}}
-		{{/with}}
 	</section>
 </template>
 
