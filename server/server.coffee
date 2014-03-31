@@ -3,6 +3,9 @@ Meteor.methods
     if not Meteor.userId()
       throw new Meteor.Error 601, "You need to be logged in to do that"
 
+    if not getSetting('answerSubmission', true)
+      throw new Meteor.Error 601, 'Answer submission is currently disabled'
+
     userId = Meteor.userId()
 
     problem = Problems.findOne problemId # TODO: Do some error handling if no problem is found? 

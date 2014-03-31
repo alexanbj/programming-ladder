@@ -1,22 +1,18 @@
 <template name="sidebar">
-    <div class="problems-toolbar">
-        {{#if currentIsAdmin}}
-                <a class="btn btn-default" href="{{pathFor 'newProblem'}}"><i class="glyphicon glyphicon-plus"></i> New problem</a>
-        {{/if}}
-        <a href="#" id="randomProblem" title="Go to random problem" class="btn btn-default"><i class="glyphicon glyphicon-random"></i> Random problem</a>
-    </div>
-    <ul class="nav nav-pills nav-stacked">
-        {{#each problems}}
-            <li class="{{selected}}">
-                <a href="{{pathFor 'showProblem'}}">
-                    {{#if currentUser}}
-                        {{#if answers.[0].solved}}
-                            <span class="glyphicon glyphicon-ok-sign pull-right"></span>
+    <div class="panel panel-default">
+        <ul class="nav nav-pills nav-stacked">
+            {{#each problems}}
+                <li class="{{selected}}">
+                    <a href="{{pathFor 'showProblem'}}">
+                        {{#if currentUser}}
+                            {{#if answers.[0].solved}}
+                                <span class="glyphicon glyphicon-ok-sign pull-right"></span>
+                            {{/if}}
                         {{/if}}
-                    {{/if}}
-                    {{title}}
-                </a>
-            </li>
-        {{/each}}
-    </ul>
+                        {{title}}
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
 </template>

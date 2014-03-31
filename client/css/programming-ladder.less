@@ -56,128 +56,80 @@ footer .services li.github a {
   }
 }
 
-.badge-success {
-	background-color: #5cb85c;
-}
-
 form .editor {
-	height: 240px;
-	margin: 20px 0 0 0;
-	overflow-y: scroll;
-}
-
-.navbar-default .score {
-	font-weight: 600;
-	color: #468847;
-}
-
-.problems-toolbar {
-	padding: 10px 15px;
-	a {
-		margin-right: 5px
-	}
-}
-
-/* Hack for leaderboard ranking until this is fixed
-https://github.com/meteor/meteor/issues/489
-*/
-.leaderboard {
-	counter-reset: rank;
-}
-
-.rank::before {
-	counter-increment: rank;
-	content: counter(rank);
+    height: 240px;
+    margin: 20px 0 0 0;
+    overflow-y: scroll;
 }
 
 .leaderboard tr:nth-child(2) .rank:before {
-	content: url('/medal-gold-2-icon.png');
-	position: relative;
-	top: 3px;
-	left: -4px;
+    content: url('/medal-gold-2-icon.png');
+    position: relative;
+    top: 3px;
+    left: -4px;
 }
 
 .leaderboard tr:nth-child(3) .rank:before {
-	content: url('/medal-silver-2-icon.png');
-	position: relative;
-	top: 3px;
-	left: -4px;
+    content: url('/medal-silver-2-icon.png');
+    position: relative;
+    top: 3px;
+    left: -4px;
 }
 
 .leaderboard tr:nth-child(4) .rank:before {
-	content: url('/medal-bronze-2-icon.png');
-	position: relative;
-	top: 3px;
-	left: -4px;
+    content: url('/medal-bronze-2-icon.png');
+    position: relative;
+    top: 3px;
+    left: -4px;
 }
 
 .edit-problem-buttons {
-	button:not(:last-child) {
-		margin-right: 15px;
-	}
+    button:not(:last-child) {
+        margin-right: 15px;
+    }
 }
 
 .not-found {
-	font-size: 2.2rem;
-	h1 {
-		font-size: 11rem;
-	}
+    font-size: 2.2rem;
+    h1 {
+        font-size: 11rem;
+    }
 
-	p {
-		padding-top: 10px;
-		strong {
-			display: block;
-		}
-	}
+    p {
+        padding-top: 10px;
+        strong {
+            display: block;
+        }
+    }
 
-	img {
-		padding-top:3em;
-	}
+    img {
+        padding-top:3em;
+    }
 }
 
-
-
-.medal {
-    width: 200px;
-    height: 200px;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
-    display: inline-block;
-    margin-left: 40px;
+.navbar-default .score {
+    padding-right: 15px;
 }
 
-.medal h1.score {
-  margin-bottom: 0px;
-  padding-bottom: 0px;
+.stats {
+    float: left;
+    text-align: center;
+    padding: 0 14px;
 }
 
-.medal p {
-  padding-top: 0px;
+.stats-header {
+    text-transform: uppercase;
+    color: #666;
+    font-size: 9pt;
+
 }
 
-.gold {
-  background: #ffbf1b;
+.stats-content {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 30px;
 }
 
-.silver {
-  background: #e3e3e3;
-}
-
-.bronze {
-  background: #ae884d;
-}
-
-.medals {
-  padding-top: 100px;
-  margin-bottom: -80px;
-  margin-left: -40px;
-}
-
-.jumbotron {
-  margin-top: -20px; /* Nullify .navbar margin-bottom */
-  text-align: center;
-}
 
 .home {
   padding-top: 100px;

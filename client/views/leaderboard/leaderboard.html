@@ -1,31 +1,37 @@
 <template name="leaderboard">
-  <table class="leaderboard table table-striped table-hover">
-    <tr>
-      <th>#</th>
-      <th>User</th>
-      <th>Solved</th>
-      <th>Score</th>
-      {{#if currentIsAdmin}}
-        <th>Actions</th>
-      {{/if}}
-    </tr>
-    {{#each users}}
-      <tr>
-        <td class="rank"><!--Empty on purpose. Handled through CSS --></td>
-        <td><a href="{{pathFor 'user'}}">{{username}}</a></td>
-        <td>{{solved}} / {{../problems}}</td>
-        <td>{{score}}</td>
-        {{#if currentIsAdmin}}
-          <td>
-              {{#if isAdmin}}
-                <button class="admin-toggle btn btn-success btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
-              {{else}}
-                <button class="admin-toggle btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
-              {{/if}}
-              <button class="delete-user btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</button>
-          </td>
-        {{/if}}
-      </tr>
-    {{/each}}
-  </table>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <table class="leaderboard table table-striped table-hover table-condensed">
+                <tbody>
+                    <tr>
+                        <th>Rank</th>
+                        <th>User</th>
+                        <th>Score</th>
+                        <th>Solved</th>
+                        {{#if currentIsAdmin}}
+                            <th>Actions</th>
+                        {{/if}}
+                    </tr>
+                    {{#each users}}
+                        <tr>
+                            <td class="rank">{{rank}}</td>
+                            <td>{{username}}</td>
+                            <td>{{score}}</td>
+                            <td>{{solved}}</td>
+                            {{#if currentIsAdmin}}
+                                <td>
+                                    {{#if isAdmin}}
+                                        <button class="admin-toggle btn btn-success btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
+                                    {{else}}
+                                        <button class="admin-toggle btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
+                                    {{/if}}
+                                    <button class="delete-user btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+                                </td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </template>

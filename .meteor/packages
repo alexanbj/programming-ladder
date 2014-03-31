@@ -4,12 +4,16 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-preserve-inputs
 coffeescript
-iron-router
-bootstrap-3
 accounts-password
-accounts-ui-bootstrap-3
-font-awesome
+natestrauser:font-awesome
 less
-collection-hooks
+mizzao:bootstrap-3
+iron:router
+matb33:collection-hooks
+mrt:iron-router-progress
+mrt:accounts-ui-bootstrap-3
+mrt:bootstrap3-wysihtml5
+aldeed:autoform
+aldeed:collection2
+

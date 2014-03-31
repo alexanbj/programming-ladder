@@ -1,155 +1,130 @@
 <template name="showProblem">
-	<div class="col-md-4">
-		{{>sidebar}}
-	</div>
+    <div class="col-md-4">
+        {{> sidebar}}
+    </div>
 
-	<section class="col-md-8 problem">
-		{{#with problem}}
-			<div class="page-header">
-				{{#if currentUser}}
-					{{#if currentIsAdmin}}
-					<div class="edit-problem-buttons pull-right">
-						<button class="edit-problem btn btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</button>
-						<button class="delete-link btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Delete</button>
-					</div>
-					{{/if}}
-					{{#if answers.[0]}}
-						{{#if answers.[0].solved}}
-							<h1>{{title}} <span class="label label-success">{{answers.[0].score}}/{{maxScore}}</span></h1>
-						{{else}}
-							<h1>{{title}} <span class="label label-warning">{{answers.[0].score}}/{{maxScore}}</span></h1>
-						{{/if}}
-					{{else}}
-						<h1>{{title}} <span class="label label-warning">{{maxScore}}/{{maxScore}}</span></h1>
-					{{/if}}
-				{{else}}
-					<h1>{{title}}</h1>
-				{{/if}}
-			</div>
-			<div class="well">
-				{{{description}}}
-			</div>
-			{{#if currentUser}}
-				{{#if answers.[0].solved}}
-					<div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>Well done!</strong> Your answer was correct. You recieved {{answers.[0].score}} points!
-					</div>
-					<a href="#" id="revealAnswer" class="btn btn-default" rel="popover">Reveal answer</a>
-				{{else}}
-					<div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						<strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
-					</div>
-					<form class="form-inline" role="form">
-						<div class="form-group">
-							<label class="sr-only" for="answer">Answer</label>
-							<input type="text" class="form-control" id="answer" placeholder="Answer" required>
-						</div>
-						<button type="submit" class="btn btn-default">Check</button>
-					</form>
-				{{/if}}
-			{{/if}}
-		{{/with}}
-	</section>
+    <section class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong class="panel-title">{{title}}</strong>
+
+                {{#if currentIsAdmin}}
+                    <button id="edit-problem" class="btn btn-primary pull-right btn-xs"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                    <button id="delete-problem" class="btn btn-danger pull-right btn-xs"><i class="fa fa-trash"></i> Delete</button>
+                {{/if}}
+
+                {{#if solved}}
+                    <span class="pull-right label label-success">{{score}}/{{maxScore}}</span>
+                {{else}}
+                    <span class="pull-right label label-default">{{score}}/{{maxScore}}</span>
+                {{/if}}
+            </div>
+            <div class="panel-body">
+                {{{description}}}
+                {{#if solved}}
+                    <div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>Well done!</strong> Your answer was correct. You received {{answers.[0].score}} points!
+                    </div>
+                {{else}}
+                    <div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+                    </div>
+                {{/if}}
+            </div>
+            <div class="panel-footer">
+                {{#if solved}}
+                    Answer: <a href="#" id="revealAnswer" rel="popover">Reveal</a>
+                {{else}}
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="sr-only" for="answer">Answer</label>
+                            <input type="text" class="form-control" id="answer" placeholder="Answer" required>
+                        </div>
+                        <button type="submit" class="btn btn-default">Check</button>
+                    </form>
+                {{/if}}
+            </div>
+        </div>
+
+        <div id="stats-wrap">
+            <div class="stats">
+                <div class="stats-header">Solved by</div>
+                <div class="stats-content">{{solveCount}}</div>
+            </div>
+            <div class="stats">
+                <div class="stats-header">Average score</div>
+                <div class="stats-content">{{avgScore}}</div>
+            </div>
+            <div class="stats">
+                <div class="stats-header">Highest score</div>
+                <div class="stats-content">{{highestScore}}</div>
+            </div>
+            <div class="stats">
+                <div class="stats-header">Lowest score</div>
+                <div class="stats-content">{{lowestScore}}</div>
+            </div>
+        </div>
+    </section>
 </template>
 
 <template name="newProblem">
-	<form role="form">
-		<div class="form-group">
-			<label for="title">Title</label>
-			<input type="text" class="form-control" id="title" placeholder="Title" required>
-		</div>
-
-		<div class="form-group">
-			<label for="editor">Description</label>
-			<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
-					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
-					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="glyphicon glyphicon-underline"></i></a>
-				</div>
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="glyphicon glyphicon-list-ul"></i></a>
-					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="glyphicon glyphicon-list-ol"></i></a>
-				</div>
-        <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
-          <div class="dropdown-menu input-append">
-            <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-            <button class="btn" type="button">Add</button>
-          </div>
-          <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+    <form role="form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" required>
         </div>
-			</div>
-			<div class="form-control editor" id="description-editor" required></div>
-			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden"></textarea>
-		</div>
-		<div class="form-group">
-			<label for="max-score">Max score</label>
-			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value=10 required>
-			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
-		</div>
-		<div class="form-group">
-			<label for="min-score">Minimum score</label>
-			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value=2 required>
-			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
-		</div>
-		<div class="form-group">
-			<label for="solution">Solution</label>
-			<input type="text" class="form-control" id="solution" placeholder="Solution" required>
-			<span class="help-block">If the solution is in a specific format, please describe it in the description. The system uses string comparisons when checking submitted answers for correctness.</span>
-		</div>
-		<button type="submit" class="btn btn-default">Save</button>
-	</form>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control editor" placeholder="Description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="max-score">Max score</label>
+            <input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value=10 required>
+            <span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
+        </div>
+        <div class="form-group">
+            <label for="min-score">Minimum score</label>
+            <input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value=2 required>
+            <span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
+        </div>
+        <div class="form-group">
+            <label for="solution">Solution</label>
+            <input type="text" class="form-control" id="solution" placeholder="Solution" required>
+            <span class="help-block">If the solution is in a specific format, please describe it in the description. The system uses string comparisons when checking submitted answers for correctness.</span>
+        </div>
+        <button type="submit" class="btn btn-default">Save</button>
+    </form>
 </template>
 
 <template name="editProblem">
-	<form role="form">
-		<div class="form-group">
-			<label for="title">Title</label>
-			<input type="text" class="form-control" id="title" value="{{problem.title}}">
-		</div>
-
-		<div class="form-group">
-			<label for="editor">Description</label>
-			<div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
-					<a class="btn btn-default" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
-					<a class="btn btn-default" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
-				</div>
-				<div class="btn-group">
-					<a class="btn btn-default" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
-					<a class="btn btn-default" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
-				</div>
-        <div class="btn-group">
-          <a class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
-          <div class="dropdown-menu input-append">
-            <input class="span2" placeholder="URL" type="text" data-edit="createLink"/>
-            <button class="btn btn-default" type="button">Add</button>
-          </div>
-          <a class="btn btn-default" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-chain-broken"></i></a>
+    <form role="form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" value="{{title}}" required>
         </div>
-			</div>
-			<div class="form-control editor" id="description-editor" required></div>
-			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden">{{problem.description}}</textarea>			
-		</div>
-		<div class="form-group">
-			<label for="max-score">Max score</label>
-			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value={{problem.maxScore}} {{#if problemAnswered}}disabled{{/if}}>
-			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
-		</div>
-		<div class="form-group">
-			<label for="min-score">Minimum score</label>
-			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value={{problem.minScore}} {{#if problemAnswered}}disabled{{/if}}>
-			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
-		</div>
-		<div class="form-group">
-			<label for="solution">Solution</label>
-			<input type="text" class="form-control" id="solution" value="{{problem.solution}}">
-			<span class="help-block">If the solution is in a specific format, please describe it in the description. The system uses string comparisons when checking submitted answers for correctness.</span>
-		</div>
-		<button type="submit" class="btn btn-default">Save</button>
-	</form>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control editor" placeholder="Description" required>{{description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="max-score">Max score</label>
+            <input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value={{maxScore}} disabled={{problemAnswered}} required>
+            <span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
+        </div>
+        <div class="form-group">
+            <label for="min-score">Minimum score</label>
+            <input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value={{minScore}} disabled={{problemAnswered}} required>
+            <span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
+        </div>
+        <div class="form-group">
+            <label for="solution">Solution</label>
+            <input type="text" class="form-control" id="solution" placeholder="Solution" value="{{solution}}" required>
+            <span class="help-block">If the solution is in a specific format, please describe it in the description. The system uses string comparisons when checking submitted answers for correctness.</span>
+        </div>
+        <button type="submit" class="btn btn-default">Save</button>
+    </form>
 </template>

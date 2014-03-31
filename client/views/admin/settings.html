@@ -1,0 +1,16 @@
+<template name="settings">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title"><i class="fa fa-cog"></i> Programming Ladder Settings</h1>
+            </div>
+            <div class="panel-body">
+                {{#if this.hasSettings}}
+                    {{> quickForm collection="Settings" id="updateSettingsForm" type="update" doc=this.settings template="bootstrap3-horizontal" label-class="control-label" input-col-class="controls"}}
+                {{else}}
+                    {{> quickForm collection="Settings" id="updateSettingsForm" type="insert" template="bootstrap3-horizontal" label-class="control-label" input-col-class="controls"}}
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

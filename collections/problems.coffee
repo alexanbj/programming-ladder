@@ -22,11 +22,6 @@ Meteor.methods
       (err, id) ->
         if id then return id
 
-  isAnswered: (problemId) ->
-    problem = Problems.findOne _id: problemId
-
-    return (problem?.answers? and problem?.answers?.length > 0)
-
   editProblem: (problem) ->
 
     if not isAdminById @userId
