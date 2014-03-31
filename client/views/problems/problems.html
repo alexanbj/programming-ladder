@@ -83,7 +83,7 @@
         </div>
 			</div>
 			<div class="form-control editor" id="description-editor" required></div>
-			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden"></textarea>
+			<textarea class="form-control hidden" id="description" name="description" placeholder="Description"></textarea>
 		</div>
 		<div class="form-group">
 			<label for="max-score">Max score</label>
@@ -133,16 +133,16 @@
         </div>
 			</div>
 			<div class="form-control editor" id="description-editor" required></div>
-			<textarea class="form-control hidden" id="description" name="description" placeholder="Description" class="hidden">{{problem.description}}</textarea>			
+			<textarea class="form-control hidden" id="description" name="description" placeholder="Description">{{problem.description}}</textarea>
 		</div>
 		<div class="form-group">
 			<label for="max-score">Max score</label>
-			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value={{problem.maxScore}} {{#if problemAnswered}}disabled{{/if}}>
+			<input type="number" class="form-control" id="max-score" placeholder="Max score" min=1 value={{problem.maxScore}} disabled={{problemAnswered}}>
 			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 10, but you are allowed to change this as you see fit.</span>
 		</div>
 		<div class="form-group">
 			<label for="min-score">Minimum score</label>
-			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value={{problem.minScore}} {{#if problemAnswered}}disabled{{/if}}>
+			<input type="number" class="form-control" id="min-score" placeholder="Min score" min=0 value={{problem.minScore}} disabled={{problemAnswered}}>
 			<span class="help-block">Remember the <a href="{{pathFor 'rules'}}">rules</a>! This should be 2, but you are allowed to customize this as you see fit.</span>
 		</div>
 		<div class="form-group">

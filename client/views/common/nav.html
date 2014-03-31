@@ -14,7 +14,7 @@
                     <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{loginButtons}}
+                    {{> loginButtons}}
                     {{#with currentUser}}
                         <p class="navbar-text score">Score: {{score}}</p>
                     {{/with}}
