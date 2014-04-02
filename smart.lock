@@ -3,6 +3,7 @@
   "dependencies": {
     "basePackages": {
       "iron-router": {},
+      "iron-router-progress": {},
       "bootstrap-3": {},
       "accounts-ui-bootstrap-3": {},
       "font-awesome": {},
@@ -13,6 +14,11 @@
         "git": "https://github.com/EventedMind/iron-router.git",
         "tag": "v0.7.0",
         "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
+      },
+      "iron-router-progress": {
+        "git": "https://github.com/Multiply/iron-router-progress.git",
+        "tag": "v0.3.1",
+        "commit": "3f7900feb4bb70a1289b39a1fdcd1f438c0335b3"
       },
       "bootstrap-3": {
         "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",

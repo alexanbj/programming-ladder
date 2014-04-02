@@ -6,34 +6,47 @@ Router.map ->
     waitOn: -> Meteor.subscribe 'leaderboard'
     data: ->
       users: Users.find({}, {sort: {score: -1}, limit: 3})
+
   @route "leaderboard",
     waitOn: -> Meteor.subscribe 'leaderboard'
     data: ->
       users: Users.find({}, {sort: {score: -1}})
       #problems: Problems.find().count()
+
   @route "showProblem",
     path: "/problems/:_id"
     waitOn: -> Meteor.subscribe 'problem', @params._id
     data: -> Problems.findOne @params._id
+
   @route "problems",
     path: "/problems"
+
   @route "newProblem"
   @route "editProblem",
     path: "/problems/edit/:_id"
     data: -> problem: Problems.findOne @params._id
+
   @route "user",
     path: "/users/:_id"
     waitOn: -> Meteor.subscribe 'user', @params._id
     data: ->
       user: Meteor.users.findOne(@params._id)
       problemCount: Problems.find().count()
-  @route "rules"
-  @route "notFound", path: "*"
+
+  @route "rules",
+    progress:
+      enabled: false
+
+  @route "notFound",
+    path: "*"
 
 
 Router.configure
   layoutTemplate: "layout"
   notFoundTemplate: "notFound"
+
+IronRouterProgress.configure
+  spinner: false
 
 
 # Custom controller. Enables us to hightlight current problem in sidebar
