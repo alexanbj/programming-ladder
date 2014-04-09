@@ -6,17 +6,15 @@
 </body>
 
 <template name="layout">
-  {{>nav}}
+  {{> nav}}
 
-  {{yield 'jumbotron'}}
+  <!--{{> yield 'jumbotron'}}-->
 
   <div class="container">
     <div class="row">
-      {{yield}}
+      {{> yield}}
     </div>
   </div>
 
-    {{#constant}}
-      {{>footer}}
-    {{/constant}}
+  {{> footer}}
 </template>
