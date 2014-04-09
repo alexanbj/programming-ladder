@@ -4,7 +4,7 @@ Template.showProblem.events
     answer = template.find("#answer").value.trim()
     if answer
       Meteor.call 'checkAnswer', answer, Session.get('selectedProblemId'), #use template.data._id instead of session object her
-      (err, res) ->  
+      (err, res) ->
         Deps.flush() #Force dom update before we jquery it!
         if res
           $('#success-message').show()
@@ -14,7 +14,7 @@ Template.showProblem.events
   'click a#revealAnswer': (event) ->
     event.preventDefault()
     Meteor.call 'revealAnswer', Session.get('selectedProblemId'),
-      (err, res) ->  
+      (err, res) ->
         if res
           $('a#revealAnswer').popover({placement:'right', content: res, trigger: "manual"})
           $('a#revealAnswer').popover('toggle')
@@ -28,6 +28,9 @@ Template.showProblem.events
 
   'click .edit-problem': (event, template) ->
      Router.go "editProblem", _id: Session.get('selectedProblemId')
+
+  'click .reset-answers': (event, template) ->
+    Problems.update _id: Session.get('selectedProblemId'), {$set: answers: null}
 
 Template.newProblem.events
   'submit form': (event, template) ->
@@ -61,12 +64,12 @@ Template.editProblem.rendered = ->
   content = $('#description').html().replace(/&lt;/g, "<").replace(/&gt;/g, ">");
   $('#description-editor').html(content);
 
-Template.editProblem.problemAnswered = -> 
+Template.editProblem.problemAnswered = ->
   Meteor.call 'isAnswered', Session.get('selectedProblemId'),
     (err, answered) -> Session.set("answered", answered)
   Session.get("answered")
 
-Template.editProblem.events 
+Template.editProblem.events
   'submit form': (event, template) ->
     event.preventDefault()
     $('#description').val($('#description-editor').cleanHtml()) # Set text from wysiwyg editor to description textarea
@@ -79,7 +82,7 @@ Template.editProblem.events
       minScore: parseInt template.find("#min-score").value
       solution: template.find("#solution").value
       created: new Date
-    
+
     Meteor.call 'editProblem', properties,
       (err, problemId) ->
         if problemId then Router.go "showProblem", _id: problemId
