@@ -2,7 +2,7 @@ Meteor.startup ->
   @Spawn = Npm.require('child_process').spawn
   @Future = Npm.require('fibers/future')
   @FS = Npm.require('fs')  
-  @MeteorDir = '/home/mkr/Desktop/pro-ladder/'
+  @MeteorDir = process.env.PWD
   @ImageName = 'code-container'
 
 Meteor.methods
@@ -21,6 +21,7 @@ Meteor.methods
     if not Meteor.userId()
       throw new Meteor.Error 601, "You need to be logged in to do that"
 
+    console.log MeteorDir
     fileRecord = CodeFiles.findOne({_id: fileId})
     blob = CodeFiles.retrieveBuffer(fileId)
     problemId = fileRecord.metadata["problemId"]
@@ -90,9 +91,6 @@ Meteor.methods
     return false 
 
 @runCommand = (command, parameter) ->
-
-  
-
   prc = Spawn(command, parameter.split(' '), {stdio:'pipe'})
 
   commandFuture = new Future
