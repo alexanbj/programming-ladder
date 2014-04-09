@@ -53,6 +53,8 @@ IronRouterProgress.configure
 class @ShowProblemController extends RouteController
   onBeforeAction: ->
     Session.set("selectedProblemId", @params._id)
+    Session.set("uploadedFile", null)
+    Session.set("uploadStarted", null)
 
 # Go to the last shown problem or last added problem
 class @ProblemsController extends RouteController

@@ -13,3 +13,7 @@ font-awesome
 less
 collection-hooks
 iron-router-progress
+cfs-ejson-file
+collectionFS
+cfs-gridfs
+cfs-filesystem

@@ -6,4 +6,9 @@ An unfinished project Euler clone written in Meteor and Coffeescript
 - Download or clone this into /some/path
 - cd /some/path
 - Run `mrt install`
-- Run `meteor
+- Run `sudo meteor` (docker requires sudo)
+
+# Install docker
+- Install [Docker](http://docker.io)
+- Download docker image `wget http://ubuntuone.com/1oPMNNeJjlqo02tb2E9IGI`
+- Install docker image `cat 1oPMNNeJjlqo02tb2E9IGI | sudo docker import - code-container`

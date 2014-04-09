@@ -43,3 +43,7 @@ Meteor.publish 'problem', (problemId) ->
       minScore: true
       created: true
       description: true
+
+Meteor.publish 'uploadedFiles', -> 
+  if @userId 
+    CodeFiles.find {owner: @userId}
