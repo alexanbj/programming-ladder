@@ -1,14 +1,20 @@
 <template name="home">
     <div class="home">
-        <img src="/knowit_logo_green_rgb.png" alt="Knowit">
+        <!--<img src="/knowit_logo_green_rgb.png" alt="Knowit">-->
 
-        <!-- TODO: Prettify the top 3. Something that looks like a podium?-->
-        <!-- TODO: Center the content properly here -->
-        {{#each users}}
-            {{username}}
-        {{/each}}
+        <div class="podium-container">
+            {{#each users}}
+            <figure class="podium">
+                <div class="background">
+                    <h2>{{username}}</h2>
+                </div>
+            </figure>
+            {{/each}}
+        </div>
 
 
-        <h4 class="lead text-center quote"><em>"D bli itj nå likar einn herre"</em> <small>&mdash; Ukjent Knowiter</small></h4>
+        <h4 class="lead text-center quote"><em>"D bli itj nå likar einn herre"</em>
+            <small>&mdash; Ukjent Knowiter</small>
+        </h4>
     </div>
 </template>

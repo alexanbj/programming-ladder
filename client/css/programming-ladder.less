@@ -51,88 +51,119 @@ footer .services li.github a {
   .footer {
     text-align: left;
   }
+
   .footer p {
     margin-bottom: 0;
   }
 }
 
 form .editor {
-    height: 240px;
-    margin: 20px 0 0 0;
-    overflow-y: scroll;
+  height: 240px;
+  margin: 20px 0 0 0;
+  overflow-y: scroll;
 }
 
 .leaderboard tr:nth-child(2) .rank:before {
-    content: url('/medal-gold-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-gold-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .leaderboard tr:nth-child(3) .rank:before {
-    content: url('/medal-silver-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-silver-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .leaderboard tr:nth-child(4) .rank:before {
-    content: url('/medal-bronze-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-bronze-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .edit-problem-buttons {
-    button:not(:last-child) {
-        margin-right: 15px;
-    }
+  button:not(:last-child) {
+    margin-right: 15px;
+  }
 }
 
 .not-found {
-    font-size: 2.2rem;
-    h1 {
-        font-size: 11rem;
-    }
+  font-size: 2.2rem;
+  h1 {
+    font-size: 11rem;
+  }
 
-    p {
-        padding-top: 10px;
-        strong {
-            display: block;
-        }
+  p {
+    padding-top: 10px;
+    strong {
+      display: block;
     }
+  }
 
-    img {
-        padding-top:3em;
-    }
+  img {
+    padding-top: 3em;
+  }
 }
 
 .navbar-default .score {
-    padding-right: 15px;
+  padding-right: 15px;
 }
 
 .stats {
-    float: left;
-    text-align: center;
-    padding: 0 14px;
+  float: left;
+  text-align: center;
+  padding: 0 14px;
 }
 
 .stats-header {
-    text-transform: uppercase;
-    color: #666;
-    font-size: 9pt;
+  text-transform: uppercase;
+  color: #666;
+  font-size: 9pt;
 
 }
 
 .stats-content {
-    font-size: 1.1em;
-    font-weight: bold;
-    height: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  height: 30px;
 }
-
 
 .home {
   padding-top: 100px;
+  height: 500px;
+
+  .podium-container {
+    figure {
+      display: inline-block;
+      min-width: 30%;
+      background: #fefcea;
+      background: linear-gradient(to bottom, #f9f2ae 0%, #f1da36 100%);
+      height: 250px;
+      -webkit-box-shadow: 0 10px 6px -6px #777;
+      -moz-box-shadow: 0 10px 6px -6px #777;
+      box-shadow: 6px 10px 6px -6px #ccc;
+      .background {
+        display: table-cell;
+        h2 {
+          margin: -50px 0 0 auto;
+        }
+      }
+    }
+
+    figure:first-child {
+      height: 200px;
+      background: linear-gradient(to bottom, #f5f6f6 0%, #dbdce2 100%)
+    }
+
+    figure:last-child {
+      height: 150px;
+//      background: linear-gradient(to bottom, #ffc987 0%, #ff920a 100%);
+      background: linear-gradient(to bottom, #ffc98c 0%,#f7b409 100%);
+    }
+  }
 }
 
 .home .quote {
