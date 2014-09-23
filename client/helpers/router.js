@@ -1,5 +1,6 @@
 //Global subscriptions. Not router specific, but since all the other subscriptions are here, whatever..
 Meteor.subscribe('currentUser');
+Meteor.subscribe('activityStream');
 
 Router.map(function() {
     this.route('home', {

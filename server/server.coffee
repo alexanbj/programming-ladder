@@ -25,6 +25,7 @@ Meteor.methods
       # Increment the score for the user accordingly
       score = if score then score else problem.maxScore
       Meteor.users.update userId, {$inc: {score: score, solved: 1}}
+      insertActivityForProblemSolved(userId, problem, score);
       return true
     else 
       if not score # Insert new answer array, decrement maximum score

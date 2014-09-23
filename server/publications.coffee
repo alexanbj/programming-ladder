@@ -4,6 +4,9 @@ Meteor.publish 'userIsAdmin', ->
     Meteor.users.find {_id: @userId}, fields:
       isAdmin: true
 
+Meteor.publish 'activityStream', ->
+  ActivityStream.find {}, {sort: {published: 1}, limit: 10}
+
 Meteor.publish 'settings', ->
   if isAdminById @userId
     Settings.find {}, {}
