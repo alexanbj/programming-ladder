@@ -51,88 +51,147 @@ footer .services li.github a {
   .footer {
     text-align: left;
   }
+
   .footer p {
     margin-bottom: 0;
   }
 }
 
 form .editor {
-    height: 240px;
-    margin: 20px 0 0 0;
-    overflow-y: scroll;
+  height: 240px;
+  margin: 20px 0 0 0;
+  overflow-y: scroll;
 }
 
 .leaderboard tr:nth-child(2) .rank:before {
-    content: url('/medal-gold-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-gold-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .leaderboard tr:nth-child(3) .rank:before {
-    content: url('/medal-silver-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-silver-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .leaderboard tr:nth-child(4) .rank:before {
-    content: url('/medal-bronze-2-icon.png');
-    position: relative;
-    top: 3px;
-    left: -4px;
+  content: url('/medal-bronze-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
 }
 
 .edit-problem-buttons {
-    button:not(:last-child) {
-        margin-right: 15px;
-    }
+  button:not(:last-child) {
+    margin-right: 15px;
+  }
 }
 
 .not-found {
-    font-size: 2.2rem;
-    h1 {
-        font-size: 11rem;
-    }
+  font-size: 2.2rem;
+  h1 {
+    font-size: 11rem;
+  }
 
-    p {
-        padding-top: 10px;
-        strong {
-            display: block;
-        }
+  p {
+    padding-top: 10px;
+    strong {
+      display: block;
     }
+  }
 
-    img {
-        padding-top:3em;
-    }
+  img {
+    padding-top: 3em;
+  }
 }
 
 .navbar-default .score {
-    padding-right: 15px;
+  padding-right: 15px;
+}
+
+.problem {
+  ul {
+    li {
+      .label {
+        font-size: 20px;
+      }
+    }
+  }
+  .panel-heading {
+    padding: 15px 15px;
+  }
+}
+
+.stats-row {
+  text-align: center;
+  .stats-container {
+    display: inline-block;
+  }
 }
 
 .stats {
-    float: left;
-    text-align: center;
-    padding: 0 14px;
+  float: left;
+  //  text-align: center;
+  padding: 0 14px;
 }
 
 .stats-header {
-    text-transform: uppercase;
-    color: #666;
-    font-size: 9pt;
+  text-transform: uppercase;
+  color: #666;
+  font-size: 9pt;
 
 }
 
 .stats-content {
-    font-size: 1.1em;
-    font-weight: bold;
-    height: 30px;
+  font-size: 1.1em;
+  font-weight: bold;
+  height: 30px;
 }
 
 
 .home {
-  padding-top: 100px;
+  .medals-container {
+
+    @gold: #C98910;
+    @silver: #A8A8A8;
+    @bronze: #965A38;
+
+    div {
+      margin-top: 30px;
+      text-align: center;
+      figure {
+        display: inline-block;
+        width: 250px;
+        height: 250px;
+        border-radius: 125px;
+        font-size: 50px;
+        color: #fff;
+        line-height: 250px;
+        text-align: center;
+        background: @gold;
+        border: 1px solid darken(@gold, 20%)
+      }
+    }
+
+    div:first-child {
+      margin-top: 90px;
+      figure{
+        background: @silver;
+        border: 1px solid darken(@silver, 20%)
+      }
+    }
+
+    div:last-child {
+      margin-top: 120px;
+      figure {
+        background: @bronze;
+        border: 1px solid darken(@bronze, 20%)
+      }
+    }
+  }
 }
 
 .home .quote {
