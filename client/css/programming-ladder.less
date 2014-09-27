@@ -1,10 +1,24 @@
-.footer {
-  padding-top: 40px;
-  padding-bottom: 30px;
-  margin-top: 100px;
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+@footer-height: 165px;
+
+body {
+  margin-bottom: @footer-height;
+}
+
+body > footer {
   color: #777;
   text-align: center;
   border-top: 1px solid #e5e5e5;
+  padding: 20px 0;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: @footer-height;
 }
 
 footer .services {
@@ -197,4 +211,10 @@ form .editor {
 .home .quote {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.settings {
+  .form-group {
+    margin: 0;
+  }
 }
