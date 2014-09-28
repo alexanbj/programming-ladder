@@ -165,7 +165,6 @@ form .editor {
   height: 30px;
 }
 
-
 .home {
   .medals-container {
 
@@ -181,19 +180,25 @@ form .editor {
         width: 250px;
         height: 250px;
         border-radius: 125px;
-        font-size: 50px;
-        color: #fff;
         line-height: 250px;
         text-align: center;
         background: @gold;
-        border: 1px solid darken(@gold, 20%)
+        border: 1px solid darken(@gold, 20%);
+
+        font-size: 40px;
+        text-transform: uppercase;
+        color: darken(@gold, 30%);
+        font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
 
     div:first-child {
       margin-top: 90px;
-      figure{
+      figure {
         background: @silver;
+        color: darken(@silver, 30%);
         border: 1px solid darken(@silver, 20%)
       }
     }
@@ -202,6 +207,7 @@ form .editor {
       margin-top: 120px;
       figure {
         background: @bronze;
+        color: darken(@bronze, 30%);
         border: 1px solid darken(@bronze, 20%)
       }
     }
