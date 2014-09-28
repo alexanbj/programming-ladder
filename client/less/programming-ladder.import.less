@@ -1,10 +1,24 @@
-.footer {
-  padding-top: 40px;
-  padding-bottom: 30px;
-  margin-top: 100px;
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+@footer-height: 165px;
+
+body {
+  margin-bottom: @footer-height;
+}
+
+body > footer {
   color: #777;
   text-align: center;
   border-top: 1px solid #e5e5e5;
+  padding: 20px 0;
+
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: @footer-height;
 }
 
 footer .services {
@@ -151,7 +165,6 @@ form .editor {
   height: 30px;
 }
 
-
 .home {
   .medals-container {
 
@@ -167,19 +180,25 @@ form .editor {
         width: 250px;
         height: 250px;
         border-radius: 125px;
-        font-size: 50px;
-        color: #fff;
         line-height: 250px;
         text-align: center;
         background: @gold;
-        border: 1px solid darken(@gold, 20%)
+        border: 1px solid darken(@gold, 20%);
+
+        font-size: 40px;
+        text-transform: uppercase;
+        color: darken(@gold, 30%);
+        font-weight: 600;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
 
     div:first-child {
       margin-top: 90px;
-      figure{
+      figure {
         background: @silver;
+        color: darken(@silver, 30%);
         border: 1px solid darken(@silver, 20%)
       }
     }
@@ -188,6 +207,7 @@ form .editor {
       margin-top: 120px;
       figure {
         background: @bronze;
+        color: darken(@bronze, 30%);
         border: 1px solid darken(@bronze, 20%)
       }
     }
@@ -197,4 +217,10 @@ form .editor {
 .home .quote {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.settings {
+  .form-group {
+    margin: 0;
+  }
 }

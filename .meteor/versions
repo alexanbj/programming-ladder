@@ -10,6 +10,7 @@ binary-heap@1.0.0
 blaze-tools@1.0.0
 blaze@2.0.0
 boilerplate-generator@1.0.0
+bootstrap3-less@0.0.0
 callback-hook@1.0.0
 check@1.0.0
 coffeescript@1.0.3
@@ -42,7 +43,6 @@ meteor-platform@1.1.0
 meteor@1.1.0
 minifiers@1.1.0
 minimongo@1.0.3
-mizzao:bootstrap-3@3.2.0
 mobile-status-bar@1.0.0
 mongo-livedata@1.0.4
 mongo@1.0.5
