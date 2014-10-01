@@ -9,11 +9,18 @@ Meteor.publish 'settings', ->
     Settings.find {}, {}
 
 Meteor.publish 'leaderboard', ->
-  Meteor.users.find {}, fields:
+
+  fields = {
     username: true
     score: true
     solved: true
-    isAdmin: true
+  }
+
+  if isAdminById @userId
+    fields = _.extend fields,
+      isAdmin: true
+
+  Meteor.users.find {}, fields: fields
 
 Meteor.publish 'user', (userId) ->
   Meteor.users.find {_id: userId}, fields:
