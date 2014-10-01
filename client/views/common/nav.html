@@ -1,31 +1,42 @@
 <template name="nav">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{pathFor 'home'}}">Programming Ladder</a>
-        </div>
+  <header class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse"
+                data-target=".prog-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Programming Ladder</a>
+      </div>
 
+      <nav class="collapse navbar-collapse prog-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav">
-            <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
-            {{#with currentUser}}
-                <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
-            {{/with}}
-            <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
-            {{#if currentIsAdmin}}
-                <li class="dropdown {{activeClassByRoute 'settings'}}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="{{activeClassByRoute 'newProblem'}}"><a href="{{pathFor 'newProblem'}}"><i class="fa fa-plus"></i> Add problem</a></li>
-                        <li class="divider"></li>
-                        <li class="{{activeClassByRoute 'settings'}}"><a href="{{pathFor 'settings'}}"><i class="fa fa-cog"></i> Settings</a></li>
-                    </ul>
-                </li>
-            {{/if}}
+          <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a>
+          </li>
+          {{#with currentUser}}
+          <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+          {{/with}}
+          <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
+          {{#if currentIsAdmin}}
+          <li class="dropdown {{activeClassByRoute 'settings'}}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="{{activeClassByRoute 'newProblem'}}"><a href="{{pathFor 'newProblem'}}"><i
+                      class="fa fa-plus hidden-xs"></i> Add problem</a></li>
+              <li class="{{activeClassByRoute 'settings'}}"><a href="{{pathFor 'settings'}}"><i
+                      class="fa fa-cog hidden-xs"></i> Settings</a></li>
+            </ul>
+          </li>
+          {{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            {{> loginButtons}}
-            {{#with currentUser}}
-                <p class="navbar-text score">Score: {{score}}</p>
-            {{/with}}
+          {{> loginButtons}}
+          {{#with currentUser}}
+          <p class="navbar-text score">Score: {{score}}</p>
+          {{/with}}
         </ul>
-    </nav>
+      </nav>
+    </div>
+  </header>
 </template>

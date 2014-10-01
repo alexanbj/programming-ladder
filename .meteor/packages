@@ -8,7 +8,6 @@ coffeescript
 accounts-password
 natestrauser:font-awesome
 less
-mizzao:bootstrap-3
 iron:router
 matb33:collection-hooks
 mrt:iron-router-progress
@@ -16,4 +15,5 @@ mrt:accounts-ui-bootstrap-3
 mrt:bootstrap3-wysihtml5
 aldeed:autoform
 aldeed:collection2
+nemo64:bootstrap
 

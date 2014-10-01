@@ -7,13 +7,13 @@
 
 <template name="layout">
 
-    <div class="container">
-        {{> nav}}
+    {{> nav}}
+    <section class="container-fluid">
         <div class="row">
             {{> yield}}
         </div>
         {{> activitystream}}
-    </div>
+    </section>
 
     {{> footer}}
 </template>
