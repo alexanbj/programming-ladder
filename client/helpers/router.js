@@ -127,5 +127,5 @@ Router._filters = {
 
 var filters = Router._filters;
 
-Router.onBeforeAction(filters.isAdmin, {only: ['admin', 'editProblem', 'newProblem']});
+Router.onBeforeAction(filters.isAdmin, {only: ['settings', 'editProblem', 'newProblem']});
 Router.onBeforeAction('dataNotFound');
