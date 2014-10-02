@@ -1,9 +1,9 @@
 ActivityStream = new Meteor.Collection('activitystream');
 
-ActivityStream.deny({
-    insert: function(){ return true; },
-    update: function(){ return true; },
-    remove: function(){ return true; }
+ActivityStream.allow({
+    insert: function() { return false; },
+    update: function() { return false; },
+    remove: isAdminById
 });
 
 if (Meteor.isServer) {

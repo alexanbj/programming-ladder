@@ -1,5 +1,16 @@
 <template name="activitystream">
-    {{#each activities}}
-        {{actor.displayName}} {{verb}}ed {{object.displayName}}
-    {{/each}}
+    <div class="list-group">
+        {{#each activities}}
+        <div class="list-group-item">
+            <div class="row-content">
+                <div class="least-content">{{formatDate published}}</div>
+                <h4 class="list-group-item-heading">Tile with label</h4>
+                {{#if currentIsAdmin}}
+                    <button type="button" class="delete-activity-item close" aria-hidden="true">&times;</button>
+                {{/if}}
+                <p class="list-group-item-text">{{actor.displayName}} {{verb}}ed {{object.displayName}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </template>

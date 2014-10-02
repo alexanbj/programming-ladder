@@ -9,9 +9,8 @@ UI.registerHelper 'activeClassByRoute', (route) ->
   if regex.test(currentRoute.route.name)
     return 'active'
 
-#UI.registerHelper 'addIndex', (collection) ->
-#  collection.map (val, index) -> {index: index, value: val}
-#
-
-UI.registerHelper 'percentage', (x, y) ->
-  (x/y) * 100
+UI.registerHelper 'formatDate', (date) ->
+  if (moment().isSame(date, 'day'))
+    moment(date).format('HH:mm')
+  else
+    moment(date).format('MMM D')
