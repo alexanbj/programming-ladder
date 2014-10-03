@@ -10,12 +10,11 @@ Router.map(function() {
         },
         data: function() {
 
-            var toPodiumOrder = function(users){
+            var toMedalOrder = function(users){
               if (users && users.length > 2){
                 var tmp = users[0];
                 users[0] = users[1];
-                users[1] = users[2];
-                users[3] = tmp;
+                users[1] = tmp;
                 return users;
               } else {
                 return users;
@@ -23,7 +22,7 @@ Router.map(function() {
 
             };
             return {
-                users: toPodiumOrder(Users.find({}, {sort: {score: -1}, limit: 3}))
+                users: toMedalOrder(Users.find({}, {sort: {score: -1}, limit: 3}).fetch())
             }
         }
     });
@@ -128,5 +127,5 @@ Router._filters = {
 
 var filters = Router._filters;
 
-Router.onBeforeAction(filters.isAdmin, {only: ['admin', 'editProblem', 'newProblem']});
+Router.onBeforeAction(filters.isAdmin, {only: ['settings', 'editProblem', 'newProblem']});
 Router.onBeforeAction('dataNotFound');
