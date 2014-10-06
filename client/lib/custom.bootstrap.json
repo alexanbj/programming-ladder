@@ -38,7 +38,7 @@
   "carousel":             false,
   
   "affix":                false,
-  "alert":                false,
+  "alert":                true,
   "button":               false,
   "collapse":             false,
   "scrollspy":            false,
