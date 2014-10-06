@@ -45,7 +45,7 @@ Template.showProblem.avgScore = ->
 
   if avg == 0 then return 0
 
-  return avg / i
+  return (avg / i).toFixed(2)
 
 Template.showProblem.highestScore = ->
   if not this.answers then return
