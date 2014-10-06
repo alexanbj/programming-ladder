@@ -29,35 +29,8 @@ Template.showProblem.events
   'click #edit-problem': ->
      Router.go "editProblem", _id: Session.get('selectedProblemId')
 
-Template.showProblem.solveCount = ->
-  if not this.answers then return 0
-
-  count = 0
-  count += 1 for answer in this.answers when answer.solved is true
-  return count
-
-Template.showProblem.avgScore = ->
-  if not this.answers then return 0
-
-  avg = 0
-  i = 0
-  (avg += answer.score) and (i=i+1) for answer in this.answers when answer.solved is true
-
-  if avg == 0 then return 0
-
-  return (avg / i).toFixed(2)
-
-Template.showProblem.highestScore = ->
-  if not this.answers then return
-
-  _.max(answer.score for answer in this.answers when answer.solved is true)
-
-Template.showProblem.lowestScore = ->
-  if not this.answers then return
-
-  _.min(answer.score for answer in this.answers when answer.solved is true)
-
-
+Template.showProblem.stats = ->
+  ProblemStats.findOne();
 
 Template.showProblem.solved = ->
   if not this.answers then return false
@@ -66,7 +39,6 @@ Template.showProblem.solved = ->
     if answer.userId == Meteor.userId() then return answer.solved
 
   return false
-
 
 #If the user has attempted to solve this problem, we retrieve 'that' score, else we get the attainable points for this problem
 Template.showProblem.score = ->
