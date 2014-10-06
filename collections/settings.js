@@ -9,6 +9,11 @@ settingsSchemaObject = {
     }
 }
 
+// add any extra properties to settingsSchemaObject (provided by packages for example)
+_.each(addToSettingsSchema, function(item){
+    settingsSchemaObject[item.propertyName] = item.propertySchema;
+});
+
 Settings = new Meteor.Collection('settings');
 SettingsSchema = new SimpleSchema(settingsSchemaObject);
 Settings.attachSchema(SettingsSchema);
