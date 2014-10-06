@@ -3,6 +3,8 @@ Meteor.publish 'userIsAdmin', ->
   if isAdminById @userId
     Meteor.users.find {_id: @userId}, fields:
       isAdmin: true
+  else
+    []
 
 Meteor.publish 'activityStream', ->
   ActivityStream.find {}, {sort: {created_at: -1}, limit: 10}
@@ -10,6 +12,8 @@ Meteor.publish 'activityStream', ->
 Meteor.publish 'settings', ->
   if isAdminById @userId
     Settings.find {}, {}
+  else
+    []
 
 Meteor.publish 'leaderboard', ->
 
@@ -34,6 +38,8 @@ Meteor.publish 'user', (userId) ->
 Meteor.publish 'currentUser', ->
   if @userId
     Meteor.users.find {_id: @userId}
+  else
+    []
 
 Meteor.publish 'problems', ->
   if @userId
@@ -41,6 +47,8 @@ Meteor.publish 'problems', ->
       title: true
       created: true
       answers: {$elemMatch: {userId: @userId}}
+  else
+    []
 
 Meteor.publish 'problem', (problemId) ->
 
@@ -59,3 +67,5 @@ Meteor.publish 'problem', (problemId) ->
 
   if @userId
     Problems.find({_id: problemId}, fields: fields)
+  else
+    []
