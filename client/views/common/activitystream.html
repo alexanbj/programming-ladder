@@ -3,12 +3,12 @@
         {{#each activities}}
         <div class="list-group-item">
             <div class="row-content">
-                <div class="least-content">{{formatDate created_at}}</div>
-                <h4 class="list-group-item-heading">{{title}}</h4>
-                <p class="list-group-item-text">{{{content}}}</p>
+                <div class="small least-content">{{formatDate created_at}}</div>
+                <p class="list-group-item-heading">{{title}}</p>
+                <p class="small list-group-item-text">{{{content}}}</p>
             </div>
             {{#if currentIsAdmin}}
-                <button type="button" class="delete-activity-item close"><i class="fa fa-close"></i></button>
+                <button type="button" class="delete-activity-item close">&times;</button>
             {{/if}}
         </div>
         {{/each}}
