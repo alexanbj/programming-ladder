@@ -1,5 +1,7 @@
+'use strict';
+
 Template.activitystream.activities = function() {
-    return ActivityStream.find();
+    return ActivityStream.find({}, {sort: {created_at: -1}});
 }
 
 Template.activitystream.urlify = function() {
@@ -17,3 +19,19 @@ Template.activitystream.events = {
     }
 };
 
+
+Template.activitystream.title = function() {
+    if (this.type === 'UserRegistrationEvent') {
+        return this.actor.name + ' has registered';
+    } else if (this.type === 'ProblemSolvedEvent') {
+        return this.actor.name + ' gained ' + this.payload.points  + ' points!';
+    }
+}
+
+Template.activitystream.content = function() {
+    if (this.type === 'UserRegistrationEvent') {
+        return ''
+    } else if (this.type === 'ProblemSolvedEvent') {
+        return 'Solved <a href="' + Router.url('showProblem', {_id: this.payload.problem.id}) + '">' + this.payload.problem.name + '</a>'
+    }
+}

@@ -7,49 +7,47 @@ ActivityStream.allow({
 });
 
 if (Meteor.isServer) {
-    Problems.after.insert(function (userId, problem) {
-        ActivityStream.insert(createActivityForProblemAdded(userId, problem));
+    /* For simplicity. This is is handled in checkAnswer on the server for now. But should be here for proper decoupling
+    Problems.after.update(function (userId, problem, fieldNames, modifier, options) {
+       insertProblemSolvedEvent(userId, problem, score)
+    });*/
+
+
+    Meteor.users.after.insert(function (userId, user) {
+        insertUserRegistrationEvent(user);
     });
 
-
-
-    createActivityForProblemAdded = function(userId, problem) {
-        var activityProperties = {
-            verb: 'added',
-            published: new Date(),
+    insertUserRegistrationEvent = function(user) {
+        var userRegistrationEvent = {
+            type: 'UserRegistrationEvent',
+            created_at: new Date(),
             actor: {
-                objectType: 'user',
+                id: user._id,
+                name: user.username
+            }
+        }
+
+        ActivityStream.insert(userRegistrationEvent)
+    }
+
+    insertProblemSolvedEvent = function(userId, problem, points) {
+        var problemSolvedEvent = {
+            type: 'ProblemSolvedEvent',
+            created_at: new Date(),
+            actor: {
                 id: userId,
-                displayName: Meteor.users.findOne(userId).username
+                name: Meteor.users.findOne(userId).username
             },
-            object: {
-                objectType: 'problem',
-                id: problem._id,
-                displayName: problem.title
+            payload: {
+                points: points,
+                problem: {
+                    id: problem._id,
+                    name: problem.title
+                }
             }
         };
 
-        return activityProperties;
-
-    };
-
-    insertActivityForProblemSolved = function(userId, problem, points) {
-        var activityProperties = {
-            verb: 'solved',
-            published: new Date(),
-            actor: {
-                objectType: 'user',
-                id: userId,
-                displayName: Meteor.users.findOne(userId).username
-            },
-            object: {
-                objectType: 'problem',
-                id: problem._id,
-                displayName: problem.title
-            }
-        };
-
-        ActivityStream.insert(activityProperties);
+        ActivityStream.insert(problemSolvedEvent);
     }
 
 
@@ -59,27 +57,3 @@ if (Meteor.isServer) {
         }
     });
 }
-/*
-if Meteor.isServer
-    #Problems.after.insert (userId, problem) ->
-#  Activities.insert createActivityForProblem(userId, problem)
-
-
-
-
-createActivityForProblem = (userId, problem) ->
-    properties =
-    verb: "added"
-published: new Date
-actor:
-    objectType: "user"
-id: userId
-displayName: Meteor.users.findOne(userId).username
-object:
-    objectType: "problem"
-id: problem._id
-displayName: problem.title
-target:
-    objectType: "todo"
-id: "todo"
-displayName: "todo"*/

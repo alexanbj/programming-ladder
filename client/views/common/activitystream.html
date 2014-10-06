@@ -3,13 +3,13 @@
         {{#each activities}}
         <div class="list-group-item">
             <div class="row-content">
-                <div class="least-content">{{formatDate published}}</div>
-                <h4 class="list-group-item-heading">Tile with label</h4>
+                <div class="least-content">{{formatDate created_at}}</div>
+                <h4 class="list-group-item-heading">{{title}}</h4>
                 {{#if currentIsAdmin}}
-                    <button type="button" class="delete-activity-item close" aria-hidden="true">&times;</button>
                 {{/if}}
-                <p class="list-group-item-text">{{actor.displayName}} {{verb}}ed {{object.displayName}}</p>
+                <p class="list-group-item-text">{{{content}}}</p>
             </div>
+            <button type="button" class="delete-activity-item close"><i class="fa fa-close"></i></button>
         </div>
         {{/each}}
     </div>

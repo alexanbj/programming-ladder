@@ -5,7 +5,7 @@ Meteor.publish 'userIsAdmin', ->
       isAdmin: true
 
 Meteor.publish 'activityStream', ->
-  ActivityStream.find {}, {sort: {published: 1}, limit: 10}
+  ActivityStream.find {}, {sort: {created_at: -1}, limit: 10}
 
 Meteor.publish 'settings', ->
   if isAdminById @userId
