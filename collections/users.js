@@ -60,9 +60,20 @@ Meteor.users.attachSchema(Users);
 
 
 Meteor.users.allow({
-    insert: function() { return true; },
-    update: function() { return true; },
-    remove: function() { return true; }
+    update: function(userId, doc) {
+        return isAdminById(userId) || userId == doc._id;
+    },
+    remove: isAdminById
+});
+
+Meteor.users.deny({
+   update: function(userId, doc, fieldNames) {
+       if (isAdminById(userId)) {
+           return false;
+       }
+       // deny the update if it contains something other than the linje field
+       return (_.without(fieldNames, 'linje').length > 0);
+   }
 });
 
 if (Meteor.isServer) {
