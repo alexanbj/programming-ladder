@@ -77,6 +77,7 @@ Router.map(function() {
         },
         onBeforeAction: function() {
             Session.set('selectedProblemId', this.params._id);
+            this.next();
         }
     });
 
@@ -118,11 +119,11 @@ Router.configure({
 
 
 Router._filters = {
-    isAdmin: function(pause) {
-        if(!this.ready()) return;
+    isAdmin: function() {
         if(!Meteor.user() || !Meteor.user().isAdmin) {
             Router.go('home');
-            pause();
+        } else {
+            this.next();
         }
     }
 }
