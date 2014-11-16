@@ -19,3 +19,19 @@ Template.leaderboard.users = function() {
         return document;
     });
 };
+
+Template.leaderboard.helpers({
+    totalScore: function() {
+
+    },
+    abakusScore: function() {
+
+    },
+    onlineScore: function() {
+        var score = 0;
+        Meteor.users.find({linje: 0}).map(function (doc) {
+            score += doc.score;
+        });
+        return score;
+    }
+});

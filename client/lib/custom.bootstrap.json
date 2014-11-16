@@ -23,7 +23,7 @@
   "jumbotron":            false,
   "thumbnails":           false,
   "alerts":               true,
-  "progress-bars":        false,
+  "progress-bars":        true,
   "media":                false,
   "list-group":           true,
   "panels":               true,

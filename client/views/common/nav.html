@@ -15,7 +15,8 @@
           <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a>
           </li>
           {{#with currentUser}}
-          <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+            <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+            <li class="{{activeClassByRoute 'profile'}}"><a href="{{pathFor 'profile'}}">Profile</a></li>
           {{/with}}
           <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
           {{#if currentIsAdmin}}

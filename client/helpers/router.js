@@ -97,16 +97,12 @@ Router.map(function() {
     });
 
 
-    /* User profile pages aren't implemented yet
-    this.route('user', {
-        path: '/users/:_id',
-        waitOn: function() {
-            return Meteor.subscribe('user', this.params._id);
-        },
+    this.route('profile', {
+        path: '/users/profile',
         data: function() {
-            return Meteor.users.findOne({_id: this.params._id});
+            return Meteor.user()
         }
-    });*/
+    });
 
 
     this.route('rules');

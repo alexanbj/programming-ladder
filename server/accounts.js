@@ -2,6 +2,7 @@ Accounts.onCreateUser(function (options, user) {
     user.score = 0
     user.solved = 0
     user.isAdmin = false
+    user.linje = 0
     return user;
 });
 

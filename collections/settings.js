@@ -14,7 +14,7 @@ _.each(addToSettingsSchema, function(item){
     settingsSchemaObject[item.propertyName] = item.propertySchema;
 });
 
-Settings = new Meteor.Collection('settings');
+Settings = new Mongo.Collection('settings');
 SettingsSchema = new SimpleSchema(settingsSchemaObject);
 Settings.attachSchema(SettingsSchema);
 
