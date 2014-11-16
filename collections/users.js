@@ -43,9 +43,16 @@ Users = new SimpleSchema({
         defaultValue: 0
     },
     linje: {
-        type: String,
-        allowedValues: ['Online', 'Abakus'],
-        defaultValue: 'Online'
+        type: Number,
+        allowedValues: [0, 1],
+        defaultValue: 0,
+        autoform: {
+            options: [
+                {label: 'Online', value: 0},
+                {label: 'Abakus', value: 1}
+            ],
+            noselect: true
+        }
     }
 });
 
@@ -53,9 +60,9 @@ Meteor.users.attachSchema(Users);
 
 
 Meteor.users.allow({
-    insert: isAdminById,
-    update: isAdminById,
-    remove: isAdminById
+    insert: function() { return true; },
+    update: function() { return true; },
+    remove: function() { return true; }
 });
 
 if (Meteor.isServer) {

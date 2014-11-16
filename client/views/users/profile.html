@@ -5,7 +5,7 @@
                 <h1 class="panel-title"><i class="fa fa-user"></i> User Profile</h1>
             </div>
             <div class="panel-body">
-                {{> quickForm collection="Meteor.users" id="updateProfileForm" type="update" doc=Meteor.user template="bootstrap3-horizontal" label-class="control-label" input-col-class="controls" fields="linje"}}
+                {{> quickForm collection="Meteor.users" id="updateSettingsForm" type="update" doc=this template="bootstrap3-horizontal" label-class="control-label" input-col-class="controls" fields="linje"}}
             </div>
         </div>
     </div>

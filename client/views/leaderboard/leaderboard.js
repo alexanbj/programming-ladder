@@ -22,14 +22,22 @@ Template.leaderboard.users = function() {
 
 Template.leaderboard.helpers({
     totalScore: function() {
-
+        var score = 0;
+        Meteor.users.find({}).map(function (doc) {
+            score += doc.score;
+        });
+        return score;
     },
     abakusScore: function() {
-
+        var score = 0;
+        Meteor.users.find({linje: 'Abakus'}).map(function (doc) {
+            score += doc.score;
+        });
+        return score;
     },
     onlineScore: function() {
         var score = 0;
-        Meteor.users.find({linje: 0}).map(function (doc) {
+        Meteor.users.find({linje: 'Online'}).map(function (doc) {
             score += doc.score;
         });
         return score;
