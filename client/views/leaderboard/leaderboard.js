@@ -30,14 +30,14 @@ Template.leaderboard.helpers({
     },
     abakusScore: function() {
         var score = 0;
-        Meteor.users.find({linje: 'Abakus'}).map(function (doc) {
+        Meteor.users.find({linje: 1}).map(function (doc) {
             score += doc.score;
         });
         return score;
     },
     onlineScore: function() {
         var score = 0;
-        Meteor.users.find({linje: 'Online'}).map(function (doc) {
+        Meteor.users.find({linje: 0}).map(function (doc) {
             score += doc.score;
         });
         return score;

@@ -24,7 +24,7 @@ Router.map(function() {
 
             };
             return {
-                users: toMedalOrder(Users.find({}, {sort: {score: -1}, limit: 3}).fetch())
+                users: toMedalOrder(Meteor.users.find({}, {sort: {score: -1}, limit: 3}).fetch())
             }
         }
     });
