@@ -15,20 +15,17 @@ Meteor.publish 'settings', ->
   else
     []
 
-Meteor.publish 'leaderboard', ->
 
+Meteor.publish 'leaderboard', ->
   fields = {
     username: true
     score: true
     solved: true
     linje: true
+    isAdmin: true
   }
+  Meteor.users.find {isAdmin: false}, fields: fields
 
-  if isAdminById @userId
-    fields = _.extend fields,
-      isAdmin: true
-
-  Meteor.users.find {}, fields: fields
 
 Meteor.publish 'user', (userId) ->
   Meteor.users.find {_id: userId}, fields:
@@ -45,9 +42,9 @@ Meteor.publish 'currentUser', ->
 
 Meteor.publish 'problems', ->
   if @userId
-    Problems.find {}, fields:
+    Problems.find {draft: false}, fields:
       title: true
-      created: true
+      published: true
       answers: {$elemMatch: {userId: @userId}}
   else
     []
@@ -59,7 +56,7 @@ Meteor.publish 'problem', (problemId) ->
     title: true
     maxScore: true
     minScore: true
-    created: true
+    published: true
     description: true
   }
 

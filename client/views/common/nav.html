@@ -20,11 +20,13 @@
           {{/with}}
           <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
           {{#if currentIsAdmin}}
-          <li class="dropdown {{activeClassByRoute 'settings'}}">
+            <li class="dropdown {{activeClassByRoute 'admin'}}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li class="{{activeClassByRoute 'newProblem'}}"><a href="{{pathFor 'newProblem'}}"><i
-                      class="fa fa-plus hidden-xs"></i> Add problem</a></li>
+              <li class="{{activeClassByRoute 'adminProblems'}}"><a href="{{pathFor 'adminProblems'}}"><i
+                      class="fa fa-tasks hidden-xs"></i> Problems</a></li>
+              <li class="{{activeClassByRoute 'adminUsers'}}"><a href="{{pathFor 'adminUsers'}}"><i
+                      class="fa fa-users hidden-xs"></i> Users</a></li>
               <li class="{{activeClassByRoute 'settings'}}"><a href="{{pathFor 'settings'}}"><i
                       class="fa fa-cog hidden-xs"></i> Settings</a></li>
             </ul>

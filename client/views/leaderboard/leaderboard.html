@@ -20,9 +20,6 @@
                         <th>User</th>
                         <th>Score</th>
                         <th>Solved</th>
-                        {{#if currentIsAdmin}}
-                            <th>Actions</th>
-                        {{/if}}
                     </tr>
                     {{#each users}}
                         <tr>
@@ -36,16 +33,6 @@
                             </td>
                             <td>{{score}}</td>
                             <td>{{solved}}</td>
-                            {{#if currentIsAdmin}}
-                                <td>
-                                    {{#if isAdmin}}
-                                        <button class="admin-toggle btn btn-success btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
-                                    {{else}}
-                                        <button class="admin-toggle btn btn-default btn-xs"><i class="glyphicon glyphicon-user"></i> Admin</button>
-                                    {{/if}}
-                                    <button class="delete-user btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i> Delete</button>
-                                </td>
-                            {{/if}}
                         </tr>
                     {{/each}}
                 </tbody>

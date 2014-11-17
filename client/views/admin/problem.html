@@ -1,0 +1,14 @@
+<template name="editProblem">
+    <div class="col-md-12 col-lg-offset-1 col-lg-10">
+        {{# autoForm collection="Problems" id="problemForm" type="insert" template="bootstrap3-horizontal" label-class="control-label" input-col-class="controls"}}
+            {{> afFormGroup name='title'}}
+            {{> afFormGroup name='description' rows=6}} {{!-- Adding the rows property turns it into a textarea --}}
+            {{> afFormGroup name='maxScore'}}
+            {{> afFormGroup name='minScore'}}
+            {{> afFormGroup name='draft'}}
+            {{> afFormGroup name='published'}}
+            {{> afFormGroup name='solution'}}
+            <button type="submit" class="btn btn-default">Save</button>
+        {{/autoForm}}
+    </div>
+</template>

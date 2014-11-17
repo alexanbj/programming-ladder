@@ -1,7 +1,7 @@
 //Global subscriptions. Not router specific, but since all the other subscriptions are here, whatever..
 Meteor.subscribe('currentUser');
 Meteor.subscribe('activityStream');
-// client side specific location. Probably shoudln't be here either
+// client side specific location. Probably shouldn't be here either
 ProblemStats = new Mongo.Collection('problemStats');
 
 Router.map(function() {
@@ -24,7 +24,7 @@ Router.map(function() {
 
             };
             return {
-                users: toMedalOrder(Meteor.users.find({}, {sort: {score: -1}, limit: 3}).fetch())
+                users: toMedalOrder(Meteor.users.find({isAdmin:false}, {sort: {score: -1}, limit: 3}).fetch())
             }
         }
     });
@@ -53,20 +53,6 @@ Router.map(function() {
         }
     });
 
-    this.route('editProblem', {
-        path: '/problems/:_id/edit',
-        waitOn: function() {
-            return Meteor.subscribe('problem', this.params._id);
-        },
-        data: function() {
-            return Problems.findOne({_id: this.params._id});
-        }
-    });
-
-    this.route('newProblem', {
-        path: '/problems/add'
-    });
-
     this.route('showProblem', {
         path: '/problems/:_id',
         waitOn: function() {
@@ -81,9 +67,21 @@ Router.map(function() {
         }
     });
 
+    this.route('profile', {
+        path: '/users/profile',
+        data: function() {
+            return Meteor.user()
+        }
+    });
+
+
+    this.route('rules');
+
+
+    // Admin stuff be here!
 
     this.route('settings', {
-        path: '/settings',
+        path: '/admin/settings',
         waitOn: function() {
             return Meteor.subscribe('settings');
         },
@@ -96,16 +94,46 @@ Router.map(function() {
         }
     });
 
-
-    this.route('profile', {
-        path: '/users/profile',
+    this.route('adminProblems', {
+        path: '/admin/problems',
+        waitOn: function() {
+            return Meteor.subscribe('adminProblems');
+        },
         data: function() {
-            return Meteor.user()
+            return {
+                active: Problems.find({draft: false}, {sort: {published: -1}}),
+                drafts: Problems.find({draft: true}, {sort: {createdAt: -1}})
+            }
         }
     });
 
+    this.route('adminUsers', {
+        path: '/admin/users',
+        waitOn: function() {
+            return Meteor.subscribe('adminUsers');
+        },
+        data: function() {
+            return {
+                users: Meteor.users.find({}, {sort: {username: 1}})
+            }
+        }
+    });
 
-    this.route('rules');
+    this.route('editProblem', {
+        path: '/admin/problems/edit/:_id',
+        waitOn: function() {
+            return Meteor.subscribe('problem', this.params._id);
+        },
+        data: function() {
+            return Problems.findOne({_id: this.params._id});
+        }
+    });
+
+    this.route('newProblem', {
+        path: '/admin/problems/edit',
+        template: 'editProblem'
+    });
+
 });
 
 Router.configure({
@@ -126,5 +154,5 @@ Router._filters = {
 
 var filters = Router._filters;
 
-Router.onBeforeAction(filters.isAdmin, {only: ['settings', 'editProblem', 'newProblem']});
+Router.onBeforeAction(filters.isAdmin, {only: ['settings', 'adminUsers', 'adminProblems', 'editProblem', 'newProblem']});
 Router.onBeforeAction('dataNotFound');
