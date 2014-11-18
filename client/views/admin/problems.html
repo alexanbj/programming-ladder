@@ -14,7 +14,7 @@
                             <td><a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a></td>
                             <td>{{published}}</td>
                             <td>
-                                <button class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                                <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="draft btn btn-default btn-xs" title="Set as draft"><i class="fa fa-eye-slash"></i> Draft</button>
                                 <button class="delete btn btn-danger btn-xs" title="Delete problem"><i class="fa fa-trash"></i> Delete</button>
                             </td>
@@ -39,7 +39,7 @@
                             <td>{{title}}</td>
                             <td>{{published}}</td>
                             <td>
-                                <button class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</button>
+                                <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="publish btn btn-default btn-xs" title="Publish problem"><i class="fa fa-eye"></i> Publish</button>
                                 <button class="delete btn btn-danger btn-xs" title="Delete problem"><i class="fa fa-trash"></i> Delete</button>
                             </td>

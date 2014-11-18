@@ -125,13 +125,22 @@ Router.map(function() {
             return Meteor.subscribe('problem', this.params._id);
         },
         data: function() {
-            return Problems.findOne({_id: this.params._id});
+            return {
+                problem: Problems.findOne({_id: this.params._id}),
+                autoFormType: 'update'
+            }
         }
     });
 
     this.route('newProblem', {
         path: '/admin/problems/edit',
-        template: 'editProblem'
+        template: 'editProblem',
+        data: function() {
+            return {
+                problem: null,
+                autoFormType: 'insert'
+            }
+        }
     });
 
 });

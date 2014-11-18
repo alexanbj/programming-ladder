@@ -46,11 +46,12 @@ ProblemsSchema = new SimpleSchema({
     },
     published: {
         type: Date,
-        defaultValue: Date.now(),
+        defaultValue: new Date,
         label: 'The time this problem is published and visible to the public.'
     },
     answers: {
-        type: [Object]
+        type: [Object],
+        defaultValue: []
     },
     'answers.$.userId': {
         type: String

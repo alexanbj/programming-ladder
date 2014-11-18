@@ -20,12 +20,6 @@ Template.showProblem.events
           $('a#revealAnswer').popover('toggle')
           $('a#revealAnswer').addClass('disabled')
 
-  'click #delete-problem': ->
-    if confirm("Are you sure?")
-      Problems.remove this._id
-      Session.set('selectedProblemId', null)
-      Router.go "problems"
-
   'click #edit-problem': ->
      Router.go "editProblem", _id: Session.get('selectedProblemId')
 
