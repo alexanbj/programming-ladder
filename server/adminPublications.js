@@ -17,3 +17,19 @@ Meteor.publish('adminUsers', function() {
         return [];
     }
 });
+
+Meteor.publish('adminProblem', function(problemId) {
+    if (isAdminById(this.userId)) {
+        return Problems.find({_id: problemId}, {fields: {
+            title: true,
+            maxScore: true,
+            minScore: true,
+            published: true,
+            description: true,
+            draft: true,
+            solution: true
+        }});
+    } else {
+        return [];
+    }
+});

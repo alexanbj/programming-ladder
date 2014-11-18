@@ -7,5 +7,5 @@ Template.sidebar.selected = function () {
 };
 
 Template.sidebar.problems = function () {
-    return Problems.find({}, {sort: {created : 1}});
+    return Problems.find({}, {sort: {published : 1}});
 };

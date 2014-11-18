@@ -42,7 +42,7 @@ Meteor.publish 'currentUser', ->
 
 Meteor.publish 'problems', ->
   if @userId
-    Problems.find {draft: false}, fields:
+    Problems.find {draft: false, published: {$lte: new Date()}}, fields:
       title: true
       published: true
       answers: {$elemMatch: {userId: @userId}}
@@ -60,12 +60,8 @@ Meteor.publish 'problem', (problemId) ->
     description: true
   }
 
-  if isAdminById @userId
-    fields = _.extend fields,
-      solution: true
-
   if @userId
-    Problems.find({_id: problemId}, fields: fields)
+    Problems.find({_id: problemId, draft: false, published: {$lte: new Date()}}, fields: fields)
   else
     []
 

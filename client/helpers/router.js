@@ -101,8 +101,8 @@ Router.map(function() {
         },
         data: function() {
             return {
-                active: Problems.find({draft: false}, {sort: {published: -1}}),
-                drafts: Problems.find({draft: true}, {sort: {createdAt: -1}})
+                active: Problems.find({draft: false}, {sort: {published: 1}}),
+                drafts: Problems.find({draft: true}, {sort: {createdAt: 1}})
             }
         }
     });
@@ -122,7 +122,7 @@ Router.map(function() {
     this.route('editProblem', {
         path: '/admin/problems/edit/:_id',
         waitOn: function() {
-            return Meteor.subscribe('problem', this.params._id);
+            return Meteor.subscribe('adminProblem', this.params._id);
         },
         data: function() {
             return {
