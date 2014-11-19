@@ -6,13 +6,15 @@
                 <tbody>
                     <tr>
                         <th>Title</th>
-                        <th>Publishing date</th>
+                        <th>Active From</th>
+                        <th>Active To</th>
                         <th>Actions</th>
                     </tr>
                     {{#each active}}
                         <tr>
                             <td><a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a></td>
-                            <td>{{published}}</td>
+                            <td>{{activeFrom}}</td>
+                            <td>{{activeTo}}</td>
                             <td>
                                 <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="draft btn btn-default btn-xs" title="Set as draft"><i class="fa fa-eye-slash"></i> Draft</button>
@@ -31,13 +33,15 @@
                 <tbody>
                     <tr>
                         <th>Title</th>
-                        <th>Publishing date</th>
+                        <th>Active From</th>
+                        <th>Active To</th>
                         <th>Actions</th>
                     </tr>
                     {{#each drafts}}
                         <tr>
                             <td>{{title}}</td>
-                            <td>{{published}}</td>
+                            <td>{{activeFrom}}</td>
+                            <td>{{activeTo}}</td>
                             <td>
                                 <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="publish btn btn-default btn-xs" title="Publish problem"><i class="fa fa-eye"></i> Publish</button>

@@ -44,10 +44,19 @@ ProblemsSchema = new SimpleSchema({
         defaultValue: true,
         label: "Drafts aren't considered published, and will only be visible to admins."
     },
-    published: {
+    activeFrom: {
         type: Date,
         defaultValue: new Date,
         label: 'The time this problem is published and visible to the public.'
+    },
+    activeTo: {
+        type: Date,
+        optional: true,
+        custom: function() {
+            if (this.value < this.field('activeFrom').value) {
+                return 'Must be greater than or equal to activeFrom';
+            }
+        }
     },
     answers: {
         type: [Object],

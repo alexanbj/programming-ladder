@@ -101,7 +101,7 @@ Router.map(function() {
         },
         data: function() {
             return {
-                active: Problems.find({draft: false}, {sort: {published: 1}}),
+                active: Problems.find({draft: false}, {sort: {activeFrom: 1}}),
                 drafts: Problems.find({draft: true}, {sort: {createdAt: 1}})
             }
         }

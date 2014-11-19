@@ -24,7 +24,8 @@ Meteor.publish('adminProblem', function(problemId) {
             title: true,
             maxScore: true,
             minScore: true,
-            published: true,
+            activeFrom: true,
+            activeTo: true,
             description: true,
             draft: true,
             solution: true

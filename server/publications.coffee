@@ -41,9 +41,10 @@ Meteor.publish 'currentUser', ->
 
 Meteor.publish 'problems', ->
   if @userId
-    Problems.find {draft: false, published: {$lte: new Date()}}, fields:
+    Problems.find {draft: false, activeFrom: {$lte: new Date()}}, fields:
       title: true
-      published: true
+      activeFrom: true
+      activeTo: true
       answers: {$elemMatch: {userId: @userId}}
   else
     []
@@ -55,12 +56,13 @@ Meteor.publish 'problem', (problemId) ->
     title: true
     maxScore: true
     minScore: true
-    published: true
+    activeFrom: true
+    activeTo: true
     description: true
   }
 
   if @userId
-    Problems.find({_id: problemId, draft: false, published: {$lte: new Date()}}, fields: fields)
+    Problems.find({_id: problemId, draft: false, activeFrom: {$lte: new Date()}}, fields: fields)
   else
     []
 

@@ -13,7 +13,7 @@ Template.showProblem.events
 
   'click a#revealAnswer': (event) ->
     event.preventDefault()
-    Meteor.call 'revealAnswer', Session.get('selectedProblemId'),
+    Meteor.call 'retrieveAnswer', Session.get('selectedProblemId'),
       (err, res) ->  
         if res
           $('a#revealAnswer').popover({placement:'right', content: res, trigger: "manual"})

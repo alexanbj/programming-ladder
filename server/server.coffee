@@ -8,7 +8,10 @@ Meteor.methods
 
     userId = Meteor.userId()
 
-    problem = Problems.findOne problemId # TODO: Do some error handling if no problem is found? 
+    problem = Problems.findOne problemId # TODO: Do some error handling if no problem is found?
+
+    if problem.activeTo < Date.now()
+      return false
 
     # If the user has tried and failed to solve this before. Get the current score value for this problem for this user
     previousAnswer = problem.answers?.filter (x) -> x.userId is userId
@@ -33,11 +36,6 @@ Meteor.methods
       else if score > problem.minScore # Decrement possible score for this problem
         Problems.update({_id: problemId, answers: {$elemMatch: {userId: userId}}}, {$inc: {'answers.$.score': -1}})
       return false
-
-  revealAnswer: (problemId) ->
-    userId = Meteor.userId()
-    problem = Problems.findOne problemId
-    return problem.solution
 
 # Removes all whitespace and lowercases it. Perhaps we should remove special chars as well?
 @sanitize = (string) ->
