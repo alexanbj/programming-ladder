@@ -22,7 +22,6 @@ Meteor.publish 'leaderboard', ->
     score: true
     solved: true
     linje: true
-    isAdmin: true
   }
   Meteor.users.find {isAdmin: false}, fields: fields
 
