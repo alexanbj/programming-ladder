@@ -13,8 +13,8 @@
                     {{#each active}}
                         <tr>
                             <td><a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a></td>
-                            <td>{{activeFrom}}</td>
-                            <td>{{activeTo}}</td>
+                            <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
                             <td>
                                 <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="draft btn btn-default btn-xs" title="Set as draft"><i class="fa fa-eye-slash"></i> Draft</button>
@@ -40,8 +40,8 @@
                     {{#each drafts}}
                         <tr>
                             <td>{{title}}</td>
-                            <td>{{activeFrom}}</td>
-                            <td>{{activeTo}}</td>
+                            <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
+                            <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
                             <td>
                                 <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
                                 <button class="publish btn btn-default btn-xs" title="Publish problem"><i class="fa fa-eye"></i> Publish</button>

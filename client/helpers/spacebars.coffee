@@ -17,3 +17,6 @@ UI.registerHelper 'formatDate', (date) ->
 
 UI.registerHelper 'percentage', (x, y) ->
   (x/y) * 100
+
+UI.registerHelper 'dateFormat', (date, dateFormat) ->
+  if date then moment(date).format(dateFormat)
