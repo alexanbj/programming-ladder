@@ -10,22 +10,19 @@
 
         <ul class="pull-right list-inline">
           {{#if currentIsAdmin}}
-          <li>
-
-            <button id="edit-problem" class="btn btn-primary pull-right btn-sm"><i
-                    class="fa fa-pencil-square-o"></i> Edit
-            </button>
-          </li>
+              <li>
+                <a href="{{pathFor 'editProblem'}}" class="btn btn-primary pull-right btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</a>
+              </li>
           {{/if}}
 
           {{#if solved}}
-          <li>
-            <span class="pull-right label label-success">{{score}}/{{maxScore}}</span>
-          </li>
+              <li>
+                <span class="pull-right label label-success">{{score}}/{{maxScore}}</span>
+              </li>
           {{else}}
-          <li>
-            <span class="pull-right label label-default">{{score}}/{{maxScore}}</span>
-          </li>
+              <li>
+                <span class="pull-right label label-default">{{score}}/{{maxScore}}</span>
+              </li>
           {{/if}}
         </ul>
       </div>
@@ -34,7 +31,8 @@
       </div>
         {{#if solved}}
             <div class="panel-footer">
-                Answer: <a href="#" id="revealAnswer" rel="popover">Reveal</a>
+                <button id="revealAnswer" class="btn btn-primary btn-sm">Reveal answer</button>
+                <span id="answer">{{!-- will be injected here by jQuery --}}</span>
             </div>
         {{/if}}
     </div>

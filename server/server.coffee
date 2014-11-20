@@ -1,17 +1,17 @@
 Meteor.methods
   checkAnswer: (answer, problemId) ->
     if not Meteor.userId()
-      throw new Meteor.Error 601, "You need to be logged in to do that"
+      throw new Meteor.Error 'logged-out', 'You must be logged in to submit answers.'
 
     if not getSetting('answerSubmission', true)
-      throw new Meteor.Error 601, 'Answer submission is currently disabled'
+      throw new Meteor.Error 'answering-disabled', 'Submitting answers is currently disabled.'
 
     userId = Meteor.userId()
 
     problem = Problems.findOne problemId # TODO: Do some error handling if no problem is found?
 
     if problem.activeTo < Date.now()
-      return false
+      throw new Meteor.Error 'too-late', 'Too late! It is no longer possible to submit answers to this problem.'
 
     # If the user has tried and failed to solve this before. Get the current score value for this problem for this user
     previousAnswer = problem.answers?.filter (x) -> x.userId is userId

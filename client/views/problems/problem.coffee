@@ -4,24 +4,22 @@ Template.showProblem.events
     answer = template.find("#answer").value.trim()
     if answer
       Meteor.call 'checkAnswer', answer, Session.get('selectedProblemId'), #use template.data._id instead of session object here
-      (err, res) ->  
+      (err, res) ->
         Deps.flush() #Force dom update before we jquery it!
         if res
           $('#success-message').show()
         else
           $('#fail-message').show()
 
-  'click a#revealAnswer': (event) ->
-    event.preventDefault()
+  'click #revealAnswer': ->
     Meteor.call 'retrieveAnswer', Session.get('selectedProblemId'),
       (err, res) ->  
         if res
-          $('a#revealAnswer').popover({placement:'right', content: res, trigger: "manual"})
-          $('a#revealAnswer').popover('toggle')
-          $('a#revealAnswer').addClass('disabled')
-
-  'click #edit-problem': ->
-     Router.go "editProblem", _id: Session.get('selectedProblemId')
+          $('#revealAnswer').hide();
+          $('#answer').text('Answer: ' + res);
+        else
+          $('#revealAnswer').hide();
+          $('#answer').text('You are not allowed to see the answer to this problem.');
 
 Template.showProblem.stats = ->
   ProblemStats.findOne();
