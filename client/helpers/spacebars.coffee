@@ -17,3 +17,9 @@ UI.registerHelper 'formatDate', (date) ->
 
 UI.registerHelper 'dateFormat', (date, dateFormat) ->
   if date then moment(date).format(dateFormat)
+
+UI.registerHelper 'isDateBeforeNow', (date) ->
+  return date > Date.now()
+
+UI.registerHelper 'isDateAfterNow', (date) ->
+  return date < Date.now()

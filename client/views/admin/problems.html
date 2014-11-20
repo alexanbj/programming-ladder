@@ -12,7 +12,13 @@
                     </tr>
                     {{#each active}}
                         <tr>
-                            <td><a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a></td>
+                            <td>
+                                {{#if isDateBeforeNow activeTo}}
+                                    {{title}}
+                                {{else}}
+                                    <a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a>
+                                {{/if}}
+                            </td>
                             <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
                             <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
                             <td>
