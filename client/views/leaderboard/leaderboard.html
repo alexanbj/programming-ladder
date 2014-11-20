@@ -1,17 +1,5 @@
 <template name="leaderboard">
     <div class="col-md-12 col-lg-offset-1 col-lg-10">
-        <div>
-            <img src="/online_logo_small.png" alt="Online logo" height="30" width="30"/>
-            <img src="/abakus_logo_small.png" alt="Abakus logo" height="30" width="30" style="float: right" />
-            <div class="progress">
-                <div class="progress-bar" style="width: {{percentage onlineScore totalScore}}%">
-                    {{onlineScore}}
-                </div>
-                <div class="progress-bar progress-bar-danger" style="width: {{percentage abakusScore totalScore}}%">
-                    {{abakusScore}}
-                </div>
-            </div>
-        </div>
         <div class="panel panel-default">
             <table class="leaderboard table table-striped table-hover table-condensed">
                 <tbody>
@@ -24,13 +12,7 @@
                     {{#each users}}
                         <tr>
                             <td class="rank">{{rank}}</td>
-                            <td>{{#if linje}}
-                                  <img src="/abakus_logo_small.png" alt="Abakus logo" height="20" width="20" style="margin-right: 5px"/>
-                                {{else}}
-                                  <img src="/online_logo_small.png" alt="Online logo" height="20" width="20" style="margin-right: 5px"/>
-                                {{/if}}
-                                {{username}}
-                            </td>
+                            <td>{{username}}</td>
                             <td>{{score}}</td>
                             <td>{{solved}}</td>
                         </tr>

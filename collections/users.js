@@ -41,18 +41,6 @@ Users = new SimpleSchema({
     solved: {
         type: Number,
         defaultValue: 0
-    },
-    linje: {
-        type: Number,
-        allowedValues: [0, 1],
-        defaultValue: 0,
-        autoform: {
-            options: [
-                {label: 'Online', value: 0},
-                {label: 'Abakus', value: 1}
-            ],
-            noselect: true
-        }
     }
 });
 
@@ -71,8 +59,7 @@ Meteor.users.deny({
        if (isAdminById(userId)) {
            return false;
        }
-       // deny the update if it contains something other than the linje field
-       return (_.without(fieldNames, 'linje').length > 0);
+       return true; // Should probably be something profile related here eventually
    }
 });
 

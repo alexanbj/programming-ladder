@@ -21,7 +21,6 @@ Meteor.publish 'leaderboard', ->
     username: true
     score: true
     solved: true
-    linje: true
   }
   Meteor.users.find {isAdmin: false}, fields: fields
 
@@ -31,7 +30,6 @@ Meteor.publish 'user', (userId) ->
     username: true
     score: true
     solved: true
-    linje: true
 
 Meteor.publish 'currentUser', ->
   if @userId
