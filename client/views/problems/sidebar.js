@@ -1,11 +1,12 @@
-Template.sidebar.selected = function () {
-    if (Session.equals('selectedProblemId', this._id)) {
-        return 'active';
-    } else {
-        return '';
+Template.sidebar.helpers({
+    selected: function() {
+        if (Session.equals('selectedProblemId', this._id)) {
+            return 'active';
+        } else {
+            return '';
+        }
+    },
+    problems: function() {
+        return Problems.find({}, {sort: {activeFrom : 1}});
     }
-};
-
-Template.sidebar.problems = function () {
-    return Problems.find({}, {sort: {activeFrom : 1}});
-};
+});

@@ -53,7 +53,7 @@ ProblemsSchema = new SimpleSchema({
         type: Date,
         optional: true,
         custom: function() {
-            if (this.value < this.field('activeFrom').value) {
+            if (this.value && this.value < this.field('activeFrom').value) {
                 return 'Must be greater than or equal to activeFrom';
             }
         }

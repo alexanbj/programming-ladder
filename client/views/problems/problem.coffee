@@ -21,22 +21,23 @@ Template.showProblem.events
           $('#revealAnswer').hide();
           $('#answer').text('You are not allowed to see the answer to this problem.');
 
-Template.showProblem.stats = ->
-  ProblemStats.findOne();
+Template.showProblem.helpers
+  solvedOrNoLongerActive: ->
+    if this.activeTo < Date.now() then return true
+    if this.answers and this.answers[0] and this.answers[0].solved then return true
+    return false
+  panelClass: ->
+    if this.answers and this.answers[0].solved then return "panel-success"
 
-Template.showProblem.solved = ->
-  if not this.answers then return false
+    if this.activeTo < Date.now() then return "panel-warning"
 
-  for answer in this.answers
-    if answer.userId == Meteor.userId() then return answer.solved
+    return "panel-default"
+  solved: ->
+    this.answers and this.answers[0]?.solved
+  score: ->
+    #If the user has attempted to solve this problem, we retrieve 'that' score, else we get the attainable points for this problem
+    if this.answers and this.answers[0] then return this.answers[0].score else this.maxScore
+  stats: ->
+    ProblemStats.findOne();
 
-  return false
 
-#If the user has attempted to solve this problem, we retrieve 'that' score, else we get the attainable points for this problem
-Template.showProblem.score = ->
-  if not this.answers then return this.maxScore
-
-  for answer in this.answers
-    if answer.userId == Meteor.userId() then return answer.score
-
-  return this.maxScore
