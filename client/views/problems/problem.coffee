@@ -20,24 +20,3 @@ Template.showProblem.events
         else
           $('#revealAnswer').hide();
           $('#answer').text('You are not allowed to see the answer to this problem.');
-
-Template.showProblem.helpers
-  solvedOrNoLongerActive: ->
-    if this.activeTo < Date.now() then return true
-    if this.answers and this.answers[0] and this.answers[0].solved then return true
-    return false
-  panelClass: ->
-    if this.answers and this.answers[0].solved then return "panel-success"
-
-    if this.activeTo < Date.now() then return "panel-warning"
-
-    return "panel-default"
-  solved: ->
-    this.answers and this.answers[0]?.solved
-  score: ->
-    #If the user has attempted to solve this problem, we retrieve 'that' score, else we get the attainable points for this problem
-    if this.answers and this.answers[0] then return this.answers[0].score else this.maxScore
-  stats: ->
-    ProblemStats.findOne();
-
-
