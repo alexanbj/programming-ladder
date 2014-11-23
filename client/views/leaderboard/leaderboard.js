@@ -4,7 +4,7 @@ Template.leaderboard.helpers({
         var selector = {};
 
         // If you are an admin, use this selector property to ensure your user isn't shown in the leaderboard.
-        if (Meteor.user().isAdmin) {
+        if (Meteor.user() && Meteor.user().isAdmin) {
             selector = {isAdmin: null};
         }
 
