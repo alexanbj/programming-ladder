@@ -13,7 +13,7 @@
                     {{#each active}}
                         <tr>
                             <td>
-                                {{#if isDateBeforeNow activeTo}}
+                                {{#if isDateBeforeNow activeFrom}}
                                     {{title}}
                                 {{else}}
                                     <a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a>
