@@ -7,18 +7,18 @@
           <span class="sr-only">Toggle navigation</span>
           <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="{{pathFor 'home'}}">Programming Ladder</a>
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Knowits Julekalender</a>
       </div>
 
       <nav class="collapse navbar-collapse prog-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav">
-          <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a>
+          <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Tabell</a>
           </li>
+            <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Luker</a></li>
           {{#with currentUser}}
-            <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
             <li class="{{activeClassByRoute 'profile'}}"><a href="{{pathFor 'profile'}}">Profile</a></li>
           {{/with}}
-          <li class="{{activeClassByRoute 'rules'}}"><a href="{{pathFor 'rules'}}">Rules</a></li>
+          <li class="{{activeClassByRoute 'about'}}"><a href="{{pathFor 'about'}}">Om</a></li>
           {{#if currentIsAdmin}}
             <li class="dropdown {{activeClassByRoute 'admin'}}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
@@ -36,7 +36,7 @@
         <ul class="nav navbar-nav navbar-right">
           {{> loginButtons}}
           {{#with currentUser}}
-          <p class="navbar-text score">Score: {{score}}</p>
+          <p class="navbar-text score">Luker: {{solved}}/24</p>
           {{/with}}
         </ul>
       </nav>

@@ -4,17 +4,15 @@
             <table class="leaderboard table table-striped table-hover table-condensed">
                 <tbody>
                     <tr>
-                        <th>Rank</th>
-                        <th>User</th>
-                        <th>Score</th>
-                        <th>Solved</th>
+                        <th></th>
+                        <th>Bruker</th>
+                        <th>Luker</th>
                     </tr>
                     {{#each users}}
                         <tr>
                             <td class="rank">{{rank}}</td>
                             <td>{{username}}</td>
-                            <td>{{score}}</td>
-                            <td>{{solved}}</td>
+                            <td>{{solved}}/24</td>
                         </tr>
                     {{/each}}
                 </tbody>

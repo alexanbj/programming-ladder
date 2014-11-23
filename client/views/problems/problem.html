@@ -1,21 +1,18 @@
 <template name="showProblem">
-    <div class="col-md-3 col-sm-4">
-        {{> sidebar}}
-    </div>
 
-    <section class="problem col-md-9 col-sm-8">
+    <section class="col-md-12 col-lg-offset-1 col-lg-10">
         <div class="panel {{panelClass}}">
             <div class="panel-heading">
-                <strong class="panel-title">{{title}}</strong>
+                <strong class="panel-title">Luke {{title}}</strong>
 
                 <ul class="pull-right list-inline">
                     {{#if currentIsAdmin}}
                         <li>
-                            <a href="{{pathFor 'editProblem'}}" class="btn btn-default pull-right btn-sm"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                            <a href="{{pathFor 'editProblem'}}" class="btn btn-default pull-right btn-xs"><i class="fa fa-pencil-square-o"></i> Edit</a>
                         </li>
                     {{/if}}
                     <li>
-                        <span class="pull-right label">{{score}}/{{maxScore}}</span>
+                        <span class="pull-right label">{{#if solved}}Løst{{else}}Ikke løst{{/if}}</span>
                     </li>
                 </ul>
             </div>
@@ -24,7 +21,7 @@
             </div>
             {{#if solvedOrNoLongerActive}}
             <div class="panel-footer">
-                <button id="revealAnswer" class="btn btn-primary btn-sm">Reveal answer</button>
+                <button id="revealAnswer" class="btn btn-primary btn-sm">Vis løsning</button>
                 <span id="answer">{{!-- will be injected here by jQuery --}}</span>
             </div>
             {{/if}}
@@ -33,43 +30,47 @@
         {{#if solved}}
             <div id="success-message" class="alert alert-dismissable alert-success fade in" style="display: none;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Well done!</strong> Your answer was correct. You received {{answers.[0].score}} points!
+                <strong>Å, jul med din glede!</strong> Svaret ditt var korrekt. Du har nå løst {{currentUser.solved}} av 24 luker!
             </div>
         {{else}}
             <div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+                <strong>Julestress!</strong> Svaret ditt var feil. Gjør noen endringer og forsøk igjen.
             </div>
         {{/if}}
 
 
         {{#unless solvedOrNoLongerActive}}
-            <form class="form-inline" role="form">
-                <div class="form-group">
-                    <label class="sr-only" for="answer">Answer</label>
-                    <input type="text" class="form-control" id="answer" placeholder="Answer" required>
+            {{#if currentUser}}
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <label class="sr-only" for="answer">Answer</label>
+                        <input type="text" class="form-control" id="answer" placeholder="Svar" required>
+                    </div>
+                    <button type="submit" class="btn btn-default">Sjekk</button>
+                </form>
+            {{else}}
+                <div class="alert alert-info" role="alert">
+                    Vennligst logg inn eller registrer deg for muligheten til å løse denne luken og bli med i trekningen av kule premier!
                 </div>
-                <button type="submit" class="btn btn-default">Check</button>
-            </form>
+            {{/if}}
+        {{else}}
+            {{#unless solved}}
+                <div class="alert alert-info" role="alert">
+                    Det er ikke lenger mulig å svare på oppgaven i denne luken, men det er fullt mulig å kode en løsning allikevel.
+                </div>
+            {{/unless}}
         {{/unless}}
 
         <div class="row stats-row">
             <div class="stats-container">
                 <div class="stats">
-                    <div class="stats-header">Solved by</div>
+                    <div class="stats-header">Løst av</div>
                     <div class="stats-content">{{stats.solveCount}}</div>
                 </div>
                 <div class="stats">
-                    <div class="stats-header">Average score</div>
-                    <div class="stats-content">{{stats.averageScore}}</div>
-                </div>
-                <div class="stats">
-                    <div class="stats-header">Highest score</div>
-                    <div class="stats-content">{{stats.maxScore}}</div>
-                </div>
-                <div class="stats">
-                    <div class="stats-header">Lowest score</div>
-                    <div class="stats-content">{{stats.minScore}}</div>
+                    <div class="stats-header">Forsøkt løst av</div>
+                    <div class="stats-content">{{stats.solveAttempts}}</div>
                 </div>
             </div>
         </div>

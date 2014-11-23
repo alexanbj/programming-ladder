@@ -1,5 +1,7 @@
 Template.showProblem.events
   'submit form': (event, template) ->
+    $('#success-message').hide()
+    $('#fail-message').hide()
     event.preventDefault() # don't reload the page on submit
     answer = template.find("#answer").value.trim()
     if answer
@@ -16,7 +18,7 @@ Template.showProblem.events
       (err, res) ->  
         if res
           $('#revealAnswer').hide();
-          $('#answer').text('Answer: ' + res);
+          $('#answer').text('Løsning: ' + res);
         else
           $('#revealAnswer').hide();
-          $('#answer').text('You are not allowed to see the answer to this problem.');
+          $('#answer').text('Du får ikke lov til å se løsningen til denne luken.');

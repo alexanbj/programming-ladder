@@ -1,16 +1,20 @@
 <template name="sidebar">
-    <div class="panel panel-default">
-        <ul class="nav nav-pills nav-stacked">
+    <div class="col-md-12 col-lg-offset-1 col-lg-10">
+        <ul class="luker-list">
             {{#each problems}}
-                <li class="{{selected}}">
-                    <a href="{{pathFor 'showProblem'}}">
-                        {{#if currentUser}}
-                            {{#if answers.[0].solved}}
-                                <i class="fa fa-check-circle pull-right"></i>
+                <li>
+                    {{#if active}}
+                        <a href="{{pathFor 'showProblem'}}">
+                            {{#if currentUser}}
+                                {{#if answers.[0].solved}}
+                                    <i class="fa fa-check-circle pull-right"></i>
+                                {{/if}}
                             {{/if}}
-                        {{/if}}
-                        {{title}}
-                    </a>
+                            Luke {{title}}
+                        </a>
+                    {{else}}
+                        Luke {{title}}
+                    {{/if}}
                 </li>
             {{/each}}
         </ul>

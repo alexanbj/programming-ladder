@@ -12,16 +12,20 @@ Template.activitystream.helpers({
     },
     title: function() {
         if (this.type === 'UserRegistrationEvent') {
-            return this.actor.name + ' has registered';
+            return this.actor.name + ' har registrert seg';
         } else if (this.type === 'ProblemSolvedEvent') {
-            return this.actor.name + ' gained ' + this.payload.points  + ' points!';
+            var luker = 'luker';
+            if (this.payload.points == 1) {
+                luker = 'luke';
+            }
+            return this.actor.name + ' har løst ' + this.payload.points  + ' ' + luker + '!';
         }
     },
     content: function() {
         if (this.type === 'UserRegistrationEvent') {
             return ''
         } else if (this.type === 'ProblemSolvedEvent') {
-            return 'Solved <a href="' + Router.url('showProblem', {_id: this.payload.problem.id}) + '">' + this.payload.problem.name + '</a>'
+            return 'Løste <a href="' + Router.url('showProblem', {_id: this.payload.problem.id}) + '"> luke ' + this.payload.problem.name + '</a>'
         }
     }
 
