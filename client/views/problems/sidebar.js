@@ -1,3 +1,21 @@
+var tickingDate = new Date();
+
+minuteTick = new Tracker.Dependency;
+
+Meteor.setInterval(function () {
+    setTickingDate(new Date());
+}, 60000);
+
+var getTickingDate = function() {
+    minuteTick.depend();
+    return tickingDate;
+};
+
+var setTickingDate = function() {
+    tickingDate = new Date();
+    minuteTick.changed();
+}
+
 Template.sidebar.helpers({
     selected: function() {
         if (Session.equals('selectedProblemId', this._id)) {
@@ -7,6 +25,6 @@ Template.sidebar.helpers({
         }
     },
     problems: function() {
-        return Problems.find({}, {sort: {activeFrom : 1}});
+        return Problems.find({activeFrom: {$lte: getTickingDate()}}, {sort: {activeFrom : 1}});
     }
 });

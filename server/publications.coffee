@@ -1,4 +1,3 @@
-# Users
 Meteor.publish 'userIsAdmin', ->
   if isAdminById @userId
     Meteor.users.find {_id: @userId}, fields:
@@ -15,7 +14,6 @@ Meteor.publish 'settings', ->
   else
     []
 
-
 Meteor.publish 'leaderboard', ->
   fields = {
     username: true
@@ -23,13 +21,6 @@ Meteor.publish 'leaderboard', ->
     solved: true
   }
   Meteor.users.find {isAdmin: false}, fields: fields
-
-
-Meteor.publish 'user', (userId) ->
-  Meteor.users.find {_id: userId}, fields:
-    username: true
-    score: true
-    solved: true
 
 Meteor.publish 'currentUser', ->
   if @userId
@@ -39,7 +30,7 @@ Meteor.publish 'currentUser', ->
 
 Meteor.publish 'problems', ->
   if @userId
-    Problems.find {draft: false, activeFrom: {$lte: new Date()}}, fields:
+    Problems.find {draft: false}, fields:
       title: true
       activeFrom: true
       activeTo: true
