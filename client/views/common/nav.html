@@ -12,22 +12,22 @@
 
       <nav class="collapse navbar-collapse prog-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav">
-          <li class="{{activeClassByRoute 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Tabell</a>
+          <li class="{{activeIfTemplateIs 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Tabell</a>
           </li>
-            <li class="{{activeClassByRoute 'problem'}}"><a href="{{pathFor 'problems'}}">Luker</a></li>
+            <li class="{{activeIfTemplateIs 'problems'}}"><a href="{{pathFor 'problems'}}">Luker</a></li>
           {{#with currentUser}}
-            <li class="{{activeClassByRoute 'profile'}}"><a href="{{pathFor 'profile'}}">Profile</a></li>
+            <li class="{{activeIfTemplateIs 'profile'}}"><a href="{{pathFor 'profile'}}">Profile</a></li>
           {{/with}}
-          <li class="{{activeClassByRoute 'about'}}"><a href="{{pathFor 'about'}}">Om</a></li>
+          <li class="{{activeIfTemplateIs 'about'}}"><a href="{{pathFor 'about'}}">Om</a></li>
           {{#if currentIsAdmin}}
-            <li class="dropdown {{activeClassByRoute 'admin'}}">
+            <li class="dropdown {{activeIfTemplateIs 'adminProblems'}} {{activeIfTemplateIs 'adminUsers'}} {{activeIfTemplateIs 'settings'}}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li class="{{activeClassByRoute 'adminProblems'}}"><a href="{{pathFor 'adminProblems'}}"><i
+              <li class="{{activeIfTemplateIs 'adminProblems'}}"><a href="{{pathFor 'adminProblems'}}"><i
                       class="fa fa-tasks hidden-xs"></i> Problems</a></li>
-              <li class="{{activeClassByRoute 'adminUsers'}}"><a href="{{pathFor 'adminUsers'}}"><i
+              <li class="{{activeIfTemplateIs 'adminUsers'}}"><a href="{{pathFor 'adminUsers'}}"><i
                       class="fa fa-users hidden-xs"></i> Users</a></li>
-              <li class="{{activeClassByRoute 'settings'}}"><a href="{{pathFor 'settings'}}"><i
+              <li class="{{activeIfTemplateIs 'settings'}}"><a href="{{pathFor 'settings'}}"><i
                       class="fa fa-cog hidden-xs"></i> Settings</a></li>
             </ul>
           </li>
