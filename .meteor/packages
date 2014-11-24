@@ -10,7 +10,6 @@ natestrauser:font-awesome
 less
 iron:router
 matb33:collection-hooks
-mrt:accounts-ui-bootstrap-3
 mrt:bootstrap3-wysihtml5
 aldeed:autoform
 aldeed:collection2
@@ -18,3 +17,4 @@ nemo64:bootstrap
 mrt:moment
 meteorhacks:kadira
 multiply:iron-router-progress
+useraccounts:bootstrap
