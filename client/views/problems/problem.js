@@ -45,7 +45,7 @@ Template.showProblem.helpers({
     },
     panelClass: function() {
         if (this.answers && this.answers[0].solved) {
-            return "panel-success";
+            return "panel-info";
         } else {
             return "panel-default";
         }
