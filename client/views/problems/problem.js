@@ -14,7 +14,24 @@ var getTickingDate = function() {
 var setTickingDate = function() {
     tickingDate = new Date();
     minuteTick.changed();
-}
+};
+
+var tickingSecond = new Date();
+secondTick = new Tracker.Dependency;
+
+Meteor.setInterval(function () {
+    setTickingSecond(new Date());
+}, 1000);
+
+var getTickingSecond = function() {
+    secondTick.depend();
+    return tickingSecond;
+};
+
+var setTickingSecond = function() {
+    tickingSecond = new Date();
+    secondTick.changed();
+};
 
 Template.showProblem.helpers({
     solvedOrNoLongerActive: function() {
@@ -38,5 +55,10 @@ Template.showProblem.helpers({
     },
     stats: function() {
         return ProblemStats.findOne();
+    },
+    problemEnds: function() {
+        var diff = this.activeTo - getTickingSecond();
+        var duration = moment.duration(diff, 'milliseconds');
+        return duration.hours() + ' timer, ' + duration.minutes() + ', minutter og ' + duration.seconds() + ' sekunder';
     }
 });

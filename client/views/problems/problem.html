@@ -48,6 +48,9 @@
                         <input type="text" class="form-control" id="answer" placeholder="Svar" required>
                     </div>
                     <button type="submit" class="btn btn-default">Sjekk</button>
+                    {{#if activeTo}}
+                        <span class="pull-right">Lukkes om {{problemEnds}}.</span>
+                    {{/if}}
                 </form>
             {{else}}
                 <div class="alert alert-info" role="alert">
