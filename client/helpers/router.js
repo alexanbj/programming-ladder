@@ -10,7 +10,7 @@ Router.map(function() {
     });
 
     this.route('leaderboard', {
-        path: '/tabell',
+        path: '/ledertavle',
         waitOn: function() {
             return Meteor.subscribe('leaderboard');
         }
