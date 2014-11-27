@@ -45,6 +45,6 @@
   "tab":                  false,
   "transition":           true,
 
-  "utilities":            false,
-  "responsive-utilities": false
+  "utilities":            true,
+  "responsive-utilities": true
 }}
