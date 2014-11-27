@@ -9,65 +9,66 @@ body {
   margin-bottom: @footer-height;
 }
 
-body > footer {
-  color: #777;
-  text-align: center;
+footer {
   border-top: 1px solid #e5e5e5;
   padding: 20px 0;
-
+  color: #777;
   position: absolute;
   bottom: 0;
-  width: 100%;
   height: @footer-height;
-}
+  width: 100%;
 
-footer .services {
-  list-style: none;
-  padding-left: 0px;
-  margin-bottom: 13px;
-  margin-left: -10px;
-}
+  ul {
+    list-style: none;
+    margin-bottom: 13px;
+    padding-left: 0px;
 
-footer .services li {
-  display: inline-block;
-  margin-left: 10px;
-}
+    li {
+      display: inline-block;
 
-footer .services li a {
-  display: block;
-  width: 32px;
-  height: 32px;
-  text-indent: 100%;
-  overflow: hidden;
-  opacity: 0.75;
-  filter: alpha(opacity=75);
-  -webkit-transition: 0.2s opacity;
-  -moz-transition: 0.2s opacity;
-  -ms-transition: 0.2s opacity;
-  -o-transition: 0.2s opacity;
-  transition: 0.2s opacity;
-}
+      a {
+        @social-link-size: 32px;
+        display: inline-block;
+        height: @social-link-size;
+        width: @social-link-size;
+        background-size: @social-link-size @social-link-size;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin: 5px;
+        text-indent: -9979em;
+        background-color: #b9bfc1;
 
-footer .services li a:hover {
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-
-footer .services li.twitter a {
-  background: url('/footer-services.png');
-}
-
-footer .services li.github a {
-  background: url('/footer-services.png') -32px 0;
-}
-
-@media (min-width: 768px) {
-  .footer {
-    text-align: left;
+      }
+      a:hover {
+        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+      }
+      .knowit {
+        background-image: url('knowit_symbol_white_rgb.png');
+        background-size: 20px 20px;
+      }
+      .facebook {
+        background-image: url('/social/facebook.png');
+      }
+      .github {
+        background-image: url('/social/github.png');
+      }
+      .twitter {
+        background-image: url('/social/twitter.png');
+      }
+      .linkedin {
+        background-image: url('/social/linkedin.png');
+      }
+    }
   }
 
-  .footer p {
-    margin-bottom: 0;
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-group {
+    display: none;
   }
 }
 
@@ -122,10 +123,6 @@ form .editor {
   }
 }
 
-.navbar-default .score {
-  padding-right: 15px;
-}
-
 .problem {
   ul {
     li {
@@ -166,60 +163,6 @@ form .editor {
   height: 30px;
 }
 
-.home {
-  .medals-container {
-
-    @gold: #C98910;
-    @silver: #A8A8A8;
-    @bronze: #965A38;
-
-    div {
-      margin-top: 30px;
-      text-align: center;
-      figure {
-        display: inline-block;
-        width: 250px;
-        height: 250px;
-        border-radius: 125px;
-        line-height: 250px;
-        text-align: center;
-        background: @gold;
-        border: 1px solid darken(@gold, 20%);
-
-        font-size: 40px;
-        text-transform: uppercase;
-        color: darken(@gold, 30%);
-        font-weight: 600;
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-    }
-
-    div:first-child {
-      margin-top: 90px;
-      figure {
-        background: @silver;
-        color: darken(@silver, 30%);
-        border: 1px solid darken(@silver, 20%)
-      }
-    }
-
-    div:last-child {
-      margin-top: 120px;
-      figure {
-        background: @bronze;
-        color: darken(@bronze, 30%);
-        border: 1px solid darken(@bronze, 20%)
-      }
-    }
-  }
-}
-
-.home .quote {
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-
 .settings {
   .form-group {
     margin: 0;
@@ -239,12 +182,6 @@ form .editor {
     color: rgba(0, 0, 0, 0.54);
     bottom: 0px;
 }
-
-/*.list-group .list-group-item .list-group-item-heading {
-color: rgba(0, 0, 0, 0.77);
-font-size: 20px;
-line-height: 29px;
-}*/
 
 .list-group .list-group-separator {
   clear: both;
@@ -357,19 +294,6 @@ line-height: 29px;
 
 }
 
-/*.luker-list li {
-    float: left;
-    width: 25%;
-    height: 115px;
-    padding: 10px;
-    font-size: 10px;
-    line-height: 1.4;
-    text-align: center;
-    background-color: #f9f9f9;
-    border: 1px solid #fff;
-}*/
-
-
 .at-form {
     background-color: #f5f5f5;
     border: 1px solid transparent;
@@ -386,27 +310,33 @@ line-height: 29px;
     text-align: center;
 }
 
+@knowit-color: #009682;
+
 .navbar-default {
-    background-color: #009682;
-    border-color: #009682;
+    background-color: @knowit-color;
+    border-color: @knowit-color;
     box-shadow: 1px 1px 5px #888888;
 }
 
 .navbar-default .btn-default {
-    background-color: #009682;
-    border-color: #009682;
+    background-color: @knowit-color;
+    border-color: @knowit-color;
 }
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  background-color: darken(#009682, 6.5%);
+  background-color: darken(@knowit-color, 6.5%);
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  background-color: darken(#009682, 6.5%);
+  background-color: darken(@knowit-color, 6.5%);
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  background-color: darken(#009682, 6.5%);
+  background-color: darken(@knowit-color, 6.5%);
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: @knowit-color;
 }
 
 .navbar-brand img {

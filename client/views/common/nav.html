@@ -2,8 +2,7 @@
   <header class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse"
-                data-target=".prog-navbar-collapse">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".prog-navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <i class="fa fa-bars"></i>
         </button>
@@ -35,8 +34,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
-              <li><p class="navbar-text score">Luker: {{currentUser.solved}}/24</p></li>
-              <li><button id="signOut" type="button" class="btn btn-default navbar-btn">Logg ut</button></li>
+              <li><p class="navbar-text">Luker: {{currentUser.solved}}/24</p></li>
+              <li><a href="#" id="signOut" title="Logg ut">Logg ut</a></li>
           {{else}}
             <li><a href="{{pathFor 'atSignIn'}}">Logg inn</a></li>
           {{/if}}
