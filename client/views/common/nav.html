@@ -34,10 +34,12 @@
           {{/if}}
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          {{> atNavButton}}
-          {{#with currentUser}}
-          <p class="navbar-text score">Luker: {{solved}}/24</p>
-          {{/with}}
+          {{#if currentUser}}
+              <li><p class="navbar-text score">Luker: {{currentUser.solved}}/24</p></li>
+              <li><button id="signOut" type="button" class="btn btn-default navbar-btn">Logg ut</button></li>
+          {{else}}
+            <li><a href="{{pathFor 'atSignIn'}}">Logg inn</a></li>
+          {{/if}}
         </ul>
       </nav>
     </div>

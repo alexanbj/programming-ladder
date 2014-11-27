@@ -4,3 +4,9 @@ Template.nav.helpers({
         return currentRoute && template === currentRoute ? 'active' : '';
     }
 });
+
+Template.nav.events({
+    'click #signOut': function() {
+        Meteor.logout();
+    }
+});
