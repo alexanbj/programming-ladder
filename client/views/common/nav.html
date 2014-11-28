@@ -16,7 +16,7 @@
                     {{#with currentUser}}
                         <li class="{{activeIfTemplateIs 'profile'}}"><a href="{{pathFor 'profile'}}">Profil</a></li>
                     {{/with}}
-                    <li class="{{activeIfTemplateIs 'about'}}"><a href="{{pathFor 'about'}}">Om</a></li>
+                    <li class="{{activeIfTemplateIs 'about'}}"><a href="{{pathFor 'about'}}">Informasjon</a></li>
                     {{#if currentIsAdmin}}
                         <li class="dropdown {{activeIfTemplateIs 'adminProblems'}} {{activeIfTemplateIs 'adminUsers'}} {{activeIfTemplateIs 'settings'}}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>

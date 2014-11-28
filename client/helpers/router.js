@@ -47,7 +47,7 @@ Router.map(function() {
 
 
     this.route('about', {
-        path: '/om',
+        path: '/informasjon',
         template: 'about'
     });
 
