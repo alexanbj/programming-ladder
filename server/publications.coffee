@@ -17,7 +17,8 @@ Meteor.publish 'settings', ->
 Meteor.publish 'leaderboard', ->
   fields = {
     username: true
-    solved: true
+    solved: true,
+    lastSolved: true
   }
   Meteor.users.find {isAdmin: false}, fields: fields
 

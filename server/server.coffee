@@ -24,7 +24,7 @@ Meteor.methods
       else # Insert new answer array, with max points!
         Problems.update problemId, {$push: {answers: {userId: user._id, solved: true}}}
       # Increment the solved count for the user accordingly
-      Meteor.users.update user._id, {$inc: {solved: 1}}
+      Meteor.users.update(user._id, {$inc: {solved: 1}, $set: {'lastSolved': new Date()}})
       insertProblemSolvedEvent(user._id, problem, user.solved + 1);
       return true
     else

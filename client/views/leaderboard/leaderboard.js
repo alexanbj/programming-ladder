@@ -8,7 +8,7 @@ Template.leaderboard.helpers({
             selector = {isAdmin: null};
         }
 
-        return Meteor.users.find(selector, {sort: {solved: -1, username: 1}}).map(function (document, index) {
+        return Meteor.users.find(selector, {sort: {solved: -1, lastSolved: 1}}).map(function (document, index) {
             document.rank = index + 1;
             return document;
         });
