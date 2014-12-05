@@ -42,7 +42,7 @@
 
         {{#unless solvedOrNoLongerActive}}
             {{#if currentUser}}
-                <form class="form-inline" role="form">
+                <form class="form-inline answer-form" role="form">
                     <div class="form-group">
                         <label class="sr-only" for="answer">Answer</label>
                         <input type="text" class="form-control" id="answer" placeholder="Svar" required>
@@ -77,5 +77,13 @@
                 </div>
             </div>
         </div>
+
+        {{#if solvedOrNoLongerActive}}
+            {{> UI.dynamic template=comment_list}}
+            {{#if currentUser}}
+                {{> UI.dynamic template=comment_form}}
+            {{/if}}
+        {{/if}}
+
     </section>
 </template>

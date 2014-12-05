@@ -1,5 +1,5 @@
 Template.showProblem.events
-  'submit form': (event, template) ->
+  'submit .answer-form': (event, template) ->
     $('#success-message').hide()
     $('#fail-message').hide()
     event.preventDefault() # don't reload the page on submit
@@ -27,3 +27,9 @@ Template.showProblem.events
         else
           $('#revealAnswer').hide();
           $('#answer').text('Du får ikke lov til å se løsningen til denne luken.');
+
+  Template.showProblem.helpers
+    comment_form: ->
+      return getTemplate('comment_form');
+    comment_list: ->
+      return getTemplate('comment_list');

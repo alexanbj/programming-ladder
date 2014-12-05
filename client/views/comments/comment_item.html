@@ -1,0 +1,25 @@
+<template name="comment_item">
+    <li class="comment" id="{{_id}}">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                {{#if currentIsAdmin}}
+                    <button class="delete pull-right btn btn-danger btn-xs"><i class="fa fa-trash"></i> Slett</button>
+                {{else}}
+                    {{#if is_own_comment}}
+                        <button class="delete pull-right btn btn-danger btn-xs"><i class="fa fa-trash"></i> Slett</button>
+                        {{!--<button class="edit pull-right btn btn-primary btn-xs"><i class="fa fa-pencil-square-o"></i> Rediger</button>--}}
+                    {{/if}}
+                {{/if}}
+                <div>
+                    <em>{{author}}</em> sa
+                </div>
+                <div>
+                    <small>{{dateFormat postedAt 'DD.MM.YYYY HH:mm'}}</small>
+                </div>
+                <div class="comment-text markdown">
+                    {{{htmlBody}}}
+                </div>
+            </div>
+        </div>
+    </li>
+</template>

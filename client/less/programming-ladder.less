@@ -6,7 +6,7 @@ html {
 @footer-height: 165px;
 
 body {
-  margin-bottom: @footer-height;
+  margin-bottom: @footer-height + 50;
 }
 
 footer {
@@ -69,6 +69,20 @@ footer {
 @media (max-width: 768px) {
   .list-group {
     display: none;
+  }
+}
+
+.comments {
+  list-style: none;
+  padding-left: 0px;
+
+  .comment-text {
+    padding-top: 10px;
+  }
+
+  .panel-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 }
 
@@ -363,5 +377,78 @@ form .editor {
 
   p:first-of-type {
     margin-bottom: 40px;
+  }
+}
+
+.markdown{
+  font-size: 90%;
+
+  img{
+    max-width: 100%;
+  }
+  ul, ol, p, pre, blockquote{
+    margin-bottom: 1em;
+    line-height: 1.45em;
+  }
+  strong{
+    font-weight:bold;
+  }
+  em{
+    font-style:italic;
+  }
+  ul, ol{
+    padding-left:18px;
+  }
+  ul{
+    list-style-type:disc;
+  }
+  ol{
+    list-style-type:decimal;
+  }
+  p{
+    &:last-child{
+      margin-bottom:0;
+    }
+  }
+  h1, h2, h3, h4, h5{
+    font-weight:bold;
+    margin-bottom:0;
+  }
+  h1{
+    font-size:36px;
+  }
+  h2{
+    font-size:24px;
+  }
+  h3{
+    font-size:18px;
+  }
+  h4{
+    font-size:16px;
+  }
+  h5{
+    font-size:14px;
+  }
+  /*code{
+    font-family: monospace;
+    margin: 0 2px;
+    padding: 0px 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+  }*/
+  pre{
+    padding: 16px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    overflow-x: scroll;
+    code{
+      border: none;
+      background: none;
+    }
+  }
+  blockquote{
+    border-left: 3px solid #eee;
+    padding-left: 20px;
   }
 }

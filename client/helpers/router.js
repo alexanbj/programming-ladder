@@ -27,7 +27,10 @@ Router.map(function() {
     this.route('showProblem', {
         path: '/luker/:_id',
         waitOn: function() {
-            return [Meteor.subscribe('problem', this.params._id), Meteor.subscribe('problemStats', this.params._id)];
+            Meteor.subscribe('problem', this.params._id);
+        },
+        subscriptions: function() {
+            this.subscribe('problemStats', this.params._id);
         },
         data: function() {
             return Problems.findOne({_id: this.params._id});

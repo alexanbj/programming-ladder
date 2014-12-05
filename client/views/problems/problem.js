@@ -36,8 +36,10 @@ var setTickingSecond = function() {
 Template.showProblem.helpers({
     solvedOrNoLongerActive: function() {
         if (this.answers && this.answers[0].solved) {
+            Meteor.subscribe('problemComments', this._id);
             return true;
         } else if (this.activeTo && this.activeTo < getTickingDate()) {
+            Meteor.subscribe('problemComments', this._id);
             return true;
         } else {
             return false;

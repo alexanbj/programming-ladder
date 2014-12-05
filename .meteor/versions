@@ -12,6 +12,7 @@ blaze@2.0.3
 boilerplate-generator@1.0.1
 callback-hook@1.0.1
 check@1.0.2
+chuangbo:marked@0.3.5
 coffeescript@1.0.4
 ctl-helper@1.0.4
 ctl@1.0.2
@@ -36,6 +37,7 @@ iron:router@1.0.3
 iron:url@1.0.3
 jquery@1.0.1
 json@1.0.1
+kenlimmj:hljs@1.0.1
 launch-screen@1.0.0
 less@1.0.11
 livedata@1.0.11

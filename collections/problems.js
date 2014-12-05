@@ -41,6 +41,10 @@ ProblemsSchema = new SimpleSchema({
             }
         }
     },
+    comments: {
+        type: Number,
+        optional: true
+    },
     answers: {
         type: [Object],
         defaultValue: []

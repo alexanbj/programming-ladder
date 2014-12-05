@@ -47,6 +47,9 @@ Meteor.publish 'problem', (problemId) ->
 
   Problems.find({_id: problemId, draft: false, activeFrom: {$lte: new Date()}}, fields: fields)
 
+Meteor.publish 'problemComments', (problemId) ->
+  Comments.find({problemId: problemId})
+
 Meteor.publish 'problemStats', (problemId) ->
   self = this
   solved = 0
