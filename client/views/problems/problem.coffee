@@ -12,6 +12,11 @@ Template.showProblem.events
           $('#success-message').show()
         else
           $('#fail-message').show()
+          $('button').prop('disabled', true)
+          Meteor.setInterval( ->
+            $('button').prop('disabled', false)
+          , 15000)
+
 
   'click #revealAnswer': ->
     Meteor.call 'retrieveAnswer', Session.get('selectedProblemId'),
