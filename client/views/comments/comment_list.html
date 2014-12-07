@@ -1,0 +1,7 @@
+<template name="comment_list">
+    <ul class="comments">
+        {{#each child_comments}}
+            {{> UI.dynamic template=comment_item}}
+        {{/each}}
+    </ul>
+</template>

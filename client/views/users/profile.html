@@ -1,11 +1,12 @@
 <template name="profile">
-    <div class="col-md-12 col-lg-offset-1 col-lg-10">
+    <div class="col-md-5 col-md-offset-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h1 class="panel-title"><i class="fa fa-user"></i> User Profile</h1>
+                <h1 class="panel-title"><i class="fa fa-user"></i> Brukerprofil ({{currentUser.username}})</h1>
             </div>
             <div class="panel-body">
                 <!-- TODO: Add user profile stuff here -->
+                {{> atForm state='changePwd'}}
             </div>
         </div>
     </div>

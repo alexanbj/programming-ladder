@@ -25,6 +25,9 @@ Template.sidebar.helpers({
         }
     },
     problems: function() {
-        return Problems.find({activeFrom: {$lte: getTickingDate()}}, {sort: {activeFrom : 1}});
+        return Problems.find({}, {sort: {activeFrom : 1}});
+    },
+    active: function() {
+        return this.activeFrom < getTickingDate();
     }
 });

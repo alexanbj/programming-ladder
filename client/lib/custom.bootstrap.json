@@ -20,7 +20,7 @@
   "pager":                false,
   "labels":               false,
   "badges":               false,
-  "jumbotron":            false,
+  "jumbotron":            true,
   "thumbnails":           false,
   "alerts":               true,
   "progress-bars":        true,
@@ -30,7 +30,7 @@
   "wells":                false,
   "close":                true,
 
-  "component-animations": false,
+  "component-animations": true,
   "dropdowns":            true,
   "modals":               true,
   "tooltip":              false,
@@ -40,11 +40,11 @@
   "affix":                false,
   "alert":                true,
   "button":               false,
-  "collapse":             false,
+  "collapse":             true,
   "scrollspy":            false,
   "tab":                  false,
-  "transition":           false,
+  "transition":           true,
 
-  "utilities":            false,
-  "responsive-utilities": false
+  "utilities":            true,
+  "responsive-utilities": true
 }}

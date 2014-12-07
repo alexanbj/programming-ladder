@@ -1,5 +1,7 @@
 Template.showProblem.events
-  'submit form': (event, template) ->
+  'submit .answer-form': (event, template) ->
+    $('#success-message').hide()
+    $('#fail-message').hide()
     event.preventDefault() # don't reload the page on submit
     answer = template.find("#answer").value.trim()
     if answer
@@ -10,13 +12,24 @@ Template.showProblem.events
           $('#success-message').show()
         else
           $('#fail-message').show()
+          $('button').prop('disabled', true)
+          Meteor.setInterval( ->
+            $('button').prop('disabled', false)
+          , 15000)
+
 
   'click #revealAnswer': ->
     Meteor.call 'retrieveAnswer', Session.get('selectedProblemId'),
       (err, res) ->  
         if res
           $('#revealAnswer').hide();
-          $('#answer').text('Answer: ' + res);
+          $('#answer').text('Løsning: ' + res);
         else
           $('#revealAnswer').hide();
-          $('#answer').text('You are not allowed to see the answer to this problem.');
+          $('#answer').text('Du får ikke lov til å se løsningen til denne luken.');
+
+  Template.showProblem.helpers
+    comment_form: ->
+      return getTemplate('comment_form');
+    comment_list: ->
+      return getTemplate('comment_list');

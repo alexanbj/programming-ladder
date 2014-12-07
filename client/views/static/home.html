@@ -1,19 +1,25 @@
 <template name="home">
-    <div class="home col-md-12 col-lg-offset-1 col-lg-10">
-        <!--<img src="/knowit_logo_green_rgb.png" alt="Knowit">-->
+    <div class="jumbotron text-center">
+        <div class="container">
+            <img src="/assets/Knowit_nisselue_2x.png" alt="Knowit logo" class="knowitNisselue">
+            <h1>Knowits Julekalender</h1>
 
-        <div class="medals-container row">
-            {{#each users}}
-            <div class="col-xs-4 medal">
-                <figure>
-                    {{username}}
-                </figure>
-            </div>
-            {{/each}}
+            <p>For en litt mer geeky adventstid.</p>
+            <p>
+                Hver kalenderluke skjuler en julenøtt i form av en programmeringsoppgave.
+                <br>
+                Velg teknologi selv og sett kodefingrene i sving.
+                <br>
+                Ny oppgave hver dag!
+            </p>
+
+            <p>En verdig vinner vil få en valgfri smarttelefon som romjulspresang.</p>
+            <p>God jul og lykke til! Hilsen Knowit-nissen.</p>
+            {{#if currentUser}}
+                <p><a class="btn btn-primary btn-lg" href="{{pathFor 'problems'}}" role="button">Ta meg til lukene!</a></p>
+            {{else}}
+                <p><a class="btn btn-primary btn-lg" href="{{pathFor 'atSignUp'}}" role="button">Bli med!</a></p>
+            {{/if}}
         </div>
-
-        <h4 class="lead text-center quote"><em>"D bli itj nå likar einn herre"</em>
-            <small>&mdash; Ukjent Knowiter</small>
-        </h4>
     </div>
 </template>

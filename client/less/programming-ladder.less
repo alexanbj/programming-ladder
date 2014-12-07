@@ -1,0 +1,454 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+@footer-height: 165px;
+
+body {
+  margin-bottom: @footer-height + 50;
+}
+
+footer {
+  border-top: 1px solid #e5e5e5;
+  padding: 20px 0;
+  color: #777;
+  position: absolute;
+  bottom: 0;
+  height: @footer-height;
+  width: 100%;
+
+  ul {
+    list-style: none;
+    margin-bottom: 13px;
+    padding-left: 0px;
+
+    li {
+      display: inline-block;
+
+      a {
+        @social-link-size: 32px;
+        display: inline-block;
+        height: @social-link-size;
+        width: @social-link-size;
+        background-size: @social-link-size @social-link-size;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin: 5px;
+        text-indent: -9979em;
+        background-color: #b9bfc1;
+
+      }
+      a:hover {
+        box-shadow: inset 0 0 0 1000px rgba(0,0,0,.2);
+      }
+      .knowit {
+        background-image: url('knowit_symbol_white_rgb.png');
+        background-size: 20px 20px;
+      }
+      .facebook {
+        background-image: url('/social/facebook.png');
+      }
+      .github {
+        background-image: url('/social/github.png');
+      }
+      .twitter {
+        background-image: url('/social/twitter.png');
+      }
+      .linkedin {
+        background-image: url('/social/linkedin.png');
+      }
+    }
+  }
+
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .list-group {
+    display: none;
+  }
+}
+
+.comments {
+  list-style: none;
+  padding-left: 0px;
+
+  .comment-text {
+    padding-top: 10px;
+  }
+
+  .panel-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+form .editor {
+  height: 240px;
+  margin: 20px 0 0 0;
+  overflow-y: scroll;
+}
+
+.leaderboard tr:nth-child(2) .rank:before {
+  content: url('/medal-gold-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
+}
+
+.leaderboard tr:nth-child(3) .rank:before {
+  content: url('/medal-silver-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
+}
+
+.leaderboard tr:nth-child(4) .rank:before {
+  content: url('/medal-bronze-2-icon.png');
+  position: relative;
+  top: 3px;
+  left: -4px;
+}
+
+.edit-problem-buttons {
+  button:not(:last-child) {
+    margin-right: 15px;
+  }
+}
+
+.not-found {
+  font-size: 2.2rem;
+  h1 {
+    font-size: 11rem;
+  }
+
+  p {
+    padding-top: 10px;
+    strong {
+      display: block;
+    }
+  }
+
+  img {
+    padding-top: 3em;
+  }
+}
+
+.problem {
+  ul {
+    li {
+      .label {
+        font-size: 20px;
+      }
+    }
+  }
+  .panel-heading {
+    padding: 15px 15px;
+  }
+}
+
+.stats-row {
+  text-align: center;
+  margin-top: 21px;
+  .stats-container {
+    display: inline-block;
+  }
+}
+
+.stats {
+  float: left;
+  //  text-align: center;
+  padding: 0 14px;
+}
+
+.stats-header {
+  text-transform: uppercase;
+  color: #666;
+  font-size: 9pt;
+
+}
+
+.stats-content {
+  font-size: 1.1em;
+  font-weight: bold;
+  height: 30px;
+}
+
+.settings {
+  .form-group {
+    margin: 0;
+  }
+}
+
+.list-group .list-group-item .row-content .least-content {
+  position: absolute;
+  right: 16px;
+  top: 0px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.delete-activity-item {
+    position: absolute;
+    right: 16px;
+    color: rgba(0, 0, 0, 0.54);
+    bottom: 0px;
+}
+
+.list-group .list-group-separator {
+  clear: both;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.luker {
+    padding-left: 0;
+
+    .luke {
+      float: left;
+      width: 150px;
+      height: 150px;
+      padding: 10px;
+      margin: 10px;
+      background-size: 150px 150px;
+
+    }
+
+    .solved {
+      content: url('/assets/Besvart_2x.png');
+      margin-top: -10px;
+      margin-right: -5px;
+      height: 30px;
+      float: right !important;
+    }
+
+    .luke:nth-child(1) {
+      background-image: url('/assets/1_2x.png');
+    }
+    .luke:nth-child(2) {
+      background-image: url('/assets/2_2x.png');
+    }
+    .luke:nth-child(3) {
+      background-image: url('/assets/3_2x.png');
+    }
+    .luke:nth-child(4) {
+      background-image: url('/assets/4_2x.png');
+    }
+    .luke:nth-child(5) {
+      background-image: url('/assets/5_2x.png');
+    }
+    .luke:nth-child(6) {
+      background-image: url('/assets/6_2x.png');
+    }
+    .luke:nth-child(7) {
+      background-image: url('/assets/7_2x.png');
+    }
+    .luke:nth-child(8) {
+      background-image: url('/assets/8_2x.png');
+    }
+    .luke:nth-child(9) {
+      background-image: url('/assets/9_2x.png');
+    }
+    .luke:nth-child(10) {
+      background-image: url('/assets/10_2x.png');
+    }
+    .luke:nth-child(11) {
+      background-image: url('/assets/11_2x.png');
+    }
+    .luke:nth-child(12) {
+      background-image: url('/assets/12_2x.png');
+    }
+    .luke:nth-child(13) {
+      background-image: url('/assets/13_2x.png');
+    }
+    .luke:nth-child(14) {
+      background-image: url('/assets/14_2x.png');
+    }
+    .luke:nth-child(15) {
+      background-image: url('/assets/15_2x.png');
+    }
+    .luke:nth-child(16) {
+      background-image: url('/assets/16_2x.png');
+    }
+    .luke:nth-child(17) {
+      background-image: url('/assets/17_2x.png');
+    }
+    .luke:nth-child(18) {
+      background-image: url('/assets/18_2x.png');
+    }
+    .luke:nth-child(19) {
+      background-image: url('/assets/19_2x.png');
+    }
+    .luke:nth-child(20) {
+      background-image: url('/assets/20_2x.png');
+    }
+    .luke:nth-child(21) {
+      background-image: url('/assets/21_2x.png');
+    }
+    .luke:nth-child(22) {
+      background-image: url('/assets/22_2x.png');
+    }
+    .luke:nth-child(23) {
+      background-image: url('/assets/23_2x.png');
+    }
+    .luke:nth-child(24) {
+      background-image: url('/assets/24_2x.png');
+    }
+
+    .disabled {
+      box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
+    }
+
+    a:hover {
+      box-shadow: inset 0 0 0 1000px rgba(0,0,0,.1);
+    }
+
+}
+
+.at-form {
+    background-color: #f5f5f5;
+    border: 1px solid transparent;
+    border-color: #dddddd;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+}
+
+.at-signin-link, .at-signup-link {
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    padding-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+@knowit-color: #009682;
+
+.navbar-default {
+    background-color: @knowit-color;
+    border-color: @knowit-color;
+    box-shadow: 1px 1px 5px #888888;
+}
+
+.navbar-default .btn-default {
+    background-color: @knowit-color;
+    border-color: @knowit-color;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: darken(@knowit-color, 6.5%);
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background-color: darken(@knowit-color, 6.5%);
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  background-color: darken(@knowit-color, 6.5%);
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: @knowit-color;
+}
+
+.navbar-brand img {
+  width: 16px;
+  height: 16px;
+  display: inline;
+  margin-top: -4px;
+}
+
+.knowitNisselue {
+  width: 100px;
+}
+
+.jumbotron {
+  background: transparent !important;
+
+  .btn {
+    margin-top: 30px;
+  }
+
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  p:first-of-type {
+    margin-bottom: 40px;
+  }
+}
+
+.markdown{
+  font-size: 90%;
+
+  img{
+    max-width: 100%;
+  }
+  ul, ol, p, pre, blockquote{
+    margin-bottom: 1em;
+    line-height: 1.45em;
+  }
+  strong{
+    font-weight:bold;
+  }
+  em{
+    font-style:italic;
+  }
+  ul, ol{
+    padding-left:18px;
+  }
+  ul{
+    list-style-type:disc;
+  }
+  ol{
+    list-style-type:decimal;
+  }
+  p{
+    &:last-child{
+      margin-bottom:0;
+    }
+  }
+  h1, h2, h3, h4, h5{
+    font-weight:bold;
+    margin-bottom:0;
+  }
+  h1{
+    font-size:36px;
+  }
+  h2{
+    font-size:24px;
+  }
+  h3{
+    font-size:18px;
+  }
+  h4{
+    font-size:16px;
+  }
+  h5{
+    font-size:14px;
+  }
+  /*code{
+    font-family: monospace;
+    margin: 0 2px;
+    padding: 0px 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+  }*/
+  pre{
+    padding: 16px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    overflow-x: scroll;
+    code{
+      border: none;
+      background: none;
+    }
+  }
+  blockquote{
+    border-left: 3px solid #eee;
+    padding-left: 20px;
+  }
+}

@@ -1,18 +1,23 @@
 <template name="sidebar">
-    <div class="panel panel-default">
-        <ul class="nav nav-pills nav-stacked">
+    <div class="col-md-12 col-lg-offset-2 col-lg-8">
+        <div class="page-header">
+            <h4 class="text-center">Løs lukene og bli med i trekningen av en smarttelefon! En ny luke åpnes hver dag frem til jul. </h4>
+        </div>
+        <div class="luker">
             {{#each problems}}
-                <li class="{{selected}}">
-                    <a href="{{pathFor 'showProblem'}}">
-                        {{#if currentUser}}
-                            {{#if answers.[0].solved}}
-                                <i class="fa fa-check-circle pull-right"></i>
+                    {{#if active}}
+                        <a href="{{pathFor 'showProblem'}}" title="Luke {{title}}" alt="Luke {{title}}" class="luke">
+                            {{#if currentUser}}
+                                {{#if answers.[0].solved}}
+                                    <i class="solved"></i>
+                                {{/if}}
                             {{/if}}
-                        {{/if}}
-                        {{title}}
-                    </a>
-                </li>
+                        </a>
+                    {{else}}
+                        <div class="luke disabled"></div>
+                    {{/if}}
             {{/each}}
-        </ul>
+        </div>
+
     </div>
 </template>

@@ -10,23 +10,6 @@ ProblemsSchema = new SimpleSchema({
     solution: {
         type: String
     },
-    maxScore: {
-        type: Number,
-        min: 0,
-        defaultValue: 10,
-        label: 'The maximum number of points attainable for this problem',
-        custom: function () {
-            if (this.value < this.field('minScore').value) {
-                return 'Must be greater than or equal to the minimum score';
-            }
-        }
-    },
-    minScore: {
-        type: Number,
-        min: 0,
-        defaultValue: 2,
-        label: 'The minimum number of points attainable for this problem'
-    },
     createdAt: {
         type: Date,
         autoValue: function() {
@@ -58,16 +41,16 @@ ProblemsSchema = new SimpleSchema({
             }
         }
     },
+    comments: {
+        type: Number,
+        optional: true
+    },
     answers: {
         type: [Object],
         defaultValue: []
     },
     'answers.$.userId': {
         type: String
-    },
-    'answers.$.score': {
-        type: Number,
-        min: 0
     },
     'answers.$.solved': {
         type: Boolean
@@ -92,7 +75,7 @@ if (Meteor.isServer) {
         var toDecrement = _.filter(problem.answers, function (answer){ return answer.solved == true; });
 
         toDecrement.forEach(function (answer) {
-            Meteor.users.update(answer.userId, {$inc: {score: -answer.score, solved: -1}});
+            Meteor.users.update(answer.userId, {$inc: {solved: -1}});
         });
     });
 }

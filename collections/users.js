@@ -34,13 +34,13 @@ Users = new SimpleSchema({
         type: Boolean,
         defaultValue: false
     },
-    score: {
-        type: Number,
-        defaultValue: 0
-    },
     solved: {
         type: Number,
         defaultValue: 0
+    },
+    lastSolved: {
+        type: Date,
+        optional: true
     }
 });
 

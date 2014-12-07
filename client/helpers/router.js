@@ -6,57 +6,31 @@ ProblemStats = new Mongo.Collection('problemStats');
 
 Router.map(function() {
     this.route('home', {
-        path: '/',
-        waitOn: function() {
-            return Meteor.subscribe('leaderboard');
-        },
-        data: function() {
-
-            var toMedalOrder = function(users){
-              if (users && users.length > 2){
-                var tmp = users[0];
-                users[0] = users[1];
-                users[1] = tmp;
-                return users;
-              } else {
-                return users;
-              }
-
-            };
-            return {
-                users: toMedalOrder(Meteor.users.find({isAdmin:false}, {sort: {score: -1}, limit: 3}).fetch())
-            }
-        }
+        path: '/'
     });
 
     this.route('leaderboard', {
+        path: '/ledertavle',
         waitOn: function() {
             return Meteor.subscribe('leaderboard');
         }
     });
 
     this.route('problems', {
-        path: '/problems',
+        path: '/luker',
+        template: 'sidebar',
         waitOn: function() {
             return Meteor.subscribe('problems');
-        },
-        onBeforeAction: function() {
-            var id;
-            if (Session.get('selectedProblemId')) {
-                id = Session.get('selectedProblemId');
-            } else if (this.ready()) {
-                id = Problems.findOne({}, {sort: {created: -1}})._id
-            }
-            if (id) {
-                Router.go('showProblem', {_id: id});
-            }
         }
     });
 
     this.route('showProblem', {
-        path: '/problems/:_id',
+        path: '/luker/:_id',
         waitOn: function() {
-            return [Meteor.subscribe('problems'), Meteor.subscribe('problem', this.params._id), Meteor.subscribe('problemStats', this.params._id)];
+            Meteor.subscribe('problem', this.params._id);
+        },
+        subscriptions: function() {
+            this.subscribe('problemStats', this.params._id);
         },
         data: function() {
             return Problems.findOne({_id: this.params._id});
@@ -75,7 +49,10 @@ Router.map(function() {
     });
 
 
-    this.route('rules');
+    this.route('about', {
+        path: '/informasjon',
+        template: 'about'
+    });
 
 
     // Admin stuff be here!

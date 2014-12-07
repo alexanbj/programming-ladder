@@ -11,7 +11,7 @@ Meteor.publish('adminUsers', function() {
         return Meteor.users.find({}, {
             name: true,
             isAdmin: true,
-            score: true
+            solved: true
         });
     } else {
         return [];
@@ -22,8 +22,6 @@ Meteor.publish('adminProblem', function(problemId) {
     if (isAdminById(this.userId)) {
         return Problems.find({_id: problemId}, {fields: {
             title: true,
-            maxScore: true,
-            minScore: true,
             activeFrom: true,
             activeTo: true,
             description: true,
