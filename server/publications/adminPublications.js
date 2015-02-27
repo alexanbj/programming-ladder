@@ -26,6 +26,8 @@ Meteor.publish('adminProblem', function(problemId) {
             activeTo: true,
             description: true,
             draft: true,
+            maxScore: true,
+            minScore: true,
             solution: true
         }});
     } else {

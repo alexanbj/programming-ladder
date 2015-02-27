@@ -1,12 +1,11 @@
-Template.nav.helpers({
-    activeIfTemplateIs: function(template) {
-        var currentRoute = Router.current().route.getName();
-        return currentRoute && template === currentRoute ? 'active' : '';
-    }
-});
+Template.nav.rendered = function () {
+    this.$(".dropdown-button").dropdown({hover: false});
+    this.$(".button-collapse").sideNav();
+};
+
 
 Template.nav.events({
-    'click #signOut': function() {
+    'click .signOut': function() {
         Meteor.logout();
     }
 });

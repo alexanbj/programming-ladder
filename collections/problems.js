@@ -7,8 +7,29 @@ ProblemsSchema = new SimpleSchema({
     description: {
         type: String
     },
+    htmlDescription: {
+        type: String,
+        optional: true
+    },
     solution: {
         type: String
+    },
+    maxScore: {
+        type: Number,
+        min: 0,
+        defaultValue: 10,
+        label: 'The maximum number of points attainable for this problem',
+        custom: function () {
+            if (this.value < this.field('minScore').value) {
+                return 'Must be greater than or equal to the minimum score';
+            }
+        }
+    },
+    minScore: {
+        type: Number,
+        min: 0,
+        defaultValue: 2,
+        label: 'The minimum number of points attainable for this problem'
     },
     createdAt: {
         type: Date,
@@ -54,6 +75,10 @@ ProblemsSchema = new SimpleSchema({
     },
     'answers.$.solved': {
         type: Boolean
+    },
+    'answers.$.score': {
+        type: Number,
+        min: 0
     }
 });
 
@@ -79,3 +104,18 @@ if (Meteor.isServer) {
         });
     });
 }
+
+Problems.before.insert(function (userId, doc) {
+    if (Meteor.isServer) {
+        doc.htmlDescription = marked(doc.description);
+        console.log(marked(doc.description));
+    }
+});
+
+Problems.before.update(function (userId, doc, fieldNames, modifier, options) {
+    // if body is being modified, update htmlBody too
+    if (Meteor.isServer && modifier.$set && modifier.$set.description) {
+        modifier.$set = modifier.$set || {};
+        modifier.$set.htmlDescription = marked(modifier.$set.description);
+    }
+});

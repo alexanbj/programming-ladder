@@ -10,22 +10,21 @@ Router.map(function() {
     });
 
     this.route('leaderboard', {
-        path: '/ledertavle',
+        path: '/leaderboard',
         waitOn: function() {
             return Meteor.subscribe('leaderboard');
         }
     });
 
     this.route('problems', {
-        path: '/luker',
-        template: 'sidebar',
+        path: '/problems',
         waitOn: function() {
             return Meteor.subscribe('problems');
         }
     });
 
     this.route('showProblem', {
-        path: '/luker/:_id',
+        path: '/problems/:_id',
         waitOn: function() {
             Meteor.subscribe('problem', this.params._id);
         },
@@ -34,24 +33,7 @@ Router.map(function() {
         },
         data: function() {
             return Problems.findOne({_id: this.params._id});
-        },
-        onBeforeAction: function() {
-            Session.set('selectedProblemId', this.params._id);
-            this.next();
         }
-    });
-
-    this.route('profile', {
-        path: '/users/profile',
-        data: function() {
-            return Meteor.user()
-        }
-    });
-
-
-    this.route('about', {
-        path: '/informasjon',
-        template: 'about'
     });
 
 
@@ -124,21 +106,25 @@ Router.map(function() {
 
 Router.configure({
     layoutTemplate: 'layout',
-    notFoundTemplate: 'notFound'
+    notFoundTemplate: 'not_found',
+    loadingTemplate: 'loading',
+    progressSpinner: false
 });
 
 
 Router._filters = {
-    isAdmin: function() {
-        if(!Meteor.user() || !Meteor.user().isAdmin) {
-            Router.go('home');
+    isAdmin: function () {
+        if(!this.ready()) return;
+        if(!isAdmin()){
+            this.render(getTemplate('no_rights'));
         } else {
             this.next();
         }
     }
-}
+};
 
 var filters = Router._filters;
 
 Router.onBeforeAction(filters.isAdmin, {only: ['settings', 'adminUsers', 'adminProblems', 'editProblem', 'newProblem']});
+Router.plugin('ensureSignedIn', {only: ['problems', 'showProblem']});
 Router.onBeforeAction('dataNotFound');

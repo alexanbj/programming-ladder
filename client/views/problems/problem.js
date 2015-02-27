@@ -45,15 +45,11 @@ Template.showProblem.helpers({
             return false;
         }
     },
-    panelClass: function() {
-        if (this.answers && this.answers[0].solved) {
-            return "panel-info";
-        } else {
-            return "panel-default";
-        }
-    },
     solved: function() {
         return this.answers && this.answers[0].solved;
+    },
+    scoreOrMax: function() {
+        return this.answers && this.answers[0] ? this.answers[0].score : this.maxScore;
     },
     stats: function() {
         return ProblemStats.findOne();

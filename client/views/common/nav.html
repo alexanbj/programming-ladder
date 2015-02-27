@@ -1,39 +1,44 @@
 <template name="nav">
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#prog-navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="{{pathFor 'home'}}"><img src="/knowit_symbol_white_rgb.png"> Julekalender</a>
-            </div>
+    <ul id="admin-dropdown" class="dropdown-content">
+        <li><a href="{{pathFor 'adminProblems'}}">Problems</a></li>
+        <li><a href="{{pathFor 'adminUsers'}}">Users</a></li>
+        <li><a href="{{pathFor 'settings'}}">Settings</a></li>
+    </ul>
 
-            <div id="prog-navbar-collapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="{{activeIfTemplateIs 'leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Ledertavle</a></li>
-                    <li class="{{activeIfTemplateIs 'problems'}}"><a href="{{pathFor 'problems'}}">Luker</a></li>
-                    {{#with currentUser}}
-                        <li class="{{activeIfTemplateIs 'profile'}}"><a href="{{pathFor 'profile'}}">Profil</a></li>
-                    {{/with}}
-                    <li class="{{activeIfTemplateIs 'about'}}"><a href="{{pathFor 'about'}}">Informasjon</a></li>
+    <nav class="grey darken-4">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="{{pathFor 'home'}}" class="brand-logo"><img src="/knowit_symbol_white_rgb.png" alt="Knowit"></a>
+
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="{{isActiveRoute regex='leaderboard'}}" href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
+                    {{#if currentUser}}
+                        <li><a class="{{isActiveRoute regex='problems'}}" href="{{pathFor 'problems'}}">Problems</a></li>
+                    {{/if}}
                     {{#if currentIsAdmin}}
-                        <li class="dropdown {{activeIfTemplateIs 'adminProblems'}} {{activeIfTemplateIs 'adminUsers'}} {{activeIfTemplateIs 'settings'}}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li class="{{activeIfTemplateIs 'adminProblems'}}"><a href="{{pathFor 'adminProblems'}}"><i class="fa fa-tasks hidden-xs"></i> Problems</a></li>
-                                <li class="{{activeIfTemplateIs 'adminUsers'}}"><a href="{{pathFor 'adminUsers'}}"><i class="fa fa-users hidden-xs"></i> Users</a></li>
-                                <li class="{{activeIfTemplateIs 'settings'}}"><a href="{{pathFor 'settings'}}"><i class="fa fa-cog hidden-xs"></i> Settings</a></li>
-                            </ul>
-                        </li>
+                        <li><a class="dropdown-button" href="#!" data-activates="admin-dropdown">Admin <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                    {{/if}}
+                    {{#if currentUser}}
+                        <li><a href="#" class="signOut" title="Logout">Logout</a></li>
+                    {{else}}
+                        <li><a class="{{isActiveRoute regex='atSignIn'}}" href="{{pathFor 'atSignIn'}}">Sign in</a></li>
                     {{/if}}
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+
+                <ul id="mobile-nav" class="side-nav">
+                    <li class="{{isActiveRoute regex='leaderboard'}}"><a href="{{pathFor 'leaderboard'}}">Leaderboard</a></li>
                     {{#if currentUser}}
-                        <li><p class="navbar-text">Luker: {{currentUser.solved}}/24</p></li>
-                        <li><a href="#" id="signOut" title="Logg ut">Logg ut</a></li>
+                        <li class="{{isActiveRoute regex='problems'}}"><a href="{{pathFor 'problems'}}">Problems</a></li>
+                    {{/if}}
+                    {{#if currentIsAdmin}}
+                        <li><a class="dropdown-button" href="#!" data-activates="admin-dropdown">Admin <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+                    {{/if}}
+                    {{#if currentUser}}
+                        <li><a href="#" class="signOut" title="Logout">Logout</a></li>
                     {{else}}
-                        <li><a href="{{pathFor 'atSignIn'}}">Logg inn</a></li>
+                        <li class="{{isActiveRoute regex='atSignIn'}}"><a href="{{pathFor 'atSignIn'}}">Sign in</a></li>
                     {{/if}}
                 </ul>
             </div>

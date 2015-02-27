@@ -1,16 +1,30 @@
 <template name="activitystream">
-    <div class="list-group">
+    <ul class="collection">
         {{#each activities}}
-        <div class="list-group-item">
-            <div class="row-content">
-                <div class="small least-content">{{formatDate created_at}}</div>
-                <p class="list-group-item-heading">{{title}}</p>
-                <p class="small list-group-item-text">{{{content}}}</p>
-            </div>
-            {{#if currentIsAdmin}}
-                <button type="button" class="delete-activity-item close">&times;</button>
-            {{/if}}
-        </div>
+            <li class="collection-item avatar">
+                <span class="title">{{actor.name}}</span>
+                {{> UI.dynamic template=type}}
+
+                {{#if currentIsAdmin}}
+                    <a href="#!" class="secondary-content delete-activity-item" title="Delete"><i class="mdi-navigation-close"></i></a>
+                {{/if}}
+            </li>
         {{/each}}
-    </div>
+    </ul>
+</template>
+
+<template name="UserRegistrationEvent">
+    <i class="mdi-social-person-add circle"></i>
+    <p>has just registered. <br>
+       Welcome!
+    </p>
+</template>
+
+<template name="ProblemSolvedEvent">
+    {{#with payload}}
+        <i class="circle teal">{{points}}</i>
+        <p>solved <a href="/problems/{{problem.id}}" title="{{problem.name}}">{{problem.name}}</a> for {{points}}.<br>
+           Now has {{total}} points!
+        </p>
+    {{/with}}
 </template>

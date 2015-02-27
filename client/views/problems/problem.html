@@ -1,89 +1,83 @@
 <template name="showProblem">
 
-    <section class="col-md-12 col-lg-offset-1 col-lg-10">
-        <div class="panel {{panelClass}}">
-            <div class="panel-heading">
-                <strong class="panel-title">Luke {{title}}</strong>
+    <div class="row">
+        <div class="col s12 m12 l10 offset-l1">
+            <div class="section">
+                <h4>{{title}}</h4>
 
-                <ul class="pull-right list-inline">
-                    {{#if currentIsAdmin}}
-                        <li>
-                            <a href="{{pathFor 'editProblem'}}" class="btn btn-default pull-right btn-xs"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                        </li>
-                    {{/if}}
-                    <li>
-                        <span class="pull-right label">{{#if currentUser}}{{#if solved}}Løst{{else}}Ikke løst{{/if}}{{/if}}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="panel-body">
-                {{{description}}}
-            </div>
-            {{#if solvedOrNoLongerActive}}
-            <div class="panel-footer">
-                <button id="revealAnswer" class="btn btn-primary btn-sm">Vis løsning</button>
-                <span id="answer">{{!-- will be injected here by jQuery --}}</span>
-            </div>
-            {{/if}}
-        </div>
-
-        {{#if solved}}
-            <div id="success-message" class="alert alert-dismissable alert-info fade in" style="display: none;">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Å, jul med din glede!</strong> Svaret ditt var korrekt. Du har nå løst {{currentUser.solved}} av 24 luker!
-            </div>
-        {{else}}
-            <div id="fail-message" class="alert alert-dismissable alert-danger fade in" style="display: none;">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <strong>Julestress!</strong> Svaret ditt var feil. Gjør noen endringer og forsøk igjen.
-            </div>
-        {{/if}}
+                {{#if solved}}
+                    <span class="btn right"><i class="mdi-image-tag-faces"></i> {{scoreOrMax}}/{{maxScore}}</span>
+                {{else}}
+                    <span class="btn right white black-text">{{scoreOrMax}}/{{maxScore}}</span>
+                {{/if}}
 
 
-        {{#unless solvedOrNoLongerActive}}
-            {{#if currentUser}}
-                <form class="form-inline answer-form" role="form">
-                    <div class="form-group">
-                        <label class="sr-only" for="answer">Answer</label>
-                        <input type="text" class="form-control" id="answer" placeholder="Svar" required>
+                {{#if currentIsAdmin}}
+                    <a href="{{pathFor 'editProblem'}}" class="btn-flat right" title="Edit"><i class="mdi-editor-mode-edit"></i></a>
+                {{/if}}
+                <div class="card-panel">
+                    {{{htmlDescription}}}
+                </div>
+
+            </div>
+
+            <div class="section">
+                {{#if solvedOrNoLongerActive}}
+                    <button id="revealAnswer" class="btn btn-primary btn-sm">Reveal solution</button>
+                    <span id="answer">{{!-- will be injected here by jQuery --}}</span>
+                {{else}}
+                    <form class="answer-form">
+                        <div class="input-field">
+                            <label for="solution">Solution</label>
+                            <input id="solution" type="text" required>
+                        </div>
+                        <button type="submit" class="btn waves-effect waves-light">Submit</button>
+                    </form>
+                {{/if}}
+
+                {{#if solved}}
+                <div id="success-message" class="card-panel" style="display: none;">
+                    <strong>Well done!</strong> Your answer was correct. You received {{answers.[0].score}} points! <i class="mdi-image-tag-faces"></i>
+                </div>
+                {{else}}
+                <div id="fail-message" class="card-panel" style="display: none;">
+                    <strong>Oh snap!</strong> Your answer was wrong. Change a few things up and try submitting again.
+                </div>
+                {{/if}}
+            </div>
+
+
+            <div class="section">
+                <div class="row stats-row">
+                    <div class="stats-container">
+                        <div class="stats">
+                            <div class="stats-header">Solved by</div>
+                            <div class="stats-content">{{stats.solved}}</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stats-header">Average</div>
+                            <div class="stats-content">{{stats.average}}</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stats-header">Highest</div>
+                            <div class="stats-content">{{stats.highest}}</div>
+                        </div>
+                        <div class="stats">
+                            <div class="stats-header">Lowest</div>
+                            <div class="stats-content">{{stats.lowest}}</div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Sjekk</button>
-                    {{#if activeTo}}
-                        <span class="pull-right">Lukkes om {{problemEnds}}.</span>
-                    {{/if}}
-                </form>
-            {{else}}
-                <div class="alert alert-info" role="alert">
-                    Vennligst <a href="{{pathFor 'atSignIn'}}" class="alert-link">logg inn</a> eller <a href="{{pathFor 'atSignUp'}}" class="alert-link">registrer deg</a> for muligheten til å løse denne luken og bli med i trekningen av en smarttelefon!
-                </div>
-            {{/if}}
-        {{else}}
-            {{#unless solved}}
-                <div class="alert alert-info" role="alert">
-                    Det er ikke lenger mulig å svare på oppgaven i denne luken, men du kan jo tross alt forsøke å løse den allikevel for moro skyld?
-                </div>
-            {{/unless}}
-        {{/unless}}
-
-        <div class="row stats-row">
-            <div class="stats-container">
-                <div class="stats">
-                    <div class="stats-header">Løst av</div>
-                    <div class="stats-content">{{stats.solveCount}}</div>
-                </div>
-                <div class="stats">
-                    <div class="stats-header">Forsøkt løst av</div>
-                    <div class="stats-content">{{stats.solveAttempts}}</div>
                 </div>
             </div>
-        </div>
 
-        {{#if solvedOrNoLongerActive}}
-            {{> UI.dynamic template=comment_list}}
-            {{#if currentUser}}
-                {{> UI.dynamic template=comment_form}}
+            {{#if solvedOrNoLongerActive}}
+                <div class="section">
+                    {{> UI.dynamic template=comment_list}}
+                    {{#if currentUser}}
+                        {{> UI.dynamic template=comment_form}}
+                    {{/if}}
+                </div>
             {{/if}}
-        {{/if}}
-
-    </section>
+        </div>
+    </div>
 </template>

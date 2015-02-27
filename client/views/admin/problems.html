@@ -1,62 +1,68 @@
 <template name="adminProblems">
-    <div class="col-md-12 col-lg-offset-1 col-lg-10">
-        <h1>Active</h1>
-        <div class="panel panel-default">
-            <table class="table table-striped table-hover table-condensed">
-                <tbody>
+    <div class="row">
+        <div class="col s12 m9 l10">
+            <div class="section">
+                <h4>Active</h4>
+                <table>
+                    <thead>
                     <tr>
                         <th>Title</th>
                         <th>Active From</th>
                         <th>Active To</th>
                         <th>Actions</th>
                     </tr>
-                    {{#each active}}
-                        <tr>
-                            <td>
-                                {{#if isDateBeforeNow activeFrom}}
-                                    {{title}}
-                                {{else}}
-                                    <a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a>
-                                {{/if}}
-                            </td>
-                            <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
-                            <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
-                            <td>
-                                <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                                <button class="draft btn btn-default btn-xs" title="Set as draft"><i class="fa fa-eye-slash"></i> Draft</button>
-                                <button class="delete btn btn-danger btn-xs" title="Delete problem"><i class="fa fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-        <a href="{{pathFor 'newProblem'}}"><i class="fa fa-plus hidden-xs"></i> New problem</a>
 
-        <h1>Drafts</h1>
-        <div class="panel panel-default">
-            <table class="table table-striped table-hover table-condensed">
-                <tbody>
+                    </thead>
+                    <tbody>
+                    {{#each active}}
+                    <tr>
+                        <td>
+                            {{#if isDateBeforeNow activeFrom}}
+                            {{title}}
+                            {{else}}
+                            <a href="{{pathFor 'showProblem'}}" title="Go to problem">{{title}}</a>
+                            {{/if}}
+                        </td>
+                        <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
+                        <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
+                        <td>
+                            <a href="{{pathFor 'editProblem'}}" class="btn btn-floating waves-effect waves-light" title="Edit"><i class="mdi-editor-mode-edit"></i> Edit</a>
+                            <button class="draft btn btn-floating waves-effect waves-light" title="Set as draft"><i class="mdi-action-visibility-off"></i> Draft</button>
+                            <button class="delete btn btn-floating waves-effect waves-light red" title="Delete"><i class="mdi-action-delete"></i> Delete</button>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <a href="{{pathFor 'newProblem'}}" class="btn"><i class="mdi-content-add"></i> New problem</a>
+            </div>
+            <div class="section">
+                <h4>Drafts</h4>
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
                     <tr>
                         <th>Title</th>
                         <th>Active From</th>
                         <th>Active To</th>
                         <th>Actions</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {{#each drafts}}
-                        <tr>
-                            <td>{{title}}</td>
-                            <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
-                            <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
-                            <td>
-                                <a href="{{pathFor 'editProblem'}}" class="btn btn-default btn-xs" title="Edit problem"><i class="fa fa-pencil-square-o"></i> Edit</a>
-                                <button class="publish btn btn-default btn-xs" title="Publish problem"><i class="fa fa-eye"></i> Publish</button>
-                                <button class="delete btn btn-danger btn-xs" title="Delete problem"><i class="fa fa-trash"></i> Delete</button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{title}}</td>
+                        <td>{{dateFormat activeFrom 'DD/MM/YYYY HH:mm'}}</td>
+                        <td>{{dateFormat activeTo 'DD/MM/YYYY HH:mm'}}</td>
+                        <td>
+                            <a href="{{pathFor 'editProblem'}}" class="btn btn-floating waves-effect waves-light" title="Edit"><i class="mdi-editor-mode-edit"></i> Edit</a>
+                            <button class="publish btn btn-floating waves-effect waves-light" title="Publish problem"><i class="mdi-action-visibility"></i> Publish</button>
+                            <button class="delete btn btn-floating waves-effect waves-light red" title="Delete"><i class="mdi-action-delete"></i> Delete</button>
+                        </td>
+                    </tr>
                     {{/each}}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>

@@ -30,7 +30,7 @@ if (Meteor.isServer) {
         ActivityStream.insert(userRegistrationEvent)
     }
 
-    insertProblemSolvedEvent = function(userId, problem, points) {
+    insertProblemSolvedEvent = function(userId, problem, points, total) {
         var problemSolvedEvent = {
             type: 'ProblemSolvedEvent',
             created_at: new Date(),
@@ -40,6 +40,7 @@ if (Meteor.isServer) {
             },
             payload: {
                 points: points,
+                total: total,
                 problem: {
                     id: problem._id,
                     name: problem.title

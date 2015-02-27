@@ -1,12 +1,5 @@
-Meteor.publish 'userIsAdmin', ->
-  if isAdminById @userId
-    Meteor.users.find {_id: @userId}, fields:
-      isAdmin: true
-  else
-    []
-
 Meteor.publish 'activityStream', ->
-  ActivityStream.find {}, {sort: {created_at: -1}, limit: 10}
+  ActivityStream.find {}, {sort: {created_at: -1}, limit: 15}
 
 Meteor.publish 'settings', ->
   if isAdminById @userId
@@ -17,7 +10,8 @@ Meteor.publish 'settings', ->
 Meteor.publish 'leaderboard', ->
   fields = {
     username: true
-    solved: true,
+    score: true
+    solved: true
     lastSolved: true
   }
   Meteor.users.find {isAdmin: false}, fields: fields
@@ -43,6 +37,9 @@ Meteor.publish 'problem', (problemId) ->
     activeFrom: true
     activeTo: true
     description: true
+    maxScore: true
+    minScore: true
+    htmlDescription: true
   }
 
   Problems.find({_id: problemId, draft: false, activeFrom: {$lte: new Date()}}, fields: fields)
@@ -53,22 +50,28 @@ Meteor.publish 'problemComments', (problemId) ->
 Meteor.publish 'problemStats', (problemId) ->
   self = this
   solved = 0
-  solveAttempts = 0
+  average = 0
+  highest = 0
+  lowest = 0
 
   #TODO: This is calculated for every client viewing the same problem.... Seems unnecessary?
   handle = Problems.find({_id: problemId}, fields: {answers: true}).observeChanges(
     changed: (id, doc) ->
         if doc.answers
           solved = countSolved(doc.answers)
-          solveAttempts = doc.answers.length - solved
-          self.changed('problemStats', problemId, {solveCount: solved, solveAttempts: solveAttempts})
+          lowest = calculateMinScore(doc.answers)
+          highest = calculateMaxScore(doc.answers)
+          average = calculateAverageScore(doc.answers)
+          self.changed('problemStats', problemId, {average: average, highest: highest, lowest: lowest, solved: solved})
     added: (id, doc) ->
       if doc.answers
         solved = countSolved(doc.answers)
-        solveAttempts = doc.answers.length - solved
+        lowest = calculateMinScore(doc.answers)
+        highest = calculateMaxScore(doc.answers)
+        average = calculateAverageScore(doc.answers)
   )
 
-  self.added('problemStats', problemId, {solveCount: solved, solveAttempts: solveAttempts})
+  self.added('problemStats', problemId, {average: average, highest: highest, lowest: lowest, solved: solved})
   self.ready()
 
   self.onStop ->

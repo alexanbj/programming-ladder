@@ -6,19 +6,21 @@
 standard-app-packages
 coffeescript
 accounts-password
-natestrauser:font-awesome
 less
 iron:router
 matb33:collection-hooks
-mrt:bootstrap3-wysihtml5
 aldeed:autoform
 aldeed:collection2
-nemo64:bootstrap
 mrt:moment
 meteorhacks:kadira
 multiply:iron-router-progress
-useraccounts:bootstrap
 iron:dynamic-template
 chuangbo:marked
-kenlimmj:hljs
+kenlimmj:hljs@=1.0.2
 
+materialize:materialize
+natestrauser:font-awesome
+gildaspk:autoform-materialize
+useraccounts:materialize
+zimme:iron-router-active
+reactive-var

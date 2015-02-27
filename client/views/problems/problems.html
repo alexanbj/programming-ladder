@@ -1,0 +1,31 @@
+<template name="problems">
+    <div class="row">
+        <div class="col s12 m12 l10 offset-l1">
+            <div class="section">
+                <p class="caption">Pick a problem, code and submit your solution to see if you have solved it correctly. It is <em>that</em> easy!</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each problems}}
+                    <tr>
+                        {{#if active}}
+                        <td>
+                            {{#if answers.[0].solved}}<i class="mdi-action-done"></i>{{/if}}
+                            <a href="{{pathFor 'showProblem'}}" title="{{title}}">{{title}}</a>
+                        </td>
+                        {{else}}
+                        <td>Hidden</td>
+                        <td></td>
+                        {{/if}}
+                    </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

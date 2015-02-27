@@ -1,11 +1,13 @@
 settingsSchemaObject = {
-    userSignup: {
+    disableUserSignup: {
         type: Boolean,
-        label: 'User sign up enabled'
+        label: 'Disable user signup',
+        defaultValue: false
     },
-    answerSubmission: {
+    disableAnswering: {
         type: Boolean,
-        label: 'Problem answer submission enabled'
+        label: 'Disable problem answering',
+        defaultValue: false
     }
 }
 

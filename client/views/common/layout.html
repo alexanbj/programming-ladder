@@ -4,7 +4,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <title>Julekalender</title>
+    <title>Programming Ladder</title>
 </head>
 
 <body>
@@ -12,19 +12,20 @@
 
 <template name="layout">
 
-    {{> nav}}
-    <section class="container-fluid">
-        <div class="row">
-            <div class="col-md-10">
-                <div class="row">
-                    {{> yield}}
-                </div>
-            </div>
-            <div class="col-md-2">
-                {{> activitystream}}
-            </div>
-        </div>
-    </section>
+    <header>
+        {{> nav}}
+    </header>
 
+    <main>
+        <div class="container">
+            {{> yield}}
+        </div>
+    </main>
+
+    <div class="sidebar hide-on-med-and-down">
+        {{> activitystream}}
+    </div>
+
+    {{! Footer tag declared inside footer template}}
     {{> footer}}
 </template>

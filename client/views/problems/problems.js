@@ -16,14 +16,7 @@ var setTickingDate = function() {
     minuteTick.changed();
 }
 
-Template.sidebar.helpers({
-    selected: function() {
-        if (Session.equals('selectedProblemId', this._id)) {
-            return 'active';
-        } else {
-            return '';
-        }
-    },
+Template.problems.helpers({
     problems: function() {
         return Problems.find({}, {sort: {activeFrom : 1}});
     },
