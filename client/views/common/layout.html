@@ -26,6 +26,10 @@
         {{> activitystream}}
     </div>
 
+    {{#if currentIsAdmin}}
+        {{> admin_actions}}
+    {{/if}}
+
     {{! Footer tag declared inside footer template}}
     {{> footer}}
 </template>

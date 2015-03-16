@@ -1,12 +1,6 @@
 Meteor.publish 'activityStream', ->
   ActivityStream.find {}, {sort: {created_at: -1}, limit: 15}
 
-Meteor.publish 'settings', ->
-  if isAdminById @userId
-    Settings.find {}, {}
-  else
-    []
-
 Meteor.publish 'leaderboard', ->
   fields = {
     username: true

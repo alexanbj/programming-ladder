@@ -1,0 +1,20 @@
+<template name="admin_actions">
+    <div class="fixed-action-btn admin-actions">
+        <a class="btn-floating btn-large teal">
+            <i class="large mdi-action-settings"></i>
+        </a>
+        <ul>
+            {{#if disableSignUp}}
+                <li><a class="btn-floating red toggleSignup" href="#!" title="Toggle user sign ups"><i class="large mdi-social-group-add"></i></a></li>
+            {{else}}
+                <li><a class="btn-floating green toggleSignup" href="#!" title="Toggle user sign ups"><i class="large mdi-social-group-add"></i></a></li>
+            {{/if}}
+
+            {{#if disableAnswering}}
+                <li><a class="btn-floating red toggleAnswering" href="#!" title="Toggle problem answering"><i class="large mdi-action-lock-outline"></i></a></li>
+            {{else}}
+                <li><a class="btn-floating green toggleAnswering" href="#!" title="Toggle problem answering"><i class="large mdi-action-lock-open"></i></a></li>
+            {{/if}}
+        </ul>
+    </div>
+</template>

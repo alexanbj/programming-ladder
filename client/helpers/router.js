@@ -1,6 +1,7 @@
 //Global subscriptions. Not router specific, but since all the other subscriptions are here, whatever..
 Meteor.subscribe('currentUser');
 Meteor.subscribe('activityStream');
+Meteor.subscribe('settings');
 // client side specific location. Probably shouldn't be here either
 ProblemStats = new Mongo.Collection('problemStats');
 
@@ -26,10 +27,10 @@ Router.map(function() {
     this.route('showProblem', {
         path: '/problems/:_id',
         waitOn: function() {
-            Meteor.subscribe('problem', this.params._id);
+            return Meteor.subscribe('problem', this.params._id);
         },
         subscriptions: function() {
-            this.subscribe('problemStats', this.params._id);
+            return Meteor.subscribe('problemStats', this.params._id);
         },
         data: function() {
             return Problems.findOne({_id: this.params._id});
