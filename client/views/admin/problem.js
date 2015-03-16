@@ -1,5 +1,6 @@
 Template.editProblem.created = function() {
-    var description = Template.instance().data.problem.description;
+    var problem =  Template.instance().data.problem;
+    var description = problem ? problem.description : "";
     this.markdownPreview = new ReactiveVar(marked(description));
 };
 Template.editProblem.events({
