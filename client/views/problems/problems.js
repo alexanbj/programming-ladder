@@ -18,7 +18,7 @@ var setTickingDate = function() {
 
 Template.problems.helpers({
     problems: function() {
-        return Problems.find({}, {sort: {activeFrom : 1}});
+        return Problems.find({}, {sort: {title : 1}});
     },
     active: function() {
         return this.activeFrom < getTickingDate();
