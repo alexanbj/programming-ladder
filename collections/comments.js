@@ -61,14 +61,6 @@ Comments.allow({
     remove: canEditById
 });
 
-Meteor.startup(function () {
-    marked.setOptions({
-        highlight: function (code) {
-            return hljs.highlightAuto(code).value;
-        }
-    });
-});
-
 Comments.before.insert(function (userId, doc) {
     if (Meteor.isServer) {
         doc.htmlBody = marked(doc.body);
