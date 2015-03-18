@@ -11,7 +11,6 @@ iron:router
 matb33:collection-hooks
 aldeed:autoform
 aldeed:collection2
-mrt:moment
 meteorhacks:kadira
 multiply:iron-router-progress
 iron:dynamic-template
@@ -24,3 +23,4 @@ gildaspk:autoform-materialize
 useraccounts:materialize
 zimme:iron-router-active
 reactive-var
+momentjs:moment
