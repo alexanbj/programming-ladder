@@ -12,15 +12,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{#each problems}}
-                        {{#if active}}
-                            <tr>
-                                <td><i class="{{toggleIconClass}}"></i></td>
-                                <td><a href="{{pathFor 'showProblem'}}" title="{{title}}">{{title}}</a></td>
-                                <td>{{answers.[0].score}}</td>
-                            </tr>
-                        {{/if}}
-                    {{/each}}
+                        {{#each problems}}
+                            {{#if active}}
+                                <tr>
+                                    <td><i class="{{toggleIconClass}}"></i></td>
+                                    <td><a href="{{pathFor 'showProblem'}}" title="{{title}}">{{title}}</a></td>
+                                    <td>{{answers.[0].score}}</td>
+                                </tr>
+                            {{/if}}
+                        {{/each}}
+                        <tr class="border-top">
+                            <td></td>
+                            <td><b>Total</b></td>
+                            <td><b>{{currentUser.score}}</b></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
