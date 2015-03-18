@@ -6,22 +6,20 @@
                 <table>
                     <thead>
                     <tr>
+                        <th style="width: 5%;"></th>
                         <th>Title</th>
+                        <th>Score</th>
                     </tr>
                     </thead>
                     <tbody>
                     {{#each problems}}
-                    <tr>
                         {{#if active}}
-                        <td>
-                            {{#if answers.[0].solved}}<i class="mdi-action-done"></i>{{/if}}
-                            <a href="{{pathFor 'showProblem'}}" title="{{title}}">{{title}}</a>
-                        </td>
-                        {{else}}
-                        <td>Hidden</td>
-                        <td></td>
+                            <tr>
+                                <td><i class="{{toggleIconClass}}"></i></td>
+                                <td><a href="{{pathFor 'showProblem'}}" title="{{title}}">{{title}}</a></td>
+                                <td>{{answers.[0].score}}</td>
+                            </tr>
                         {{/if}}
-                    </tr>
                     {{/each}}
                     </tbody>
                 </table>

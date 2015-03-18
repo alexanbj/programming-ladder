@@ -22,5 +22,12 @@ Template.problems.helpers({
     },
     active: function() {
         return this.activeFrom < getTickingDate();
+    },
+    toggleIconClass: function() {
+        if (this.answers && this.answers[0].solved)
+            return "mdi-toggle-check-box";
+        else {
+            return "mdi-toggle-check-box-outline-blank";
+        }
     }
 });
