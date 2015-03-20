@@ -100,7 +100,7 @@ if (Meteor.isServer) {
         var toDecrement = _.filter(problem.answers, function (answer){ return answer.solved == true; });
 
         toDecrement.forEach(function (answer) {
-            Meteor.users.update(answer.userId, {$inc: {solved: -1}});
+            Meteor.users.update(answer.userId, {$inc: {score: -answer.score, solved: -1}});
         });
     });
 }
