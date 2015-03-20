@@ -61,13 +61,16 @@ footer .right {
   font-size: 1.3em;
 }
 
-.parallax-container {
-  height: 300px;
-}
-
 .admin-actions {
   bottom: 45px;
   right: @sidebar-width + 24px;
+}
+
+@media only screen and (max-width: 992px) {
+  .admin-actions {
+    right: 10px;
+    bottom: 0px;
+  }
 }
 
 @sidebar-width: 200px;
@@ -131,7 +134,6 @@ form .editor {
 
 .stats {
   float: left;
-  //  text-align: center;
   padding: 0 14px;
 }
 
