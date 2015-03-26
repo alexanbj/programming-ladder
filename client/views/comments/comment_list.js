@@ -8,3 +8,11 @@ Template[getTemplate('comment_list')].helpers({
         return comments;
     }
 });
+
+Template[getTemplate('comment_list')].onCreated(function () {
+    var self = this;
+
+    self.autorun(function () {
+        self.subscribe('problemComments', Template.currentData()._id);
+    });
+});
