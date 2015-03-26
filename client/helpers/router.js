@@ -1,8 +1,7 @@
-//Global subscriptions. Not router specific, but since all the other subscriptions are here, whatever..
+//Global subscriptions. Not route specific
 Meteor.subscribe('currentUser');
-Meteor.subscribe('activityStream');
 Meteor.subscribe('settings');
-// client side specific location. Probably shouldn't be here either
+// client side specific location. Probably shouldn't be here
 ProblemStats = new Mongo.Collection('problemStats');
 
 Router.map(function() {

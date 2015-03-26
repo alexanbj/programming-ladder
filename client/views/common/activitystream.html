@@ -1,16 +1,22 @@
 <template name="activitystream">
-    <ul class="collection">
-        {{#each activities}}
-            <li class="collection-item avatar">
-                <span class="title">{{actor.name}}</span>
-                {{> UI.dynamic template=type}}
+    {{#if Template.subscriptionsReady}}
+        <ul class="collection">
+            {{#each activities}}
+                <li class="collection-item avatar">
+                    <span class="title">{{actor.name}}</span>
+                    {{> UI.dynamic template=type}}
 
-                {{#if currentIsAdmin}}
-                    <a href="#!" class="secondary-content delete-activity-item" title="Delete"><i class="mdi-navigation-close"></i></a>
-                {{/if}}
-            </li>
-        {{/each}}
-    </ul>
+                    {{#if currentIsAdmin}}
+                        <a href="#!" class="secondary-content delete-activity-item" title="Delete"><i class="mdi-navigation-close"></i></a>
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <div class="center">
+            {{> spinner}}
+        </div>
+    {{/if}}
 </template>
 
 <template name="UserRegistrationEvent">

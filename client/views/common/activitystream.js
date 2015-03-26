@@ -13,3 +13,9 @@ Template.activitystream.events = {
         }
     }
 };
+
+Template.activitystream.onCreated(function () {
+    var self = this;
+
+    self.subscribe('activityStream');
+});
