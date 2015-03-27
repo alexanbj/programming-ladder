@@ -69,7 +69,7 @@ Router.map(function() {
     this.route('adminUsers', {
         path: '/admin/users',
         waitOn: function() {
-            return Meteor.subscribe('adminUsers');
+            return Meteor.subscribe('allUsersAdmin');
         },
         data: function() {
             return {
