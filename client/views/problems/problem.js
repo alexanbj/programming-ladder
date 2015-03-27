@@ -56,5 +56,45 @@ Template.showProblem.helpers({
         var diff = this.activeTo - getTickingSecond();
         var duration = moment.duration(diff, 'milliseconds');
         return duration.hours() + ' timer, ' + duration.minutes() + ', minutter og ' + duration.seconds() + ' sekunder';
+    },
+    comment_form: function() {
+        return getTemplate('comment_form');
+    },
+    comment_list: function() {
+        return getTemplate('comment_list');
     }
 });
+
+Template.showProblem.events = {
+    'submit .answer-form': function(event, template) {
+        $('#success-message').hide();
+        $('#fail-message').hide();
+        event.preventDefault(); //don't reload the page on submit
+        var answer = template.find("#solution").value.trim();
+        if (answer) {
+            Meteor.call('checkAnswer', answer, template.data._id, function (err, res) {
+                Deps.flush(); //Force dom update before we jquery it!
+                if (res) {
+                    $('#success-message').show();
+                } else {
+                    $('#fail-message').show();
+                    $('button').prop('disabled', true);
+                    Meteor.setInterval(function () {
+                        $('button').prop('disabled', false);
+                    }, 1500);
+                }
+            });
+        }
+    },
+    'click #revealAnswer': function(event, template) {
+        Meteor.call('retrieveAnswer', template.data._id, function (err, res) {
+            if (res) {
+                $('#revealAnswer').hide();
+                $('#answer').text('Solution: ' + res);
+            } else {
+                $('#revealAnswer').hide();
+                $('#answer').text('You are not allowed to see the solution to this problem.');
+            }
+        });
+    }
+};
