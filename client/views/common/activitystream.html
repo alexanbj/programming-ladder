@@ -6,7 +6,7 @@
                     <span class="title">{{actor.name}}</span>
                     {{> UI.dynamic template=type}}
 
-                    {{#if currentIsAdmin}}
+                    {{#if isAdmin}}
                         <a href="#!" class="secondary-content delete-activity-item" title="Delete"><i class="mdi-navigation-close"></i></a>
                     {{/if}}
                 </li>
