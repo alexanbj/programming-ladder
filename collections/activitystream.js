@@ -30,6 +30,34 @@ if (Meteor.isServer) {
         insertUserRegistrationEvent(user);
     });
 
+    Meteor.startup(function() { // Load order, again...
+        Comments.after.insert(function (userId, comment) {
+            insertNewCommentEvent(comment);
+        });
+    });
+
+    insertNewCommentEvent = function(comment) {
+        var problem = Problems.findOne(comment.problemId);
+        var user = Meteor.users.findOne(comment.userId);
+
+        var newCommentEvent = {
+            type: 'NewCommentEvent',
+            created_at: comment.postedAt,
+            actor: {
+                id: user._id,
+                name: user.username
+            },
+            payload: {
+                problem: {
+                    id: problem._id,
+                    name: problem.title
+                }
+            }
+        };
+
+        ActivityStream.insert(newCommentEvent);
+    };
+
     insertUserRegistrationEvent = function(user) {
         var userRegistrationEvent = {
             type: 'UserRegistrationEvent',
@@ -38,10 +66,10 @@ if (Meteor.isServer) {
                 id: user._id,
                 name: user.username
             }
-        }
+        };
 
         ActivityStream.insert(userRegistrationEvent)
-    }
+    };
 
     insertProblemSolvedEvent = function(userId, problem, points) {
         var user = Meteor.users.findOne(userId);
@@ -64,7 +92,7 @@ if (Meteor.isServer) {
         };
 
         ActivityStream.insert(problemSolvedEvent);
-    }
+    };
 
 
     Meteor.methods({

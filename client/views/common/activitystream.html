@@ -34,3 +34,10 @@
         </p>
     {{/with}}
 </template>
+
+<template name="NewCommentEvent">
+    {{#with payload}}
+        <i class="circle mdi-communication-comment"></i>
+        <p> has commented on <a href="/problems/{{problem.id}}" title="{{problem.name}}">{{problem.name}}</a>.</p>
+    {{/with}}
+</template>

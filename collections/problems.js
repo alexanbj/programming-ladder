@@ -62,7 +62,7 @@ ProblemsSchema = new SimpleSchema({
             }
         }
     },
-    comments: {
+    commentCount: {
         type: Number,
         optional: true
     },
