@@ -7,10 +7,23 @@ ActivityStream.allow({
 });
 
 if (Meteor.isServer) {
-    /* For simplicity. This is is handled in checkAnswer on the server for now. But should be here for proper decoupling
-    Problems.after.update(function (userId, problem, fieldNames, modifier, options) {
-       insertProblemSolvedEvent(userId, problem, score)
-    });*/
+
+    Meteor.startup(function() { // Stupid load order...
+        Problems.after.update(function (userId, problem, fieldNames, modifier, options) {
+
+            if (_.contains(fieldNames, 'answers')) {
+                var self = this;
+
+                var diff = _.filter(problem.answers, function(obj){ return !_.findWhere(self.previous.answers, obj); });
+                diff = _.first(diff);
+
+                if (diff.solved) {
+                    insertProblemSolvedEvent(diff.userId, problem, diff.score);
+                }
+            }
+        });
+
+    });
 
 
     Meteor.users.after.insert(function (userId, user) {
@@ -30,17 +43,19 @@ if (Meteor.isServer) {
         ActivityStream.insert(userRegistrationEvent)
     }
 
-    insertProblemSolvedEvent = function(userId, problem, points, total) {
+    insertProblemSolvedEvent = function(userId, problem, points) {
+        var user = Meteor.users.findOne(userId);
+
         var problemSolvedEvent = {
             type: 'ProblemSolvedEvent',
             created_at: new Date(),
             actor: {
                 id: userId,
-                name: Meteor.users.findOne(userId).username
+                name: user.username
             },
             payload: {
                 points: points,
-                total: total,
+                total: user.score + points,
                 problem: {
                     id: problem._id,
                     name: problem.title
