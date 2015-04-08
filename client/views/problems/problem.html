@@ -70,14 +70,16 @@
                 </div>
             </div>
 
-            {{#if solvedOrNoLongerActive}}
-                <div class="section">
-                    {{> UI.dynamic template=comment_list}}
-                    {{#if currentUser}}
-                        {{> UI.dynamic template=comment_form}}
-                    {{/if}}
-                </div>
-            {{/if}}
+            {{#unless getSetting 'disableComments' false}}
+                {{#if solvedOrNoLongerActive}}
+                    <div class="section">
+                        {{> UI.dynamic template=comment_list}}
+                        {{#if currentUser}}
+                            {{> UI.dynamic template=comment_form}}
+                        {{/if}}
+                    </div>
+                {{/if}}
+            {{/unless}}
         </div>
     </div>
 </template>

@@ -8,6 +8,11 @@ settingsSchemaObject = {
         type: Boolean,
         label: 'Disable problem answering',
         defaultValue: false
+    },
+    disableComments: {
+        type: Boolean,
+        label: 'Disable comments',
+        defaultValue: false
     }
 }
 

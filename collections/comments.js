@@ -98,6 +98,10 @@ Meteor.methods({
         if (!user)
             throw new Meteor.Error(i18n.t('you_need_to_login_or_be_invited_to_post_new_comments'));
 
+        if (getSetting('disableComments', false)) {
+            throw new Meteor.Error('commenting-disabled', 'Commenting is currently disabled.');
+        }
+
         // Don't allow empty comments
         if (!text)
             throw new Meteor.Error(704,i18n.t('your_comment_is_empty'));

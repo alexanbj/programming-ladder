@@ -17,3 +17,8 @@ UI.registerHelper('isDateBeforeNow', function(date) {
 UI.registerHelper('isDateAfterNow', function(date) {
     return date < Date.now();
 });
+
+UI.registerHelper('getSetting', function(setting, defaultArgument){
+    setting = getSetting(setting, defaultArgument);
+    return setting;
+});

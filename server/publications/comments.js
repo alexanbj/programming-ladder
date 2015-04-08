@@ -1,3 +1,7 @@
 Meteor.publish('problemComments', function (problemId) {
-    return Comments.find({problemId: problemId});
+    if (!getSetting('disableComments', false)) {
+        return Comments.find({problemId: problemId});
+    } else {
+        return [];
+    }
 });
