@@ -17,7 +17,7 @@ if (Meteor.isServer) {
                 var diff = _.filter(problem.answers, function(obj){ return !_.findWhere(self.previous.answers, obj); });
                 diff = _.first(diff);
 
-                if (diff.solved) {
+                if (diff && diff.solved) {
                     insertProblemSolvedEvent(diff.userId, problem, diff.score);
                 }
             }
